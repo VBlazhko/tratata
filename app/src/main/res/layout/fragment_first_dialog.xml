@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.aaa.politindex.lounchscreen.FirstDialogFragment"
+    android:background="@drawable/dialog_background">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+       android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/first_point"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/circle_indicator_white"/>
+        <ImageView
+            android:id="@+id/second_point"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/circle_indicator_white"
+            android:layout_margin="@dimen/deafault_size"/>
+        <ImageView
+            android:id="@+id/third_point"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/circle_indicator_white"
+            />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/container"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пропустить"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/deafault_size"
+        />
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/deafault_size"/>
+
+
+</RelativeLayout>
