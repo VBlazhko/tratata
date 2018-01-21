@@ -16,59 +16,43 @@ import android.widget.TextView;
 import com.aaa.politindex.R;
 
 
-public class LounchScreenThreeFragment extends Fragment {
+public class LaunchScreenOneFragment extends Fragment {
 
     TextView next;
-    FirstDialogFragment.ICloseListener mCloseListener;
     ViewPager mPager;
+    ImageView mImageView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lounch_screen_three, container, false);
+        View view = inflater.inflate(R.layout.fragment_lounch_screen_one, container, false);
         return view;
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        Log.w("log", "onHiddenChanged:3 ");
-    }
-    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.w("log", "onHiddenChanged:3 " + isVisibleToUser);
-        mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
-        if(isVisibleToUser){
-            next.setText("Готово");
+
+        mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
+
+        if (isVisibleToUser) {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCloseListener.onClose();
-
-                }
-            });
-        } else {
-            next.setText("Далее");
-            next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPager.setCurrentItem(2);
-
+                    mPager.setCurrentItem(1);
                 }
             });
         }
 
-
     }
 
-    ImageView mImageView;
     public void setImageView(ImageView imageView) {
         mImageView = imageView;
     }
 
-    public void setNext(TextView next, ViewPager pager, FirstDialogFragment.ICloseListener close) {
+    public void setNext(TextView next, ViewPager pager) {
         this.next = next;
-        mCloseListener = close;
         mPager = pager;
     }
+
 }

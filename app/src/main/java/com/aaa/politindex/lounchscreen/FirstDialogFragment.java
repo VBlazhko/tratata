@@ -6,10 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,12 +25,14 @@ public class FirstDialogFragment extends DialogFragment {
     @BindView(R.id.pager)
     ViewPager mPager;
     @BindView(R.id.first_point)
+
     ImageView firstPoint;
     @BindView(R.id.second_point)
     ImageView secondPoint;
     @BindView(R.id.third_point)
     ImageView thirdPoint;
     @BindView(R.id.next)
+
     TextView next;
     @BindView(R.id.skip)
     TextView skip;
@@ -50,27 +49,35 @@ public class FirstDialogFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LounchScreenOneFragment mLounchScreenOneFragment = new LounchScreenOneFragment();
-        LounchScreenTwoFragment mLounchScreenTwoFragment = new LounchScreenTwoFragment();
-        LounchScreenThreeFragment mLounchScreenThreeFragment = new LounchScreenThreeFragment();
+        LaunchScreenOneFragment mLaunchScreenOneFragment = new LaunchScreenOneFragment();
+        LaunchScreenTwoFragment mLaunchScreenTwoFragment = new LaunchScreenTwoFragment();
+        LaunchScreenThreeFragment mLaunchScreenThreeFragment = new LaunchScreenThreeFragment();
 
-        mLounchScreenOneFragment.setImageView(firstPoint);
-        mLounchScreenTwoFragment.setImageView(secondPoint);
-        mLounchScreenThreeFragment.setImageView(thirdPoint);
+        mLaunchScreenOneFragment.setImageView(firstPoint);
+        mLaunchScreenTwoFragment.setImageView(secondPoint);
+        mLaunchScreenThreeFragment.setImageView(thirdPoint);
 
-        mLounchScreenThreeFragment.setNext(next, mPager, new ICloseListener() {
+        mLaunchScreenOneFragment.setNext(next, mPager);
+        mLaunchScreenThreeFragment.setNext(next, mPager, new ICloseListener() {
             @Override
             public void onClose() {
                 getDialog().dismiss();
             }
         });
-        mLounchScreenOneFragment.setNext(next, mPager);
 
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
+            }
+        });
 
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), 3);
-        adapter.setLounchScreenOneFragment(mLounchScreenOneFragment);
-        adapter.setLounchScreenTwoFragment(mLounchScreenTwoFragment);
-        adapter.setLounchScreenThreeFragment(mLounchScreenThreeFragment);
+
+        adapter.setLaunchScreenOneFragment(mLaunchScreenOneFragment);
+        adapter.setLaunchScreenTwoFragment(mLaunchScreenTwoFragment);
+        adapter.setLaunchScreenThreeFragment(mLaunchScreenThreeFragment);
+
         mPager.setAdapter(adapter);
     }
 

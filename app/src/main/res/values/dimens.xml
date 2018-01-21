@@ -5,6 +5,10 @@
     <dimen name="quarter_deafault_size">4dp</dimen>
 
 
+    <!-- image sizes -->
+    <dimen name="image_lounch_screen_size">150dp</dimen>
+
+
     <!-- font sizes -->
     <dimen name="font_large">18sp</dimen>
     <dimen name="font_big">16sp</dimen>

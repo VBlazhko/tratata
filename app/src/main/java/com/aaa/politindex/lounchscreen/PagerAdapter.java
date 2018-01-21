@@ -3,29 +3,18 @@ package com.aaa.politindex.lounchscreen;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.widget.ImageView;
-
-import com.aaa.politindex.R;
 
 /**
  * Created by 11 on 20.01.2018.
  */
 
 public class PagerAdapter extends FragmentPagerAdapter {
+
     int mNumOfTabs;
 
-    ImageView firstPoint;
-
-
-    LounchScreenOneFragment mLounchScreenOneFragment;
-    LounchScreenTwoFragment mLounchScreenTwoFragment;
-    LounchScreenThreeFragment mLounchScreenThreeFragment;
-
-    public void setFirstPoint(ImageView firstPoint) {
-        this.firstPoint = firstPoint;
-    }
-
-
+    LaunchScreenOneFragment mLaunchScreenOneFragment;
+    LaunchScreenTwoFragment mLaunchScreenTwoFragment;
+    LaunchScreenThreeFragment mLaunchScreenThreeFragment;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -37,13 +26,13 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                return mLounchScreenOneFragment;
+                return mLaunchScreenOneFragment;
 
             case 1:
-                return mLounchScreenTwoFragment;
+                return mLaunchScreenTwoFragment;
 
             case 2:
-                return mLounchScreenThreeFragment;
+                return mLaunchScreenThreeFragment;
 
             default:
                 return null;
@@ -56,15 +45,15 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
 
-    public void setLounchScreenOneFragment(LounchScreenOneFragment lounchScreenOneFragment) {
-        mLounchScreenOneFragment = lounchScreenOneFragment;
+    public void setLaunchScreenOneFragment(LaunchScreenOneFragment launchScreenOneFragment) {
+        mLaunchScreenOneFragment = launchScreenOneFragment;
     }
 
-    public void setLounchScreenTwoFragment(LounchScreenTwoFragment lounchScreenTwoFragment) {
-        mLounchScreenTwoFragment = lounchScreenTwoFragment;
+    public void setLaunchScreenTwoFragment(LaunchScreenTwoFragment launchScreenTwoFragment) {
+        mLaunchScreenTwoFragment = launchScreenTwoFragment;
     }
 
-    public void setLounchScreenThreeFragment(LounchScreenThreeFragment lounchScreenThreeFragment) {
-        mLounchScreenThreeFragment = lounchScreenThreeFragment;
+    public void setLaunchScreenThreeFragment(LaunchScreenThreeFragment launchScreenThreeFragment) {
+        mLaunchScreenThreeFragment = launchScreenThreeFragment;
     }
 }

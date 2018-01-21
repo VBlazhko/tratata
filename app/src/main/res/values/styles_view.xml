@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- *********************** Labels  *********************** -->
+
+    <style name="Label">
+        <item name="android:fontFamily">@font/fira_sans_reg</item>
+    </style>
+
+    <!-- ****** Normal  ****** -->
+
+    <style name="Label.Normal">
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+    <style name="Label.Normal.Gray">
+        <item name="android:textColor">@color/grayDefault</item>
+    </style>
+    <style name="Label.Normal.Black">
+        <item name="android:textColor">@color/blackDefault</item>
+    </style>
+    <style name="Label.Normal.Blue">
+        <item name="android:textColor">@color/blueDefault</item>
+    </style>
+
+    <!-- ****** Caption  ****** -->
+
+    <style name="Label.Caption">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+    <style name="Label.Caption.Black">
+        <item name="android:textColor">@color/blackDefault</item>
+    </style>
+    <style name="Label.Caption.Gray">
+        <item name="android:textColor">@color/grayDefault</item>
+    </style>
+
+</resources>

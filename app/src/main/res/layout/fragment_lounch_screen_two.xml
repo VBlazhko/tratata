@@ -1,13 +1,28 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aaa.politindex.lounchscreen.LounchScreenTwoFragment">
+    tools:context="com.aaa.politindex.lounchscreen.LaunchScreenTwoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <TextView
+        style="@style/Label.Caption.Gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/second_lounchscreen_fragment" />
+
+
+    <ImageView
+        android:layout_width="@dimen/image_lounch_screen_size"
+        android:layout_height="@dimen/image_lounch_screen_size"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/half_deafault_size"
+        android:src="@drawable/second_dialog_img" />
+
+</RelativeLayout>

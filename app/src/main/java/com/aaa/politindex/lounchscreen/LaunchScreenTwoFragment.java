@@ -15,7 +15,7 @@ import com.aaa.politindex.R;
 
 
 
-public class LounchScreenTwoFragment extends Fragment {
+public class LaunchScreenTwoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,13 +24,8 @@ public class LounchScreenTwoFragment extends Fragment {
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        Log.w("log", "onHiddenChanged:2 ");
-    }
-    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.w("log", "onHiddenChanged:2 " + isVisibleToUser);
         mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
     }
     ImageView mImageView;
