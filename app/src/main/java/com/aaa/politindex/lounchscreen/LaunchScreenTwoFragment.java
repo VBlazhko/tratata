@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import com.aaa.politindex.R;
 
 
-
 public class LaunchScreenTwoFragment extends Fragment {
     @Nullable
     @Override
@@ -26,9 +25,11 @@ public class LaunchScreenTwoFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
+        mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
     }
+
     ImageView mImageView;
+
     public void setImageView(ImageView imageView) {
         mImageView = imageView;
     }

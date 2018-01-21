@@ -16,23 +16,21 @@
             style="@style/Label.Caption.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Hello"
-             />
+            android:text="@string/Hello" />
 
         <TextView
             style="@style/Label.Caption.Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/deafault_size"
-            android:text="@string/first_lounchscreen_fragment"
-            />
+            android:text="@string/first_lounchscreen_fragment" />
     </LinearLayout>
 
     <ImageView
         android:layout_width="@dimen/image_lounch_screen_size"
         android:layout_height="@dimen/image_lounch_screen_size"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/half_deafault_size"
         android:src="@drawable/first_dialog_img" />
 

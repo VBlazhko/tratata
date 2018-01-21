@@ -33,9 +33,9 @@ public class LaunchScreenThreeFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
+        mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
 
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             next.setText("Готово");
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,6 +57,7 @@ public class LaunchScreenThreeFragment extends Fragment {
     }
 
     ImageView mImageView;
+
     public void setImageView(ImageView imageView) {
         mImageView = imageView;
     }

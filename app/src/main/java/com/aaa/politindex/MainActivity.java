@@ -9,21 +9,21 @@ import com.aaa.politindex.lounchscreen.FirstDialogFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences sPrefLounchScreeen=null;
+    SharedPreferences sPrefLounchScreeen = null;
     boolean show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirstDialogFragment firstDialogFragment=new FirstDialogFragment();
+        FirstDialogFragment firstDialogFragment = new FirstDialogFragment();
         sPrefLounchScreeen = getPreferences(MODE_PRIVATE);
 
-        show = sPrefLounchScreeen.getBoolean("NEVER_SHOW_AGAIN",false);
-        if(!show) {
+//        show = sPrefLounchScreeen.getBoolean("NEVER_SHOW_AGAIN", false);
+//        if (!show) {
             firstDialogFragment.show(getSupportFragmentManager(), "lounchScreen");
-            sPrefLounchScreeen.edit().putBoolean("NEVER_SHOW_AGAIN", true).commit();
-        }
+//            sPrefLounchScreeen.edit().putBoolean("NEVER_SHOW_AGAIN", true).commit();
+//        }
 
         Log.w("log", "onCreate: ");
     }
