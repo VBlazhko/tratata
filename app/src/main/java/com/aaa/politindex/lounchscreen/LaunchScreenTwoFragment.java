@@ -10,15 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.aaa.politindex.App;
+import com.aaa.politindex.BaseFragment;
 import com.aaa.politindex.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class LaunchScreenTwoFragment extends Fragment {
+
+public class LaunchScreenTwoFragment extends BaseFragment {
+
+    @BindView(R.id.help2_text)
+    TextView help2_text;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lounch_screen_two, container, false);
+        mUnbinder=ButterKnife.bind(this,view);
+        help2_text.setText(App.getApp().getValue("help2_text"));
         return view;
     }
 

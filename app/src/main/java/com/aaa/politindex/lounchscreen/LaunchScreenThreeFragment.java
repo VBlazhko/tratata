@@ -13,19 +13,30 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aaa.politindex.App;
+import com.aaa.politindex.BaseFragment;
 import com.aaa.politindex.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class LaunchScreenThreeFragment extends Fragment {
+
+public class LaunchScreenThreeFragment extends BaseFragment {
 
     TextView next;
     FirstDialogFragment.ICloseListener mCloseListener;
     ViewPager mPager;
 
+    @BindView(R.id.help3_text)
+    TextView help3_text;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lounch_screen_three, container, false);
+        mUnbinder= ButterKnife.bind(this,view);
+        help3_text.setText(App.getApp().getValue("help3_text"));
         return view;
     }
 
