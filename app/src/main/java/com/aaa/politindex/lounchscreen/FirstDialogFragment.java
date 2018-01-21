@@ -25,35 +25,30 @@ import butterknife.ButterKnife;
 
 public class FirstDialogFragment extends DialogFragment {
 
-
+    @BindView(R.id.pager)
     ViewPager mPager;
-    public ImageView firstPoint;
-    public ImageView secondPoint;
-    public ImageView thirdPoint;
-    public TextView next;
-
- /*   @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_first_dialog, null);
-        mPager = (ViewPager) view.findViewById(R.id.pager);
-        adb.setView(view);
-        PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), 3);
-        mPager.setAdapter(adapter);
-
-        return adb.create();
-    }*/
+    @BindView(R.id.first_point)
+    ImageView firstPoint;
+    @BindView(R.id.second_point)
+    ImageView secondPoint;
+    @BindView(R.id.third_point)
+    ImageView thirdPoint;
+    @BindView(R.id.next)
+    TextView next;
+    @BindView(R.id.skip)
+    TextView skip;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_first_dialog, null);
-        mPager = (ViewPager) view.findViewById(R.id.pager);
-        firstPoint = (ImageView) view.findViewById(R.id.first_point);
-        secondPoint = (ImageView) view.findViewById(R.id.second_point);
-        thirdPoint = (ImageView) view.findViewById(R.id.third_point);
-        next = (TextView) view.findViewById(R.id.next);
+        ButterKnife.bind(this,view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         LounchScreenOneFragment mLounchScreenOneFragment = new LounchScreenOneFragment();
         LounchScreenTwoFragment mLounchScreenTwoFragment = new LounchScreenTwoFragment();
@@ -62,6 +57,7 @@ public class FirstDialogFragment extends DialogFragment {
         mLounchScreenOneFragment.setImageView(firstPoint);
         mLounchScreenTwoFragment.setImageView(secondPoint);
         mLounchScreenThreeFragment.setImageView(thirdPoint);
+
         mLounchScreenThreeFragment.setNext(next, mPager, new ICloseListener() {
             @Override
             public void onClose() {
@@ -76,8 +72,6 @@ public class FirstDialogFragment extends DialogFragment {
         adapter.setLounchScreenTwoFragment(mLounchScreenTwoFragment);
         adapter.setLounchScreenThreeFragment(mLounchScreenThreeFragment);
         mPager.setAdapter(adapter);
-        return view;
-
     }
 
     @Override
@@ -87,8 +81,8 @@ public class FirstDialogFragment extends DialogFragment {
         Point size = new Point();
         display.getSize(size);
         float density = getActivity().getResources().getDisplayMetrics().density;
-        int width = (int) (size.x - 48 * density);
-        int height = (int) (size.y - 48 * density);
+        int width = (int) (size.x - 40 * density);
+        int height = (int) (size.y - 64 * density);
 
         Dialog dialog = getDialog();
         if (dialog != null) {

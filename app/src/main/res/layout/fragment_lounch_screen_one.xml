@@ -5,6 +5,36 @@
     tools:context="com.aaa.politindex.lounchscreen.LounchScreenOneFragment">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:orientation="vertical"
+        android:layout_marginTop="-5dp">
 
+        <TextView
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Привет."
+            android:textColor="@color/blackDefault" />
+
+        <TextView
+            style="@style/Label.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/deafault_size"
+            android:text="POLITINDEX - это независимая платформа анализа общественного мения."
+            android:textColor="@color/grayDefault" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/first_dialog_img"
+        android:layout_marginTop="@dimen/half_deafault_size"/>
 
 </RelativeLayout>

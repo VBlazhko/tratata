@@ -39,22 +39,26 @@ public class LounchScreenThreeFragment extends Fragment {
         Log.w("log", "onHiddenChanged:3 " + isVisibleToUser);
         mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
         if(isVisibleToUser){
+            next.setText("Готово");
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mCloseListener.onClose();
+
                 }
             });
         } else {
+            next.setText("Далее");
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mPager.setCurrentItem(2);
+
                 }
             });
         }
 
-        next.setText("sadas");
+
     }
 
     ImageView mImageView;

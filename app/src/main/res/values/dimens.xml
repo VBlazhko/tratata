@@ -5,5 +5,13 @@
     <dimen name="quarter_deafault_size">4dp</dimen>
 
 
+    <!-- font sizes -->
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_big">16sp</dimen>
+    <dimen name="font_medium">14sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_smaller">10sp</dimen>
+
+
 
 </resources>

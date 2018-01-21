@@ -20,14 +20,13 @@ public class LounchScreenOneFragment extends Fragment {
 
     TextView next;
     ViewPager mPager;
+    ImageView mImageView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lounch_screen_one, container, false);
-
         return view;
-
     }
 
     @Override
@@ -35,14 +34,15 @@ public class LounchScreenOneFragment extends Fragment {
         Log.w("log", "onHiddenChanged:1 ");
     }
 
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.w("log", "onHiddenChanged:1 " + isVisibleToUser);
-        mImageView.setBackgroundResource(isVisibleToUser?R.drawable.circle_indicator_balck:R.drawable.circle_indicator_white);
 
-        if(isVisibleToUser){
+        Log.w("log", "onHiddenChanged:1 " + isVisibleToUser);
+
+        mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
+
+        if (isVisibleToUser) {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -53,7 +53,8 @@ public class LounchScreenOneFragment extends Fragment {
 
     }
 
-    ImageView mImageView;
+
+
     public void setImageView(ImageView imageView) {
         mImageView = imageView;
     }
