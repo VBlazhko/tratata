@@ -7,6 +7,12 @@
     <color name="blackDefault">#646463</color>
     <color name="grayDefault">#a1a1a0</color>
     <color name="background">#979797</color>
+    <color name="background2">#F6F6F6</color>
+    <color name="whiteDefault">#FFFFFF</color>
+    <color name="blackText">#434242</color>
+    <color name="darkGray">#797979</color>
+
+
 
 
 

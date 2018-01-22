@@ -54,13 +54,12 @@ public class Request {
     public JSONObject getResult(final String function, final Map<String, String> params, final CallBack callBack) {
 
 
-            Map<String, String> map = new HashMap<>();
+
             Map<String, String> headers = new HashMap<>();
-            map.put("login", "w8me");
-            map.put("password", "hZ858685");
+
 
             headers.put("Encoding", App.getApp().getLocale());
-            mRetrofitApi.getRequestPost(function,headers, map).enqueue(new Callback<ResponseBody>() {
+            mRetrofitApi.getRequestPost(function,headers).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Log.w("log", "onResponse: " + response.raw() );

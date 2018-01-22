@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.main_screen.MainActivity;
 import com.aaa.politindex.model.Item;
 import com.google.gson.Gson;
 

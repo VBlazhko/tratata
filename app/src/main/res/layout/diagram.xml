@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:gravity="bottom"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/diagram_margin_size"
+        android:layout_marginRight="@dimen/diagram_margin_size"
+        android:gravity="center_horizontal"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textColum1"
+            style="@style/Label.Small.DarkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="25%" />
+
+        <ImageView
+            android:id="@+id/colum1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_colum_blue" />
+
+        <TextView
+
+            android:id="@+id/dateColum1"
+            style="@style/Label.Small.Black2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="21.05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/diagram_margin_size"
+        android:layout_marginRight="@dimen/diagram_margin_size"
+        android:gravity="center_horizontal"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textColum2"
+            style="@style/Label.Small.DarkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="25%" />
+
+        <ImageView
+            android:id="@+id/colum2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_colum_blue" />
+
+        <TextView
+            android:id="@+id/dateColum2"
+            style="@style/Label.Small.Black2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="21.05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/diagram_margin_size"
+        android:layout_marginRight="@dimen/diagram_margin_size"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textColum3"
+            style="@style/Label.Small.DarkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+
+            android:layout_centerHorizontal="true"
+            android:text="25%" />
+
+        <ImageView
+            android:id="@+id/colum3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_colum_blue" />
+
+        <TextView
+            android:id="@+id/dateColum3"
+            style="@style/Label.Small.Black2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="21.05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/diagram_margin_size"
+        android:layout_marginRight="@dimen/diagram_margin_size"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textColum4"
+            style="@style/Label.Small.DarkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="25%" />
+
+        <ImageView
+            android:id="@+id/colum4"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_colum_blue" />
+
+        <TextView
+            android:id="@+id/dateColum4"
+            style="@style/Label.Small.Black2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="21.05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/diagram_margin_size"
+        android:layout_marginRight="@dimen/diagram_margin_size"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textColum5"
+            style="@style/Label.Small.DarkGray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="25%" />
+
+        <ImageView
+            android:id="@+id/colum5"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_colum_blue" />
+
+        <TextView
+            android:id="@+id/dateColum5"
+            style="@style/Label.Small.Black2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/image"
+            android:layout_centerHorizontal="true"
+            android:text="21.05" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -26,7 +26,7 @@ public interface RetrofitApi {
 
 
     @POST("/{server}")
-    Call<ResponseBody> getRequestPost(@Path(value = "server", encoded = true) String server, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> queryParams);
+    Call<ResponseBody> getRequestPost(@Path(value = "server", encoded = true) String server, @HeaderMap Map<String, String> headers);
 
 
 }
