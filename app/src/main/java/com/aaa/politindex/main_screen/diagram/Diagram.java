@@ -163,9 +163,18 @@ public class Diagram extends LinearLayout {
         final int newCounter = --counter;
 
         if (newCounter == 0) {
+            if (current / maxHeight >= 50) {
+                image.setBackgroundResource(R.drawable.background_colum_blue);
+            } else {
+                image.setBackgroundResource(R.drawable.background_column_red);
+            }
+
+
             return;
         }
         Log.w("log", "changeSize: " + delta);
+
+        image.setBackgroundResource(R.drawable.background_colum_gray);
 
         handler.myPostDelay(new Runnable() {
             @Override

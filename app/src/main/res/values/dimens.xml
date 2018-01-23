@@ -4,6 +4,7 @@
     <dimen name="half_deafault_size">8dp</dimen>
     <dimen name="quarter_deafault_size">4dp</dimen>
     <dimen name="diagram_margin_size">10dp</dimen>
+    <dimen name="four_default_size">64dp</dimen>
 
     <dimen name="toolbar_size">45dp</dimen>
 
