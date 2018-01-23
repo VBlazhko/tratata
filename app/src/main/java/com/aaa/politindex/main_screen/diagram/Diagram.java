@@ -36,7 +36,7 @@ public class Diagram extends LinearLayout {
 
     private static final String TAG = "log";
 
-    private int maxHeight = 2;
+    private float maxHeight;
 
     MyHandler mHandler;
 
@@ -70,6 +70,7 @@ public class Diagram extends LinearLayout {
     private int endProcent4;
     private int endProcent5;
 
+    float density;
 
     public Diagram(Context context) {
         super(context);
@@ -110,6 +111,8 @@ public class Diagram extends LinearLayout {
         dateColum5 = (TextView) findViewById(R.id.dateColum5);
 
 
+        maxHeight = context.getResources().getDisplayMetrics().density/ 1.5f;
+
     }
 
     public void setDate(String date1, String date2, String date3, String date4, String date5) {
@@ -128,11 +131,11 @@ public class Diagram extends LinearLayout {
         textColum4.setText(procent4 + "%");
         textColum5.setText(procent5 + "%");
 
-        startProcent1 = colum1.getHeight() / maxHeight;
-        startProcent2 = colum2.getHeight() / maxHeight;
-        startProcent3 = colum3.getHeight() / maxHeight;
-        startProcent4 = colum4.getHeight() / maxHeight;
-        startProcent5 = colum5.getHeight() / maxHeight;
+        startProcent1 = (int) (colum1.getHeight() / maxHeight);
+        startProcent2 = (int) (colum2.getHeight() / maxHeight);
+        startProcent3 = (int) (colum3.getHeight() / maxHeight);
+        startProcent4 = (int) (colum4.getHeight() / maxHeight);
+        startProcent5 = (int) (colum5.getHeight() / maxHeight);
 
         endProcent1 = procent1;
         endProcent2 = procent2;
@@ -150,16 +153,17 @@ public class Diagram extends LinearLayout {
         Log.w(TAG, "setProcent2: " + endProcent1);
 
 
-        changeSize(startProcent1 * maxHeight, (int) ((endProcent1 - startProcent1) / 10), colum1, mHandler, maxHeight * 10 + 1);
-        changeSize(startProcent2 * maxHeight, (int) ((endProcent2 - startProcent2) / 10), colum2, mHandler, maxHeight * 10 + 1);
-        changeSize(startProcent3 * maxHeight, (int) ((endProcent3 - startProcent3) / 10), colum3, mHandler, maxHeight * 10 + 1);
-        changeSize(startProcent4 * maxHeight, (int) ((endProcent4 - startProcent4) / 10), colum4, mHandler, maxHeight * 10 + 1);
-        changeSize(startProcent5 * maxHeight, (int) ((endProcent5 - startProcent5) / 10), colum5, mHandler, maxHeight * 10 + 1);
+
+        changeSize(startProcent1 * maxHeight, (int) ((endProcent1 - startProcent1) / 10), colum1, mHandler, (int) (maxHeight * 10 + 1));
+        changeSize(startProcent2 * maxHeight, (int) ((endProcent2 - startProcent2) / 10), colum2, mHandler, (int) (maxHeight * 10 + 1));
+        changeSize(startProcent3 * maxHeight, (int) ((endProcent3 - startProcent3) / 10), colum3, mHandler, (int) (maxHeight * 10 + 1));
+        changeSize(startProcent4 * maxHeight, (int) ((endProcent4 - startProcent4) / 10), colum4, mHandler, (int) (maxHeight * 10 + 1));
+        changeSize(startProcent5 * maxHeight, (int) ((endProcent5 - startProcent5) / 10), colum5, mHandler, (int) (maxHeight * 10 + 1));
 
 
     }
 
-    public void changeSize(final int current, final int delta, final ImageView image, final MyHandler handler, int counter) {
+    public void changeSize(final float current, final int delta, final ImageView image, final MyHandler handler, int counter) {
         final int newCounter = --counter;
 
         if (newCounter == 0) {
@@ -179,7 +183,7 @@ public class Diagram extends LinearLayout {
         handler.myPostDelay(new Runnable() {
             @Override
             public void run() {
-                int newStart = current + delta;
+                int newStart = (int) (current + delta);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, newStart);
                 image.setLayoutParams(lp);
                 changeSize(newStart, delta, image, handler, newCounter);

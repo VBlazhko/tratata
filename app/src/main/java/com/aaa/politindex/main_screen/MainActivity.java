@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.falg)
     ImageView flag;
 
-    @BindView(R.id.sliding_layout)
+    @BindView(R.id.slidingLayout)
     SlidingUpPanelLayout mSlidingUpPanelLayout;
 
     @BindView(R.id.arrow)
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                                     figure.getGraph().getItems().get(3).getRating(),
                                     figure.getGraph().getItems().get(4).getRating());
 
-                            Log.w("log", "onShowFigure: "+ figure.getGraph().getItems().get(0).getRating() );
+                            Log.w("log", "onShowFigure: " + figure.getGraph().getItems().get(0).getRating());
 
                             mDiagram.setDate(figure.getGraph().getItems().get(0).getDate(),
                                     figure.getGraph().getItems().get(1).getDate(),
@@ -142,12 +142,29 @@ public class MainActivity extends AppCompatActivity {
 
 
         btn_login.setText(App.getApp().getValue("btn_login"));
-        loginform_text.setText(App.getApp().getValue("loginform_text"));
+        loginform_text.setText(App.getApp().getValue("loginform_text").replaceAll("////n","//n"));
         loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
-        flag.setBackgroundResource(App.getApp().getLocale().equals("en")?R.drawable.english_language_icon:R.drawable.icon_russia_3x);
+        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
+
+        mSlidingUpPanelLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+            }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if(newState.toString().equals("COLLAPSED")){
+                    mImageArrow.setRotation(0);
+                }else {
+                    mImageArrow.setRotation(180);
+                }
 
 
 
+            }
+        });
 
 
     }
