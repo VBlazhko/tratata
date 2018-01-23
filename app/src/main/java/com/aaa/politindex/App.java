@@ -15,7 +15,7 @@ import java.util.Locale;
 public class App extends Application {
 
     private static App mApp;
-    private String mLocale="RU";
+    private String mLocale="EN";
 
 
     private List<Item> mItemList;

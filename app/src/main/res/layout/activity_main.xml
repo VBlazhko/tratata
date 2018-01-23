@@ -4,15 +4,16 @@
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:gravity="bottom"
+    sothree:umanoClipPanel="true"
     sothree:umanoDragView="@+id/dragView"
+    sothree:umanoFadeColor="@android:color/transparent"
     sothree:umanoOverlay="true"
     sothree:umanoPanelHeight="@dimen/four_default_size"
     sothree:umanoParallaxOffset="0dp"
     sothree:umanoScrollableView="@+id/list"
-    sothree:umanoShadowHeight="50dp"
-    android:background="@android:color/transparent"
-    sothree:umanoClipPanel="true">
+    sothree:umanoShadowHeight="5000dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             android:layout_height="@dimen/toolbar_size"
             android:background="@color/whiteDefault"
             android:paddingLeft="@dimen/deafault_size"
-            android:paddingRight="@dimen/deafault_size">
+            android:paddingRight="@dimen/deafault_size"
+            android:layout_marginTop="2dp">
 
             <TextView
                 android:id="@+id/title"
@@ -94,11 +96,117 @@
     <LinearLayout
         android:id="@+id/dragView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/background_login_layout"
-        android:orientation="horizontal">
+        android:layout_height="280dp"
+        android:background="#d8d8d8"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_deafault_size"
+            android:src="@drawable/btn_up_stand"
+            android:tint="@color/grayDefault" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/deafault_size"
+            android:layout_marginRight="@dimen/deafault_size">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/icons8_info_squared"
+                android:tint="@color/blackText"/>
+
+            <TextView
+                android:id="@+id/btn_login"
+                style="@style/Label.Normal.Black2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="Войти в Politindex"
+                android:layout_marginRight="@dimen/four_default_size"
+                android:layout_marginLeft="@dimen/four_default_size"/>
+
+            <ImageView
+                android:id="@+id/falg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                 />
+
+
+        </RelativeLayout>
+        
+        
+        <TextView
+            android:id="@+id/loginform_text"
+            style="@style/Label.Small.Gray"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/deafault_size"
+            android:layout_marginLeft="68dp"
+            android:layout_marginRight="68dp"
+            android:layout_height="wrap_content"
+            android:text="Для авторизациия или регистрации Вам необходимо подтвердить \n ваш профиль через одну из соц сетей"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/deafault_size">
+
+            <ImageView
+                android:layout_margin="@dimen/half_deafault_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vk_icon"/>
+            <ImageView
+                android:layout_margin="@dimen/half_deafault_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fb_image"/>
+            <ImageView
+                android:layout_margin="@dimen/half_deafault_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/odnokl_icon"/>
+            <ImageView
+                android:layout_margin="@dimen/half_deafault_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/insta_icon"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/loginform_law_text"
+            android:layout_marginTop="20dp"
+            style="@style/Label.Small.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Регистрируясь вы соглашаетесь с"/>
+
+        <TextView
+            style="@style/Label.Small.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:text="правилами сервиса." />
+
 
     </LinearLayout>
+
+
 
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

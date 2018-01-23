@@ -25,7 +25,7 @@ public class FirstDialogFragment extends DialogFragment {
     @BindView(R.id.pager)
     ViewPager mPager;
     @BindView(R.id.first_point)
-
+            ImageView first_point;
     ImageView firstPoint;
     @BindView(R.id.second_point)
     ImageView secondPoint;

@@ -6,8 +6,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aaa.politindex.App;
 import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.lounchscreen.FirstDialogFragment;
@@ -18,6 +21,7 @@ import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.Graph;
 import com.aaa.politindex.model.Item;
 import com.google.gson.Gson;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,6 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.diagram)
     Diagram mDiagram;
+
+    @BindView(R.id.loginform_law_text)
+    TextView loginform_law_text;
+
+    @BindView(R.id.loginform_text)
+    TextView loginform_text;
+
+    @BindView(R.id.btn_login)
+    TextView btn_login;
+
+    @BindView(R.id.falg)
+    ImageView flag;
+
+    @BindView(R.id.sliding_layout)
+    SlidingUpPanelLayout mSlidingUpPanelLayout;
+
+    @BindView(R.id.arrow)
+    ImageView mImageArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +139,15 @@ public class MainActivity extends AppCompatActivity {
         //  firstDialogFragment.show(getSupportFragmentManager(), "lounchScreen");
 //            sPrefLounchScreeen.edit().putBoolean(prefKey, true).commit();
 //        }
+
+
+        btn_login.setText(App.getApp().getValue("btn_login"));
+        loginform_text.setText(App.getApp().getValue("loginform_text"));
+        loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
+        flag.setBackgroundResource(App.getApp().getLocale().equals("en")?R.drawable.english_language_icon:R.drawable.icon_russia_3x);
+
+
+
 
 
     }

@@ -188,7 +188,7 @@ public class Diagram extends LinearLayout {
     }
 
     class MyHandler extends Handler {
-        public int delay = 20;
+        public int delay = 3;
 
         public void myPostDelay(Runnable run, int delay) {
             if (delay > 0) {
