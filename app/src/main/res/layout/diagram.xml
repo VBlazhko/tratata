@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/colum1"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/background_colum_blue" />
 
@@ -62,7 +62,7 @@
         <ImageView
             android:id="@+id/colum2"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/background_colum_blue" />
 
@@ -97,7 +97,7 @@
         <ImageView
             android:id="@+id/colum3"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/background_colum_blue" />
 
@@ -131,7 +131,7 @@
         <ImageView
             android:id="@+id/colum4"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/background_colum_blue" />
 
@@ -165,7 +165,7 @@
         <ImageView
             android:id="@+id/colum5"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:background="@drawable/background_colum_blue" />
 

@@ -172,6 +172,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/vk_icon"/>
             <ImageView
+                android:id="@+id/fb_auth_button"
                 android:layout_margin="@dimen/half_deafault_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

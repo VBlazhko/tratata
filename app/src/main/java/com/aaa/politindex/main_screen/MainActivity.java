@@ -1,29 +1,30 @@
 package com.aaa.politindex.main_screen;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aaa.politindex.App;
+import com.aaa.politindex.AuthVKActivity;
 import com.aaa.politindex.R;
+import com.aaa.politindex.SplashActivity;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.lounchscreen.FirstDialogFragment;
 import com.aaa.politindex.main_screen.diagram.Diagram;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
 import com.aaa.politindex.main_screen.tabs.PagerAdapter;
 import com.aaa.politindex.model.Figure;
-import com.aaa.politindex.model.Graph;
-import com.aaa.politindex.model.Item;
 import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.vk.sdk.VKScope;
+import com.vk.sdk.VKSdk;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     String prefKey = "NEVER_SHOW_AGAIN";
     FirstDialogFragment firstDialogFragment;
     ViewPager mViewPager;
+    private String[] scope;
 
     @BindView(R.id.slidingLayout)
     SlidingUpPanelLayout slidingLayout;
@@ -69,11 +71,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.arrow)
     ImageView mImageArrow;
 
+    @BindView(R.id.fb_auth_button)
+    ImageView fb_auth_button;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         firstDialogFragment = new FirstDialogFragment();
@@ -183,7 +189,22 @@ public class MainActivity extends AppCompatActivity {
         Log.w("log", "onCreate3: Hi,\\nHow are you?");
         loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
         flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
+
+
+
+
+        fb_auth_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AuthVKActivity.class));
+            }
+        });
     }
 
 
-}
+    }
+
+
+
+
+

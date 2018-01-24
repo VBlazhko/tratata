@@ -154,11 +154,11 @@ public class Diagram extends LinearLayout {
 
 
 
-        changeSize(startProcent1 * maxHeight, (int) ((endProcent1 - startProcent1) / 10), colum1, mHandler, (int) (maxHeight * 10 + 1));
-        changeSize(startProcent2 * maxHeight, (int) ((endProcent2 - startProcent2) / 10), colum2, mHandler, (int) (maxHeight * 10 + 1));
-        changeSize(startProcent3 * maxHeight, (int) ((endProcent3 - startProcent3) / 10), colum3, mHandler, (int) (maxHeight * 10 + 1));
-        changeSize(startProcent4 * maxHeight, (int) ((endProcent4 - startProcent4) / 10), colum4, mHandler, (int) (maxHeight * 10 + 1));
-        changeSize(startProcent5 * maxHeight, (int) ((endProcent5 - startProcent5) / 10), colum5, mHandler, (int) (maxHeight * 10 + 1));
+        changeSize(startProcent1 * maxHeight, (int) ((endProcent1 - startProcent1) / 3), colum1, mHandler, (int) (maxHeight * 3 + 1));
+        changeSize(startProcent2 * maxHeight, (int) ((endProcent2 - startProcent2) / 3), colum2, mHandler, (int) (maxHeight * 3 + 1));
+        changeSize(startProcent3 * maxHeight, (int) ((endProcent3 - startProcent3) / 3), colum3, mHandler, (int) (maxHeight * 3 + 1));
+        changeSize(startProcent4 * maxHeight, (int) ((endProcent4 - startProcent4) / 3), colum4, mHandler, (int) (maxHeight * 3 + 1));
+        changeSize(startProcent5 * maxHeight, (int) ((endProcent5 - startProcent5) / 3), colum5, mHandler, (int) (maxHeight * 3 + 1));
 
 
     }
@@ -192,7 +192,7 @@ public class Diagram extends LinearLayout {
     }
 
     class MyHandler extends Handler {
-        public int delay = 3;
+        public int delay = 12;
 
         public void myPostDelay(Runnable run, int delay) {
             if (delay > 0) {

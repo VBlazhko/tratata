@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.aaa.politindex.model.Item;
+import com.vk.sdk.VKSdk;
 
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +24,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         mApp = this;
+        VKSdk.initialize(this);
+
         Locale locale=getResources().getConfiguration().locale;
         mLocale=locale.toString().split("_")[0];
         Log.w("log", "onCreate: "+ mLocale.toString() );

@@ -6,4 +6,5 @@ package com.aaa.politindex;
 
 public class Const {
     public static final String SERVER = " http://politindex.nowords.ru/";
+    public static final String VKSERVER = "https://oauth.vk.com/";
 }

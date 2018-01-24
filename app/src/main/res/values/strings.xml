@@ -6,6 +6,7 @@
 
 
     <string name="facebook_app_id">1527818680665402</string>
+    <integer name="com_vk_sdk_AppId">6344553</integer>
 
 
     <!-- TODO ^^ Dialog Fragment -->
