@@ -35,12 +35,11 @@ public class LaunchScreenOneFragment extends BaseFragment {
     TextView hello_title;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lounch_screen_one, container, false);
-        mUnbinder=ButterKnife.bind(this,view);
+        mUnbinder = ButterKnife.bind(this, view);
         help1_text.setText(App.getApp().getValue("help1_text"));
         hello_title.setText(App.getApp().getValue("hello_title"));
         return view;
@@ -50,7 +49,8 @@ public class LaunchScreenOneFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
+        if (mImageView != null)
+            mImageView.setBackgroundResource(isVisibleToUser ? R.drawable.circle_indicator_balck : R.drawable.circle_indicator_white);
 
         if (isVisibleToUser) {
             next.setOnClickListener(new View.OnClickListener() {

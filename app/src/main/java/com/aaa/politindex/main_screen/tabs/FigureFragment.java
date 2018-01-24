@@ -62,7 +62,7 @@ public class FigureFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         m_iAmVisible = isVisibleToUser;
         if (mImageView != null) mImageView.setAlpha(m_iAmVisible ? 1.0f : 0.7f);
-        if(mFigure!=null) mListener.onShowFigure(mFigure);
+        if(isVisibleToUser) mListener.onShowFigure(mFigure);
 
 
     }

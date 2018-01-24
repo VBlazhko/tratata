@@ -37,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
                 App.getApp().setItemList(list);
 
               startActivity(new Intent(SplashActivity.this,MainActivity.class));
+              finish();
 
 
             }

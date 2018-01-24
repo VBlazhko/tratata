@@ -3,8 +3,10 @@ package com.aaa.politindex.main_screen;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     FirstDialogFragment firstDialogFragment;
     ViewPager mViewPager;
 
+    @BindView(R.id.slidingLayout)
+    SlidingUpPanelLayout slidingLayout;
+
     @BindView(R.id.surname)
     TextView lastname;
 
@@ -61,11 +66,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.falg)
     ImageView flag;
 
-    @BindView(R.id.slidingLayout)
-    SlidingUpPanelLayout mSlidingUpPanelLayout;
-
     @BindView(R.id.arrow)
     ImageView mImageArrow;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
                     fragment.setListener(new IShowFigureListener() {
                         @Override
                         public void onShowFigure(Figure figure) {
+                            firstname.setVisibility(View.VISIBLE);
+                            lastname.setVisibility(View.VISIBLE);
+                            mDiagram.setVisibility(View.VISIBLE);
                             firstname.setText(figure.getFirstname());
                             lastname.setText(figure.getLastname());
                             mDiagram.setProcent(figure.getGraph().getItems().get(0).getRating(),
@@ -121,8 +128,17 @@ public class MainActivity extends AppCompatActivity {
                     fragments.add(fragment);
 
                 }
-
-                fragments.add(new FigureFragment());
+                FigureFragment figureFragment = new FigureFragment();
+                figureFragment.setListener(new IShowFigureListener() {
+                    @Override
+                    public void onShowFigure(Figure figure) {
+                        firstname.setVisibility(View.INVISIBLE);
+                        lastname.setVisibility(View.INVISIBLE);
+                        mDiagram.setVisibility(View.INVISIBLE);
+                        return;
+                    }
+                });
+                fragments.add(figureFragment);
 
                 mViewPager.setClipToPadding(false); //
                 mViewPager.setPageMargin(30);
@@ -134,38 +150,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //        show = sPrefLounchScreeen.getBoolean(prefKey, false);
-//        if (!show) {
-        //  firstDialogFragment.show(getSupportFragmentManager(), "lounchScreen");
-//            sPrefLounchScreeen.edit().putBoolean(prefKey, true).commit();
-//        }
 
-
-        btn_login.setText(App.getApp().getValue("btn_login"));
-        loginform_text.setText(App.getApp().getValue("loginform_text").replaceAll("////n","//n"));
-        loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
-        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
-
-        mSlidingUpPanelLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-
+        slidingLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-
+                Log.w("log", "onPanelSlide1: ");
             }
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                if(newState.toString().equals("COLLAPSED")){
-                    mImageArrow.setRotation(0);
-                }else {
+
+
+                if (!newState.toString().equals("COLLAPSED")) {
                     mImageArrow.setRotation(180);
+                } else {
+                    mImageArrow.setRotation(0);
                 }
-
-
-
             }
         });
 
+        show = sPrefLounchScreeen.getBoolean(prefKey, false);
+        if (!show) {
+            firstDialogFragment.show(getSupportFragmentManager(), "lounchScreen");
+            sPrefLounchScreeen.edit().putBoolean(prefKey, true).commit();
+        }
 
+
+        btn_login.setText(App.getApp().getValue("btn_login"));
+        String s = (App.getApp().getValue("loginform_text"));
+
+        loginform_text.setText(s.replaceAll("\\\\n", "\n"));
+        Log.w("log", "onCreate3: Hi,\\nHow are you?");
+        loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
+        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
     }
+
+
 }
