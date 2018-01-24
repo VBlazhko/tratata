@@ -3,6 +3,7 @@ package com.aaa.politindex.connection;
 /**
  * Created by 11 on 21.01.2018.
  */
+
 import android.util.Log;
 
 import com.aaa.politindex.App;
@@ -25,7 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-
 
 
 public class Request {
@@ -54,30 +54,28 @@ public class Request {
     public JSONObject getResult(final String function, final Map<String, String> params, final CallBack callBack) {
 
 
+        Map<String, String> headers = new HashMap<>();
 
-            Map<String, String> headers = new HashMap<>();
 
-
-            headers.put("Encoding", App.getApp().getLocale());
-            mRetrofitApi.getRequestPost(function,headers).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    Log.w("log", "onResponse: " + response.raw() );
-                    try {
-                        JSONObject result = new JSONObject(response.body().string());
-                        callBack.onResponse(result);
-                        Log.w("log", "onResponse: "+result.toString() );
-                    } catch (Exception e) {
-                    }
+        headers.put("Encoding", App.getApp().getLocale());
+        mRetrofitApi.getRequestPost(function, headers).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.w("log", "onResponse: " + response.raw());
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    callBack.onResponse(result);
+                    Log.w("log", "onResponse: " + result.toString());
+                } catch (Exception e) {
                 }
+            }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
 
-                    Log.w("log", "onFailure: "  + t  );
-                }
-            });
+            }
+        });
 
         return null;
     }
@@ -85,7 +83,6 @@ public class Request {
     public interface CallBack {
         void onResponse(JSONObject jsonObject);
     }
-
 
 
 }

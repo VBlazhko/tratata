@@ -167,6 +167,7 @@
             android:layout_marginTop="@dimen/deafault_size">
 
             <ImageView
+                android:id="@+id/vk_auth_button"
                 android:layout_margin="@dimen/half_deafault_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

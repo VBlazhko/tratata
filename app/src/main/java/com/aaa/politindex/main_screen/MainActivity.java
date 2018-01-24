@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.aaa.politindex.App;
 import com.aaa.politindex.AuthVKActivity;
+import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.SplashActivity;
 import com.aaa.politindex.connection.Request;
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.fb_auth_button)
     ImageView fb_auth_button;
+
+    @BindView(R.id.vk_auth_button)
+    ImageView vk_auth_button;
 
 
 
@@ -183,23 +187,31 @@ public class MainActivity extends AppCompatActivity {
 
 
         btn_login.setText(App.getApp().getValue("btn_login"));
+
         String s = (App.getApp().getValue("loginform_text"));
-
         loginform_text.setText(s.replaceAll("\\\\n", "\n"));
-        Log.w("log", "onCreate3: Hi,\\nHow are you?");
-        loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
-        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
 
+        loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
+
+        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
 
 
 
         fb_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AuthVKActivity.class));
+                startActivity(new Intent(MainActivity.this, AuthVKActivity.class).putExtra("authorization", Const.FACEBOOK));
+            }
+        });
+        vk_auth_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AuthVKActivity.class).putExtra("authorization",Const.VKONTAKTE));
             }
         });
     }
+
+
 
 
     }
