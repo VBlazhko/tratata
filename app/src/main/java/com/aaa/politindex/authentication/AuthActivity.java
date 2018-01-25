@@ -1,4 +1,4 @@
-package com.aaa.politindex;
+package com.aaa.politindex.authentication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,21 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.aaa.politindex.Const;
+import com.aaa.politindex.R;
 import com.aaa.politindex.main_screen.MainActivity;
-import com.vk.sdk.VKAccessToken;
-import com.vk.sdk.VKCallback;
-import com.vk.sdk.VKScope;
-import com.vk.sdk.VKSdk;
-import com.vk.sdk.api.VKError;
-import com.vk.sdk.util.VKUtil;
 
-public class AuthVKActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity {
 
 
     WebView wb;
@@ -66,30 +60,48 @@ public class AuthVKActivity extends AppCompatActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            wb.evaluateJavascript(
-                    "(function() { return (document.getElementsByTagName('html')[0].innerHTML); })();",
-                    new ValueCallback<String>() {
-                        @Override
-                        public void onReceiveValue(String html) {
-                            if(html!=null){
-                            String result = html.replace("\\", "");
-                            Log.w("log", "onReceiveValue: "+result );
-                            parseString(result);
-
-                            mProgressBar.setVisibility(View.INVISIBLE);
-
-                            if(status.equals("OK")&&verification.equals("false")){
-                                Log.w("log", "onPageFinished: "+"GO TO SMS" );
-                            }else if(status.equals("OK")&&verification.equals("true")){
-                                Log.w("log", "onPageFinished: "+" auth OK" );
+            mProgressBar.setVisibility(View.INVISIBLE);
+            if(url.contains("code=")&&!url.contains("error_code=")) {
+                mProgressBar.setVisibility(View.VISIBLE);
+                wb.setVisibility(View.INVISIBLE);
+                wb.evaluateJavascript(
+                        "(function() { return (document.getElementsByTagName('html')[0].innerHTML); })();",
+                        new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String html) {
+                                if (html != null) {
+                                    String result = html.replace("\\", "");
+                                    Log.w("log", "onReceiveValue: " + result);
+                                    parseString(result);
+                                    changeActivity();
+                                }
                             }
-                        }}
-                    });
+                        });
+            }else if(url.contains("error_code=")){
+                Log.w("log", "onPageFinished: "+"----------------------ERROR" );
+                startActivity(new Intent(AuthActivity.this, MainActivity.class));
+                finish();
+            }
+
 
 
         }
 
+        public void changeActivity(){
+            if (status.equals("OK") && verification.equals("false")) {
+                startActivity(new Intent(AuthActivity.this, AuthPhoneActivity.class));
+                finish();
+            } else if (status.equals("OK") && verification.equals("true")) {
+                Log.w("log", "onPageFinished: " + " auth OK");
+            }
+        }
 
+
+        @Override
+        public void onReceivedLoginRequest(WebView view, String realm, String account, String args) {
+            super.onReceivedLoginRequest(view, realm, account, args);
+            Log.w("log", "onReceivedLoginRequest: " + args );
+        }
 
         public void parseString(String string){
             String[] array = string.split("\"status\":\"");
@@ -109,6 +121,11 @@ public class AuthVKActivity extends AppCompatActivity {
             super.onPageStarted(view, url, favicon);
 
         }
+
+
+
+
+
     }
 
 

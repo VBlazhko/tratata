@@ -59,9 +59,33 @@
     <style name="Label.Small.DarkGray">
         <item name="android:textColor">@color/darkGray</item>
     </style>
+
     <style name="Label.Small.Gray">
         <item name="android:textColor">@color/grayDefault</item>
     </style>
 
+    <style name="Label.EditPhone">
+        <item name="android:textSize">@dimen/font_larger</item>
+    </style>
+
+    <style name="Label.EditPhone.Black">
+        <item name="android:textColor">@color/blackText</item>
+    </style>
+
+    <style name="Label.Smaller">
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="Label.Smaller.Gray">
+        <item name="android:textColor">@color/grayDefault</item>
+    </style>
+
+    <style name="Label.Smaller2">
+        <item name="android:textSize">@dimen/font_smaller2</item>
+    </style>
+
+    <style name="Label.Smaller2.Gray">
+        <item name="android:textColor">@color/grayDefault</item>
+    </style>
 
 </resources>

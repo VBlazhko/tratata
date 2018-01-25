@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
-
+        <activity
+            android:name="com.vk.sdk.VKServiceActivity"
+            android:label="ServiceActivity"
+            android:theme="@style/VK.Transparent" />
         <activity
             android:name=".main_screen.MainActivity"
             android:screenOrientation="portrait" />
@@ -28,7 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AuthVKActivity"></activity>
+        <activity android:name=".authentication.AuthActivity" />
+        <activity android:name=".authentication.AuthPhoneActivity" >
+            android:windowSoftInputMode="adjustResize"
+        </activity>
+        <activity android:name=".authentication.SendSmsActivity">
+            android:windowSoftInputMode="adjustResize"
+        </activity>
     </application>
 
 </manifest>

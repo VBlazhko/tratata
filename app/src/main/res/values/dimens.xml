@@ -20,6 +20,8 @@
     <dimen name="font_small">12sp</dimen>
     <dimen name="font_smaller">10sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="font_larger">20dp</dimen>
+    <dimen name="font_smaller2">9sp</dimen>
 
 
 </resources>

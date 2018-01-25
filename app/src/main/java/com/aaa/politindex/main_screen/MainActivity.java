@@ -12,10 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aaa.politindex.App;
-import com.aaa.politindex.AuthVKActivity;
+import com.aaa.politindex.authentication.AuthActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
-import com.aaa.politindex.SplashActivity;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.lounchscreen.FirstDialogFragment;
 import com.aaa.politindex.main_screen.diagram.Diagram;
@@ -24,8 +23,6 @@ import com.aaa.politindex.main_screen.tabs.PagerAdapter;
 import com.aaa.politindex.model.Figure;
 import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.vk.sdk.VKScope;
-import com.vk.sdk.VKSdk;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -200,13 +197,13 @@ public class MainActivity extends AppCompatActivity {
         fb_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AuthVKActivity.class).putExtra("authorization", Const.FACEBOOK));
+                startActivity(new Intent(MainActivity.this, AuthActivity.class).putExtra("authorization", Const.FACEBOOK));
             }
         });
         vk_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AuthVKActivity.class).putExtra("authorization",Const.VKONTAKTE));
+                startActivity(new Intent(MainActivity.this, AuthActivity.class).putExtra("authorization",Const.VKONTAKTE));
             }
         });
     }

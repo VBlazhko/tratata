@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="com.aaa.politindex.authentication.SendSmsActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_size"
+        android:layout_marginTop="2dp"
+        android:background="@color/whiteDefault"
+        android:paddingLeft="@dimen/deafault_size"
+        android:paddingRight="@dimen/deafault_size">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="CМС код " />
+
+        <ImageView
+            style="@style/Label.Normal.Black"
+            android:id="@+id/icon_back"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:rotation="90"
+            android:src="@drawable/btn_up_down"
+            android:tint="@color/blackText" />
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon_back"
+            android:layout_centerVertical="true"
+            android:paddingLeft="4dp"
+            android:text="Назад" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteDefault"
+        android:paddingBottom="35dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="40dp">
+
+        <TextView
+            android:id="@+id/codeSent"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Код отправлен:" />
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Код отправлен:" />
+
+        <TextView
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phoneNumber"
+            android:text="+7 1231232323" />
+
+        <ImageView
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginTop="8dp"
+            android:src="@drawable/btn_send"
+            android:tint="@color/grayDefault" />
+
+        <TextView
+        android:id="@+id/sendSms"
+        style="@style/Label.Smaller.Gray"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_toLeftOf="@+id/btnSend"
+        android:gravity="center"
+        android:text="Выслать смс код " />
+
+        <TextView
+            android:id="@+id/repeatedly"
+            style="@style/Label.Smaller2.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/sendSms"
+            android:gravity="center"
+            android:text="Повторно через "
+            android:layout_toLeftOf="@+id/seconds"/>
+        <TextView
+            android:id="@+id/seconds"
+            style="@style/Label.Smaller2.Gray"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/sendSms"
+            android:gravity="center"
+            android:text="30"
+            android:layout_alignParentRight="true"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:isScrollContainer="true"
+        android:orientation="vertical">
+
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/txt_pin_entry"
+            style="@style/Label.Normal.Black2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="30sp"
+            app:pinLineColors="@color/grayDefault" />
+    </LinearLayout>
+
+
+</LinearLayout>
