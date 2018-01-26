@@ -50,16 +50,33 @@
         android:layout_height="wrap_content"
         android:background="@color/whiteDefault"
         android:paddingBottom="35dp"
+        android:paddingTop="40dp"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
 
         >
+
+        <com.gmail.samehadar.iosdialog.CamomileSpinner
+            android:id="@+id/spinner"
+            android:layout_marginRight="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:duration="100"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:spinnerColor="@color/grayDefault"
+            app:clockwise="true"
+            android:visibility="invisible"/>
+
+
 
         <ImageView
 
             android:id="@+id/falgImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="48dp"
+
+            android:layout_marginTop="8dp"
             android:src="@drawable/icon_russia_3x" />
 
 
@@ -69,7 +86,6 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
             android:layout_toRightOf="@+id/falgImage"
             android:background="@android:color/transparent"
             android:hint="9091403543"
@@ -93,8 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="44dp"
+
+            android:layout_marginTop="4dp"
             android:src="@drawable/btn_send"
             android:tint="@color/grayDefault" />
 
@@ -103,7 +119,7 @@
             style="@style/Label.Smaller.Gray"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+
             android:layout_toLeftOf="@+id/btnSend"
             android:gravity="center"
             android:text="Выслать смс код " />
@@ -135,6 +151,7 @@
 
 
     </LinearLayout>
+
 
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aaa.politindex.R;
+import com.gmail.samehadar.iosdialog.CamomileSpinner;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +20,9 @@ public class SendSmsActivity extends AppCompatActivity {
     @BindView(R.id.repeatedly)
     TextView mRepeatedly;
 
+    @BindView(R.id.spinner)
+    CamomileSpinner mSpinner;
+
     Handler myHandler;
 
 
@@ -29,6 +33,7 @@ public class SendSmsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         myHandler=new Handler();
 
+        mSpinner.start();
         stopwatch(myHandler,60);
 
 

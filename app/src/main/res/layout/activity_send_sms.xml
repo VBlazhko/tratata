@@ -17,6 +17,8 @@
         android:paddingLeft="@dimen/deafault_size"
         android:paddingRight="@dimen/deafault_size">
 
+
+
         <TextView
             android:id="@+id/title"
             style="@style/Label.Caption.Black"
@@ -26,10 +28,10 @@
             android:text="CМС код " />
 
         <ImageView
-            style="@style/Label.Normal.Black"
             android:id="@+id/icon_back"
-            android:layout_height="wrap_content"
+            style="@style/Label.Normal.Black"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:rotation="90"
@@ -41,8 +43,8 @@
             style="@style/Label.Normal.Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/icon_back"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_back"
             android:paddingLeft="4dp"
             android:text="Назад" />
     </RelativeLayout>
@@ -55,6 +57,18 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:paddingTop="40dp">
+
+        <com.gmail.samehadar.iosdialog.CamomileSpinner
+            android:id="@+id/spinner"
+            android:layout_marginRight="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:duration="100"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:spinnerColor="@color/grayDefault"
+            app:clockwise="true"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/codeSent"
@@ -88,35 +102,36 @@
             android:tint="@color/grayDefault" />
 
         <TextView
-        android:id="@+id/sendSms"
-        style="@style/Label.Smaller.Gray"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_toLeftOf="@+id/btnSend"
-        android:gravity="center"
-        android:text="Выслать смс код " />
+            android:id="@+id/sendSms"
+            style="@style/Label.Smaller.Gray"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@+id/btnSend"
+            android:gravity="center"
+            android:text="Выслать смс код " />
 
         <TextView
             android:id="@+id/repeatedly"
             style="@style/Label.Smaller2.Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_below="@+id/sendSms"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@+id/seconds"
             android:gravity="center"
-            android:text="Повторно через "
-            android:layout_toLeftOf="@+id/seconds"/>
+            android:text="Повторно через " />
+
         <TextView
             android:id="@+id/seconds"
             style="@style/Label.Smaller2.Gray"
             android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/sendSms"
+            android:layout_marginTop="3dp"
             android:gravity="center"
-            android:text="30"
-            android:layout_alignParentRight="true"/>
+            android:text="30" />
 
 
     </RelativeLayout>

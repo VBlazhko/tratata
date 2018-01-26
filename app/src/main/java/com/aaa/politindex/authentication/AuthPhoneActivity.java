@@ -9,7 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aaa.politindex.R;
+import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.connection.RequestAuth;
 import com.aaa.politindex.main_screen.MainActivity;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +64,14 @@ public class AuthPhoneActivity extends AppCompatActivity {
         mBack.setOnClickListener(myListner);
         mBtnSend.setOnClickListener(myListner);
         mSendSMS.setOnClickListener(myListner);
+
+
+        RequestAuth.getInstance().getResult("v1/phone/auth.api", null, new Request.CallBack() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                Log.w("log", "onResponse: "+ jsonObject );
+            }
+        });
 
     }
 }

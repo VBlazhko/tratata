@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.aaa.politindex.App;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.main_screen.MainActivity;
@@ -109,6 +110,11 @@ public class AuthActivity extends AppCompatActivity {
             idUser = array[1].split("\"idUser\":")[1].split(",")[0];
             verification = array[1].split("\"verification\":")[1].split(",")[0];
             token = array[1].split("\"token\":\"")[1].split("\"")[0];
+
+            App.getApp().setSharedPreferences(Const.ID_USER,idUser);
+            App.getApp().setSharedPreferences(Const.TOKEN,token);
+
+
 
             Log.w("log", "parseString: Status = "+status );
             Log.w("log", "parseString: idUser = "+idUser );
