@@ -147,7 +147,7 @@
 
         <com.alimuzaffar.lib.pin.PinEntryEditText
             android:id="@+id/txt_pin_entry"
-            style="@style/Label.Normal.Black2"
+            style="@style/Label.Normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
@@ -158,7 +158,8 @@
             android:maxLength="4"
             android:textIsSelectable="false"
             android:textSize="30sp"
-            app:pinLineColors="@color/grayDefault" />
+            app:pinLineColors="@color/grayDefault"
+            android:textColor="@color/blackText"/>
     </LinearLayout>
 
 

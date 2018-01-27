@@ -25,6 +25,10 @@
         <item name="android:textColor">@color/blackText</item>
     </style>
 
+    <style name="Label.Normal.Red">
+        <item name="android:textColor">@color/redDefault</item>
+    </style>
+
     <style name="Label.Normal.Blue">
         <item name="android:textColor">@color/blueDefault</item>
     </style>

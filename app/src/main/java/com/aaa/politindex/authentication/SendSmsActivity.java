@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
@@ -111,37 +112,30 @@ public class SendSmsActivity extends BaseActivity {
 
     @OnTextChanged(R.id.txt_pin_entry)
     protected void pinEntry() {
-        Log.w(TAG, "pinEntry: " + pinCode.getText().toString());
+
+        pinCode.setBackgroundTintList(getResources().getColorStateList(R.color.blackText));
+
         if (pinCode.getText().toString().length() == 4) {
-
-//            Map<String, String> params = new HashMap<>();
-//            params.put("id_user", App.getApp().getSharedPreferences(Const.ID_USER));
-//            params.put("token", App.getApp().getSharedPreferences(Const.TOKEN));
-//            params.put("sms_code", pinCode.getText().toString());
-//            params.put("hash", Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + App.getApp().getSharedPreferences(Const.TOKEN)) + pinCode.getText().toString());
-//            RequestAuth.getInstance().getResult("v1/sms/auth.api", params, new Request.CallBack() {
-//                @Override
-//                public void onResponse(JSONObject jsonObject) {
-//                    showSend(true);
-//                    Log.w("log", "onResponse: ------------------------------------------------------------" + jsonObject);
-//                    if (jsonObject.optString("status").equals("OK")) {
-//
-//                    }
-//                }
-//            });
-
-
+            showSend(false);
             RequestAuth.getInstance().getResultSms("v1/sms/auth.api", Integer.parseInt(App.getApp().getSharedPreferences(Const.ID_USER)),
                     App.getApp().getSharedPreferences(Const.TOKEN),
                     Integer.parseInt(pinCode.getText().toString()),
                     Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + App.getApp().getSharedPreferences(Const.TOKEN)) + pinCode.getText().toString(), new Request.CallBack() {
-                   // Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)) + ":" + pinCode.getText().toString(), new Request.CallBack() {
+                        // Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)) + ":" + pinCode.getText().toString(), new Request.CallBack() {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
-
-                            Log.w("log", "onResponse: ------------------------------------------------------------" + jsonObject);
                             if (jsonObject.optString("status").equals("OK")) {
 
+                            }else if(jsonObject.optString("status").equals("wrongsmscode")){
+                                Log.w(TAG, "onResponse: "+"must change color to red" );
+                                showSend(true);
+                                pinCode.setTextColor(getResources().getColor(R.color.redDefault));
+                            }else if(jsonObject.optString("status").equals("error")){
+                                if(this!=null) {
+                                    Toast toast = Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_SHORT); //?????????????????????????????
+                                    toast.show();
+                                    showSend(true);
+                                }
                             }
                         }
                     });
