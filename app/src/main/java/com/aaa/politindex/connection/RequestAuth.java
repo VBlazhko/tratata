@@ -45,20 +45,39 @@ public class RequestAuth {
 
 
     public JSONObject getResult(final String function, final Map<String, String> params, final Request.CallBack callBack) {
-
-        Map<String, String> params1 = new HashMap<>();
-        params1.put("id_user", App.getApp().getSharedPreferences(Const.ID_USER));
-        params1.put("token", App.getApp().getSharedPreferences(Const.TOKEN));
-
-        Log.w("log", "getResult: " + App.getApp().getSharedPreferences(Const.ID_USER));
-        Log.w("log", "getResult: " + App.getApp().getSharedPreferences(Const.TOKEN));
-
-        params1.put("phone", "79601018088");
-
-        mRetrofitAuthApi.getRequestPost(function, params1).enqueue(new Callback<ResponseBody>() {
+        mRetrofitAuthApi.getRequestPost(function, params).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.w("log", "onResponse: " + response.raw());
+
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    Log.w("log", "onResponse: " + result);
+                    callBack.onResponse(result);
+                    Log.w("log", "onResponse: " + result.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.w("log", "onFailure: " + t.toString());
+
+            }
+        });
+
+        return null;
+    }
+
+
+    public JSONObject getResultSms(final String function, final int idUser,final  String token,final int pinCode,final String hash, final Request.CallBack callBack) {
+        mRetrofitAuthApi.getRequestPostSms(function,idUser,token,pinCode,hash ).enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.w("log", "onResponse: " + response.raw());
+                Log.w("log", "onResponseSMSCODE: " + pinCode );
 
                 try {
                     JSONObject result = new JSONObject(response.body().string());

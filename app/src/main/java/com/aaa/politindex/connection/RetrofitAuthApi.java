@@ -25,6 +25,12 @@ public interface RetrofitAuthApi {
     @POST("/{server}")
     Call<ResponseBody> getRequestPost(@Path(value = "server", encoded = true) String server, @FieldMap Map<String,String> map  );
 
+    @FormUrlEncoded
+    @POST("/{server}")
+    Call<ResponseBody> getRequestPostSms(@Path(value = "server", encoded = true) String server, @Field("id_user") int idUser,
+                                         @Field("token") String token,
+                                         @Field("sms_code") int pinCode,
+                                         @Field("hash") String hash);
 
 
     @GET("/{server}")

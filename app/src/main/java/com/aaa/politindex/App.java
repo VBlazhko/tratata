@@ -33,7 +33,7 @@ public class App extends Application {
 
         mApp = this;
         //VKSdk.initialize(this);
-        getSharedPreferences("info", MODE_PRIVATE);
+       mSharedPreferences =  getSharedPreferences("info", MODE_PRIVATE);
 
 
         Locale locale=getResources().getConfiguration().locale;

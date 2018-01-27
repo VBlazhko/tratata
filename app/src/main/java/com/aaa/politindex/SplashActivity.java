@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 for(int i = 0; i < items.length(); i++){
                     Item item = gson.fromJson(items.optJSONObject(i).toString(), Item.class);
                     list.add(item);
-                    Log.w("log", "onResponse: " + item);
+
                 }
 
                 App.getApp().setItemList(list);

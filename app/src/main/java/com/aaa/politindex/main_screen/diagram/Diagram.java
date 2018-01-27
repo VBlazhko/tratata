@@ -34,7 +34,7 @@ import static android.widget.RelativeLayout.CENTER_IN_PARENT;
 
 public class Diagram extends LinearLayout {
 
-    private static final String TAG = "log";
+
 
     private float maxHeight;
 
@@ -149,8 +149,7 @@ public class Diagram extends LinearLayout {
         }
         mHandler = new MyHandler();
 
-        Log.w(TAG, "setProcent1: " + startProcent1);
-        Log.w(TAG, "setProcent2: " + endProcent1);
+
 
 
 
@@ -176,7 +175,7 @@ public class Diagram extends LinearLayout {
 
             return;
         }
-        Log.w("log", "changeSize: " + delta);
+
 
         image.setBackgroundResource(R.drawable.background_colum_gray);
 

@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         Request.getInstance().getResult("v1/ru/event.api", null, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Log.w("log", "onResponse: " + jsonObject.toString());
                 List<Figure> figureList = new ArrayList<>();
                 Gson gson = new Gson();
                 JSONObject data = jsonObject.optJSONObject("data");
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         slidingLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-                Log.w("log", "onPanelSlide1: ");
+
             }
 
             @Override

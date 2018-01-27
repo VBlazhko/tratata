@@ -62,7 +62,7 @@ public class AuthActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             mProgressBar.setVisibility(View.INVISIBLE);
-            if(url.contains("code=")&&!url.contains("error_code=")) {
+            if(url.contains("politindex")&&!url.contains("error_code=")&&!url.contains("redirect_uri")) {
                 mProgressBar.setVisibility(View.VISIBLE);
                 wb.setVisibility(View.INVISIBLE);
                 wb.evaluateJavascript(
@@ -73,6 +73,10 @@ public class AuthActivity extends AppCompatActivity {
                                 if (html != null) {
                                     String result = html.replace("\\", "");
                                     Log.w("log", "onReceiveValue: " + result);
+                                    if(result.contains("error")){
+                                        finish();
+                                        return;
+                                    }
                                     parseString(result);
                                     changeActivity();
                                 }
@@ -80,7 +84,6 @@ public class AuthActivity extends AppCompatActivity {
                         });
             }else if(url.contains("error_code=")){
                 Log.w("log", "onPageFinished: "+"----------------------ERROR" );
-                startActivity(new Intent(AuthActivity.this, MainActivity.class));
                 finish();
             }
 
