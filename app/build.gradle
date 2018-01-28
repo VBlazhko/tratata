@@ -40,6 +40,7 @@ dependencies {
     compile 'ru.egslava:MaskedEditText:1.0.5'
     compile 'com.alimuzaffar.lib:pinentryedittext:1.3.1'
     compile 'com.gmail.samehadar:iosdialog:1.0'
+    compile 'com.chaos.view:pinview:1.2.0'
 
 
 }

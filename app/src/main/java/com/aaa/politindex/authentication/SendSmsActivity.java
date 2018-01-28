@@ -2,6 +2,7 @@ package com.aaa.politindex.authentication;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,8 +50,8 @@ public class SendSmsActivity extends BaseActivity {
     TextView mSendSMS;
     @BindView(R.id.btnSend)
     ImageView mBtnSend;
-    @BindView(R.id.txt_pin_entry)
-    PinEntryEditText pinCode;
+    @BindView(R.id.pinView)
+    EditText pinCode;
 
 
     Handler myHandler;
@@ -65,6 +66,11 @@ public class SendSmsActivity extends BaseActivity {
         mPhoneNumber.setText(getIntent().getExtras().getString("phone"));
         mSpinner.start();
         stopwatch(myHandler, 60);
+
+
+
+
+
 
 
     }
@@ -91,7 +97,26 @@ public class SendSmsActivity extends BaseActivity {
     @OnClick({R.id.btnSend, R.id.sendSms})
     protected void clickSend() {
         showSend(false);
+        RequestAuth.getInstance().getResultSms("v1/sms/auth.api", Integer.parseInt(App.getApp().getSharedPreferences(Const.ID_USER)),
+                App.getApp().getSharedPreferences(Const.TOKEN),
+                Integer.parseInt(pinCode.getText().toString()),
+                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + App.getApp().getSharedPreferences(Const.TOKEN)) + pinCode.getText().toString(), new Request.CallBack() {
+                    // Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)) + ":" + pinCode.getText().toString(), new Request.CallBack() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        if (jsonObject.optString("status").equals("OK")) {
 
+                        } else if (jsonObject.optString("status").equals("wrongsmscode")) {
+                            showSend(true);
+                        } else if (jsonObject.optString("status").equals("error")) {
+                            if (this != null) {
+                                Toast toast = Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_SHORT); //?????????????????????????????
+                                toast.show();
+                                showSend(true);
+                            }
+                        }
+                    }
+                });
 
     }
 
@@ -110,11 +135,10 @@ public class SendSmsActivity extends BaseActivity {
         }
     }
 
-    @OnTextChanged(R.id.txt_pin_entry)
+    @OnTextChanged(R.id.pinView)
     protected void pinEntry() {
 
-        pinCode.setBackgroundTintList(getResources().getColorStateList(R.color.blackText));
-
+        pinCode.setTextColor(getResources().getColor(R.color.blackText));
         if (pinCode.getText().toString().length() == 4) {
             showSend(false);
             RequestAuth.getInstance().getResultSms("v1/sms/auth.api", Integer.parseInt(App.getApp().getSharedPreferences(Const.ID_USER)),
@@ -126,12 +150,11 @@ public class SendSmsActivity extends BaseActivity {
                         public void onResponse(JSONObject jsonObject) {
                             if (jsonObject.optString("status").equals("OK")) {
 
-                            }else if(jsonObject.optString("status").equals("wrongsmscode")){
-                                Log.w(TAG, "onResponse: "+"must change color to red" );
-                                showSend(true);
+                            } else if (jsonObject.optString("status").equals("wrongsmscode")) {
                                 pinCode.setTextColor(getResources().getColor(R.color.redDefault));
-                            }else if(jsonObject.optString("status").equals("error")){
-                                if(this!=null) {
+                                showSend(true);
+                            } else if (jsonObject.optString("status").equals("error")) {
+                                if (this != null) {
                                     Toast toast = Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_SHORT); //?????????????????????????????
                                     toast.show();
                                     showSend(true);
@@ -141,4 +164,6 @@ public class SendSmsActivity extends BaseActivity {
                     });
         }
     }
+
+
 }

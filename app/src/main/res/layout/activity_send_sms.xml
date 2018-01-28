@@ -121,7 +121,7 @@
             android:layout_toLeftOf="@+id/seconds"
             android:gravity="center"
             android:text="Повторно через "
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/seconds"
@@ -133,7 +133,7 @@
             android:layout_marginTop="3dp"
             android:gravity="center"
             android:text="30"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
 
     </RelativeLayout>
@@ -145,21 +145,28 @@
         android:isScrollContainer="true"
         android:orientation="vertical">
 
-        <com.alimuzaffar.lib.pin.PinEntryEditText
-            android:id="@+id/txt_pin_entry"
-            style="@style/Label.Normal"
-            android:layout_width="match_parent"
+        <com.chaos.view.PinView
+            android:id="@+id/pinView"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
+
             android:cursorVisible="false"
             android:digits="1234567890"
             android:inputType="number"
-            android:maxLength="4"
-            android:textIsSelectable="false"
-            android:textSize="30sp"
-            app:pinLineColors="@color/grayDefault"
-            android:textColor="@color/blackText"/>
+            android:textColor="@color/blackText"
+            android:textSize="35sp"
+            app:itemCount="4"
+            app:itemHeight="48dp"
+            app:itemRadius="1dp"
+            app:itemSpacing="18dp"
+            app:itemWidth="28dp"
+            app:lineColor="@color/gray"
+            app:lineWidth="3dp"
+            app:viewType="line"
+             />
+
+
     </LinearLayout>
 
 
