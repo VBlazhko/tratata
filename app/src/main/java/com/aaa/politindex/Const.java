@@ -15,5 +15,6 @@ public class Const {
 
     public static final String TOKEN = "token";
     public static final String ID_USER = "id_user";
+    public static final String ID_TOKEN = "id_token";
 
 }

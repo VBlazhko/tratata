@@ -20,6 +20,7 @@ import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.connection.RequestAuth;
 import com.aaa.politindex.helper.Md5Helper;
+import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.chaos.view.PinView;
 import com.gmail.samehadar.iosdialog.CamomileSpinner;
@@ -69,7 +70,7 @@ public class SendSmsActivity extends BaseActivity {
         setContentView(R.layout.activity_send_sms);
         mUnbinder = ButterKnife.bind(this);
         myHandler = new Handler();
-        mPhoneNumber.setText(getIntent().getExtras().getString("phone"));
+        mPhoneNumber.setText("+" + getIntent().getExtras().getString("phone"));
         mSpinner.start();
         stopwatch(myHandler, 60);
 
@@ -86,11 +87,11 @@ public class SendSmsActivity extends BaseActivity {
 
     public void stopwatch(final Handler handler, int number) {
         final int newCounter = --number;
-        if (newCounter == 0)return;
+        if (newCounter == 0) return;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mSeconds == null)return;
+                if (mSeconds == null) return;
                 mSeconds.setText(newCounter + "");
                 stopwatch(handler, newCounter);
             }
@@ -156,12 +157,13 @@ public class SendSmsActivity extends BaseActivity {
             RequestAuth.getInstance().getResultSms("v1/sms/auth.api", Integer.parseInt(App.getApp().getSharedPreferences(Const.ID_USER)),
                     App.getApp().getSharedPreferences(Const.TOKEN),
                     Integer.parseInt(pinCode.getText().toString()),
-                    Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + App.getApp().getSharedPreferences(Const.TOKEN)) + pinCode.getText().toString(), new Request.CallBack() {
-                        // Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)) + ":" + pinCode.getText().toString(), new Request.CallBack() {
+                    Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN) + ":" + pinCode.getText().toString()), new Request.CallBack() {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
                             if (jsonObject.optString("status").equals("OK")) {
-
+                                App.getApp().setSharedPreferences(Const.ID_TOKEN, jsonObject.optString("idToken"));
+                                startActivity(new Intent(SendSmsActivity.this, MainAuthUserActivity.class));
+                                finish();
                             } else if (jsonObject.optString("status").equals("wrongsmscode")) {
                                 pinCode.setTextColor(getResources().getColor(R.color.redDefault));
                                 showSend(true);

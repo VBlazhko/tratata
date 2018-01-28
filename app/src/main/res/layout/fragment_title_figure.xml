@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    tools:context="com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure.TitleFigureFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/tab_image_figure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/deafault_size"
+        android:src="@drawable/tab_figure_image"
+        android:tint="@color/darkBlue" />
+
+    <TextView
+        android:id="@+id/tab_text_figure"
+        style="@style/Label.Normal.Gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выборы президента \nРоссийской федерации" />
+
+</LinearLayout>

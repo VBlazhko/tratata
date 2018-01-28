@@ -30,12 +30,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".authentication.AuthActivity" />
-        <activity android:name=".authentication.AuthPhoneActivity" >
+        <activity android:name=".authentication.AuthPhoneActivity">
             android:windowSoftInputMode="adjustResize"
         </activity>
         <activity android:name=".authentication.SendSmsActivity">
             android:windowSoftInputMode="adjustResize"
         </activity>
+        <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity"></activity>
     </application>
 
 </manifest>

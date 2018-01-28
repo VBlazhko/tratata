@@ -15,6 +15,7 @@ import com.aaa.politindex.App;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.main_screen.MainActivity;
+import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -24,7 +25,8 @@ public class AuthActivity extends AppCompatActivity {
 
     String status;
     String idUser;
-    String verification;
+    String idToken;
+    boolean verification;
     String token;
 
 
@@ -33,25 +35,24 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_vk);
 
-        mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
-        String selectSocialNetwork=intent.getStringExtra("authorization");
+        String selectSocialNetwork = intent.getStringExtra("authorization");
 
         wb = (WebView) findViewById(R.id.webView);
         wb.setWebViewClient(new MyWebClient());
         wb.getSettings().setJavaScriptEnabled(true);
 
-        if(selectSocialNetwork.equals(Const.FACEBOOK))wb.loadUrl(Const.FBSERVER);
-        if(selectSocialNetwork.equals(Const.VKONTAKTE))wb.loadUrl(Const.VKSERVER);
-
+        if (selectSocialNetwork.equals(Const.FACEBOOK)) wb.loadUrl(Const.FBSERVER);
+        if (selectSocialNetwork.equals(Const.VKONTAKTE)) wb.loadUrl(Const.VKSERVER);
 
 
 //        VKSdk.login(this, VKScope.DIRECT);
     }
 
 
-    class MyWebClient extends  WebViewClient{
+    class MyWebClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -62,7 +63,7 @@ public class AuthActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             mProgressBar.setVisibility(View.INVISIBLE);
-            if(url.contains("politindex")&&!url.contains("error_code=")&&!url.contains("redirect_uri")) {
+            if (url.contains("politindex") && !url.contains("error_code=") && !url.contains("redirect_uri")) {
                 mProgressBar.setVisibility(View.VISIBLE);
                 wb.setVisibility(View.INVISIBLE);
                 wb.evaluateJavascript(
@@ -73,7 +74,7 @@ public class AuthActivity extends AppCompatActivity {
                                 if (html != null) {
                                     String result = html.replace("\\", "");
                                     Log.w("log", "onReceiveValue: " + result);
-                                    if(result.contains("error")){
+                                    if (result.contains("error")) {
                                         finish();
                                         return;
                                     }
@@ -82,21 +83,21 @@ public class AuthActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }else if(url.contains("error_code=")){
-                Log.w("log", "onPageFinished: "+"----------------------ERROR" );
+            } else if (url.contains("error_code=")) {
+                Log.w("log", "onPageFinished: " + "----------------------ERROR");
                 finish();
             }
 
 
-
         }
 
-        public void changeActivity(){
-            if (status.equals("OK") && verification.equals("false")) {
+        public void changeActivity() {
+            if (status.equals("OK") && !verification) {
                 startActivity(new Intent(AuthActivity.this, AuthPhoneActivity.class));
                 finish();
-            } else if (status.equals("OK") && verification.equals("true")) {
-                Log.w("log", "onPageFinished: " + " auth OK");
+            } else if (status.equals("OK") && verification) {
+                startActivity(new Intent(AuthActivity.this, MainAuthUserActivity.class));
+                finish();
             }
         }
 
@@ -104,62 +105,42 @@ public class AuthActivity extends AppCompatActivity {
         @Override
         public void onReceivedLoginRequest(WebView view, String realm, String account, String args) {
             super.onReceivedLoginRequest(view, realm, account, args);
-            Log.w("log", "onReceivedLoginRequest: " + args );
+            Log.w("log", "onReceivedLoginRequest: " + args);
         }
 
-        public void parseString(String string){
-            String[] array = string.split("\"status\":\"");
-            status = array[1].split("\",")[0];
-            idUser = array[1].split("\"idUser\":")[1].split(",")[0];
-            verification = array[1].split("\"verification\":")[1].split(",")[0];
-            token = array[1].split("\"token\":\"")[1].split("\"")[0];
+        public void parseString(String string) {
+            if (string.contains("false")) {
+                String[] array = string.split("\"status\":\"");
+                status = array[1].split("\",")[0];
+                idUser = array[1].split("\"idUser\":")[1].split(",")[0];
+                verification = array[1].split("\"verification\":")[1].split(",")[0].contains("true");
+                token = array[1].split("\"token\":\"")[1].split("\"")[0];
+                token = array[1].split("\"token\":\"")[1].split("\"")[0];
 
-            App.getApp().setSharedPreferences(Const.ID_USER,idUser);
-            App.getApp().setSharedPreferences(Const.TOKEN,token);
+            } else if (string.contains("true")) {
+
+                String[] array = string.split("\"status\":\"");
+                status = array[1].split("\",")[0];
+                token = array[1].split("\"token\":\"")[1].split("\"")[0];
+                idUser = array[1].split("\"idUser\":")[1].split(",")[0];
+                idToken = array[1].split("\"idToken\":")[1].split(",")[0];
+                verification = array[1].split("\"verification\":")[1].split(",")[0].contains("true");
+
+            }
+
+            App.getApp().setSharedPreferences(Const.ID_USER, idUser);
+            App.getApp().setSharedPreferences(Const.TOKEN, token);
+            if (verification) App.getApp().setSharedPreferences(Const.ID_TOKEN, idToken);
 
 
+            Log.w("log", "parseString: Status = " + status);
+            Log.w("log", "parseString: idUser = " + idUser);
+            Log.w("log", "parseString: verification = " + verification);
+            Log.w("log", "parseString: token = " + token);
+            if (verification) Log.w("log", "parseString: idToken = " + idToken);
 
-            Log.w("log", "parseString: Status = "+status );
-            Log.w("log", "parseString: idUser = "+idUser );
-            Log.w("log", "parseString: verification = "+verification );
-            Log.w("log", "parseString: token = "+token );
+
         }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-
-        }
-
-
-
-
 
     }
-
-
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-//            @Override
-//            public void onResult(VKAccessToken res) {
-//
-//            }
-//            @Override
-//            public void onError(VKError error) {
-//
-//            }
-//        })) {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-
-
-
-
-
-
-
 }

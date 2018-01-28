@@ -73,14 +73,14 @@ public class AuthPhoneActivity extends BaseActivity {
 
         params.put("id_user", App.getApp().getSharedPreferences(Const.ID_USER));
         params.put("token", App.getApp().getSharedPreferences(Const.TOKEN));
-        params.put("phone", mEditPhone.getText().toString().replace("+", "").replace(" ", ""));
+        params.put("phone", "7" + mEditPhone.getText().toString().replace("+", "").replace(" ", ""));
 
         RequestAuth.getInstance().getResult("v1/phone/auth.api", params, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 showSend(true);
                 if (jsonObject.optString("status").equals("OK")) {
-                    startActivity(new Intent(AuthPhoneActivity.this, SendSmsActivity.class).putExtra("phone", mEditPhone.getText().toString()));
+                    startActivity(new Intent(AuthPhoneActivity.this, SendSmsActivity.class).putExtra("phone", "7"+mEditPhone.getText().toString()));
                 } else if (jsonObject.optString("status").equals("wrongphone")
                         || jsonObject.optString("status").equals("wrongphoneformat")
                         || jsonObject.optString("status").equals("outphone")) {
