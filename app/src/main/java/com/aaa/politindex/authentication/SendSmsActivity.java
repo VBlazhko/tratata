@@ -1,6 +1,7 @@
 package com.aaa.politindex.authentication;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.connection.RequestAuth;
 import com.aaa.politindex.helper.Md5Helper;
 import com.alimuzaffar.lib.pin.PinEntryEditText;
+import com.chaos.view.PinView;
 import com.gmail.samehadar.iosdialog.CamomileSpinner;
 
 import org.json.JSONObject;
@@ -51,7 +53,7 @@ public class SendSmsActivity extends BaseActivity {
     @BindView(R.id.btnSend)
     ImageView mBtnSend;
     @BindView(R.id.pinView)
-    EditText pinCode;
+    PinView pinCode;
 
 
     Handler myHandler;
@@ -66,12 +68,8 @@ public class SendSmsActivity extends BaseActivity {
         mPhoneNumber.setText(getIntent().getExtras().getString("phone"));
         mSpinner.start();
         stopwatch(myHandler, 60);
-
-
-
-
-
-
+        pinCode.setLineColor(getResources().getColor(R.color.grayDefault));
+        pinCode.setAnimationEnable(true);
 
     }
 
@@ -97,26 +95,7 @@ public class SendSmsActivity extends BaseActivity {
     @OnClick({R.id.btnSend, R.id.sendSms})
     protected void clickSend() {
         showSend(false);
-        RequestAuth.getInstance().getResultSms("v1/sms/auth.api", Integer.parseInt(App.getApp().getSharedPreferences(Const.ID_USER)),
-                App.getApp().getSharedPreferences(Const.TOKEN),
-                Integer.parseInt(pinCode.getText().toString()),
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + App.getApp().getSharedPreferences(Const.TOKEN)) + pinCode.getText().toString(), new Request.CallBack() {
-                    // Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)) + ":" + pinCode.getText().toString(), new Request.CallBack() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        if (jsonObject.optString("status").equals("OK")) {
 
-                        } else if (jsonObject.optString("status").equals("wrongsmscode")) {
-                            showSend(true);
-                        } else if (jsonObject.optString("status").equals("error")) {
-                            if (this != null) {
-                                Toast toast = Toast.makeText(getApplicationContext(), jsonObject.toString(), Toast.LENGTH_SHORT); //?????????????????????????????
-                                toast.show();
-                                showSend(true);
-                            }
-                        }
-                    }
-                });
 
     }
 
