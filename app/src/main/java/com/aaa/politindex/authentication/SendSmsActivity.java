@@ -78,7 +78,7 @@ public class SendSmsActivity extends BaseActivity {
 
 
         mBack.setText(App.getApp().getValue("back_button"));
-        mBack.setText(App.getApp().getValue("title_sms"));
+        mTitle.setText(App.getApp().getValue("title_sms"));
         mSendSMS.setText(App.getApp().getValue("btn_send_sms").replaceAll("\\\\n", "\n"));
 
     }
