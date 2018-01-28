@@ -135,11 +135,13 @@
         android:isScrollContainer="true">
 
         <TextView
+            android:id="@+id/textSmsRule"
             style="@style/Label.Normal.Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
             android:text="На ваш номер телефон
 будет отпрвлен 4 значный СМС код,
 который вам надо будет ввести на

@@ -40,6 +40,12 @@ public class AuthPhoneActivity extends BaseActivity {
     TextView mSendSMS;
     @BindView(R.id.btnSend)
     ImageView mBtnSend;
+    @BindView(R.id.title)
+    TextView mTitle;
+    @BindView(R.id.mobilePhone)
+    TextView mCellNumb;
+    @BindView(R.id.textSmsRule)
+    TextView mSmsRule;
     @BindView(R.id.phoneInput)
     MaskedEditText mEditPhone;
     @BindView(R.id.spinner)
@@ -52,6 +58,11 @@ public class AuthPhoneActivity extends BaseActivity {
         mUnbinder = ButterKnife.bind(this);
         mSpinner.start();
 
+        mBack.setText(App.getApp().getValue("back_button"));
+        mTitle.setText(App.getApp().getValue("title_phone"));
+        mSendSMS.setText(App.getApp().getValue("btn_send_sms").replaceAll("\\\\n", "\n"));
+        mCellNumb.setText(App.getApp().getValue("lbl_type_phone_number"));
+        mSmsRule.setText(App.getApp().getValue("text_sms_rule").replaceAll("\\\\n", "\n"));
 
     }
 
@@ -104,7 +115,7 @@ public class AuthPhoneActivity extends BaseActivity {
     private void makeToast(String errorText) {
         if (this != null) {
             Toast toast = Toast.makeText(this,
-                    "Error: " + errorText, Toast.LENGTH_SHORT);
+                    errorText, Toast.LENGTH_SHORT);
             toast.show();
             showSend(true);
         }
