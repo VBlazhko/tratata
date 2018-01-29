@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.aaa.politindex.model.Item;
-import com.vk.sdk.VKSdk;
 
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +31,7 @@ public class App extends Application {
         super.onCreate();
 
         mApp = this;
-        //VKSdk.initialize(this);
+
        mSharedPreferences =  getSharedPreferences("info", MODE_PRIVATE);
 
 

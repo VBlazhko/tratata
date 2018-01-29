@@ -2,6 +2,7 @@ package com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure;
 
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aaa.politindex.R;
+import com.aaa.politindex.model.TitleEvent;
+import com.bumptech.glide.Glide;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +24,7 @@ public class TitleFigureFragment extends Fragment {
     private TextView tabTextFigure;
     private boolean m_iAmVisible;
     private boolean mIsFirstImage;
+    private TitleEvent mTitleEvent;
 
     public TitleFigureFragment() {
         // Required empty public constructor
@@ -34,6 +38,9 @@ public class TitleFigureFragment extends Fragment {
 
         tabImageFigure = view.findViewById(R.id.tab_image_figure);
         tabTextFigure = view.findViewById(R.id.tab_text_figure);
+
+        tabTextFigure.setText(mTitleEvent.getTitle());
+        Glide.with(getContext()).load(Uri.parse(mTitleEvent.getIcon())).into(tabImageFigure);
 
         return view;
     }
@@ -53,4 +60,7 @@ public class TitleFigureFragment extends Fragment {
 
     }
 
+    public void setTitleEvent(TitleEvent titleEvent) {
+        mTitleEvent = titleEvent;
+    }
 }
