@@ -16,6 +16,10 @@
     <style name="Label.Normal.Gray">
         <item name="android:textColor">@color/grayDefault</item>
     </style>
+    <style name="Label.Normal.GrayLight">
+        <item name="android:textColor">@color/lightGray</item>
+    </style>
+
 
     <style name="Label.Normal.Black">
         <item name="android:textColor">@color/blackDefault</item>

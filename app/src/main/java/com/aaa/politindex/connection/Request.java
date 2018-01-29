@@ -80,6 +80,30 @@ public class Request {
         return null;
     }
 
+    public JSONObject getResultEvent(final String function, final Map<String, String> headers, final CallBack callBack) {
+
+        mRetrofitApi.getRequestPostEvent(function, headers).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.w("log", "onResponse: " + response.raw());
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    callBack.onResponse(result);
+                    Log.w("log", "onResponse: " + result.toString());
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+
+            }
+        });
+
+        return null;
+    }
+
     public interface CallBack {
         void onResponse(JSONObject jsonObject);
     }
