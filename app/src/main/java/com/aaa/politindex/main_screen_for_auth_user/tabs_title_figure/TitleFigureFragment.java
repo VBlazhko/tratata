@@ -42,7 +42,13 @@ public class TitleFigureFragment extends Fragment {
 
         tabTextFigure.setText(mTitleEvent.getTitle());
         Glide.with(getContext()).load(Uri.parse(mTitleEvent.getIcon())).into(tabImageFigure);
-
+        if(!mIsFirstImage) {
+            tabTextFigure.setTextColor(getResources().getColor(R.color.light_gray));
+            tabImageFigure.setColorFilter(getResources().getColor(R.color.light_gray));
+        }else{
+            tabTextFigure.setTextColor(getResources().getColor(R.color.grayDefault));
+            tabImageFigure.setColorFilter(getResources().getColor(R.color.darkBlue));
+        }
         return view;
     }
 
@@ -68,5 +74,9 @@ public class TitleFigureFragment extends Fragment {
 
     public void setTitleEvent(TitleEvent titleEvent) {
         mTitleEvent = titleEvent;
+    }
+
+    public void setFirstImage(boolean firstImage) {
+        mIsFirstImage = firstImage;
     }
 }

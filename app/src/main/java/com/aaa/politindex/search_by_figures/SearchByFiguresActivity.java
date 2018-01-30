@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.R;
 import com.aaa.politindex.model.Figure;
@@ -46,6 +47,8 @@ public class SearchByFiguresActivity extends BaseActivity {
         Log.w(TAG, "onCreate: "+mFigureArrayList.get(0).getToday().getRating() );
         SearchListAdapter adapter = new SearchListAdapter(this,mFigureArrayList);
         mFigureList.setAdapter(adapter);
+
+        mEditFigure.setHint(App.getApp().getValue("search_placeholder"));
 
     }
 

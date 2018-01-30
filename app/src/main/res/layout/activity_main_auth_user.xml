@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Politindex" />
+            android:text="POLITINDEX" />
 
         <ImageView
             android:layout_width="25dp"
@@ -62,8 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="6dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="130dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="170dp"
             android:foregroundGravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="4dp"
@@ -72,7 +72,10 @@
             app:pageColor="#b5d7ef"
             app:radius="3dp"
             app:strokeColor="@android:color/transparent"
-            app:strokeWidth="0dp" />
+            app:strokeWidth="0dp"
+            app:centered="true"
+            app:snap="true"/>
+
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager

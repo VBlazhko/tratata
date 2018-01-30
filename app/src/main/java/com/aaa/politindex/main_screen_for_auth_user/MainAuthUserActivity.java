@@ -74,6 +74,9 @@ public class MainAuthUserActivity extends BaseActivity {
     @BindView(R.id.btn_search)
     TextView mBtnSearch;
 
+    @BindView(R.id.PiToday)
+    TextView mPiToday;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +113,7 @@ public class MainAuthUserActivity extends BaseActivity {
                             getFigureRequest("/"+titleEvent.getIdEvent());
                         }
                     });
+                    if(i==0)titleFigureFragment.setFirstImage(true);
                     titleFragments.add(titleFigureFragment);
                 }
 
@@ -121,6 +125,10 @@ public class MainAuthUserActivity extends BaseActivity {
                 mViewPagerTabTitle.setClipToPadding(false); //
                 mViewPagerTabTitle.setPageMargin(80);
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
+                mCirclePageIndicator.setCurrentItem(0);
+
+                mPiToday.setText(App.getApp().getValue("lbl_pi_today"));
+                mBtnSearch.setText(App.getApp().getValue("search_placeholder"));
 
             }
         });
@@ -145,8 +153,8 @@ public class MainAuthUserActivity extends BaseActivity {
 
                 }
 
-                PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-                List<Fragment> fragments = new ArrayList<>();
+                final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+                final List<Fragment> fragments = new ArrayList<>();
                 for (int i = 0; i < figureList.size(); i++) {
                     FigureFragment fragment = new FigureFragment();
                     fragment.setFigure(figureList.get(i));
@@ -162,8 +170,10 @@ public class MainAuthUserActivity extends BaseActivity {
 
 
 
+
                         }
                     });
+
                     if (i == 0) fragment.setFirstImage(true);
                     fragments.add(fragment);
 
@@ -172,9 +182,9 @@ public class MainAuthUserActivity extends BaseActivity {
                 figureFragment.setListener(new IShowFigureListener() {
                     @Override
                     public void onShowFigure(Figure figure) {
-                        firstname.setVisibility(View.INVISIBLE);
-                        lastname.setVisibility(View.INVISIBLE);
-                        return;
+                            firstname.setVisibility(View.INVISIBLE);
+                            lastname.setVisibility(View.INVISIBLE);
+
                     }
                 });
                 fragments.add(figureFragment);

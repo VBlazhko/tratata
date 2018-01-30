@@ -43,5 +43,6 @@ dependencies {
     compile 'com.chaos.view:pinview:1.2.0'
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
     compile 'com.makeramen:roundedimageview:2.3.0'
+    compile 'me.relex:circleindicator:1.2.1@aar'
 
 }
