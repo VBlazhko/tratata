@@ -25,6 +25,7 @@ public class TitleFigureFragment extends Fragment {
     private boolean m_iAmVisible;
     private boolean mIsFirstImage;
     private TitleEvent mTitleEvent;
+    private IShowTitleListener mListener;
 
     public TitleFigureFragment() {
         // Required empty public constructor
@@ -55,9 +56,14 @@ public class TitleFigureFragment extends Fragment {
                 tabTextFigure.setTextColor(m_iAmVisible ? getResources().getColor(R.color.grayDefault) : getResources().getColor(R.color.light_gray));
                 tabImageFigure.setColorFilter(m_iAmVisible ? getResources().getColor(R.color.darkBlue) : getResources().getColor(R.color.light_gray));
             }
+            if(isVisibleToUser&&mTitleEvent!=null) mListener.onShowTitle(mTitleEvent);
         }
 
 
+    }
+
+    public void setListener(IShowTitleListener listener) {
+        mListener = listener;
     }
 
     public void setTitleEvent(TitleEvent titleEvent) {

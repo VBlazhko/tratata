@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".main_screen.MainActivity"
             android:screenOrientation="portrait" />
@@ -33,7 +32,8 @@
         <activity android:name=".authentication.SendSmsActivity">
             android:windowSoftInputMode="adjustResize"
         </activity>
-        <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity"></activity>
+        <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity" />
+        <activity android:name=".search_by_figures.SearchByFiguresActivity"></activity>
     </application>
 
 </manifest>

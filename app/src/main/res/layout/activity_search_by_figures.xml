@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context="com.aaa.politindex.search_by_figures.SearchByFiguresActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_size"
+        android:background="@color/whiteDefault"
+        android:paddingLeft="@dimen/deafault_size"
+        android:paddingRight="@dimen/deafault_size">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Politindex" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_profile" />
+
+        <ImageView
+            android:id="@+id/btn_change_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/flag_russia" />
+
+    </RelativeLayout>
+
+    <ListView
+
+        android:id="@+id/figure_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edit_layout"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="20dp"
+        android:background="@color/whiteDefault"
+        android:divider="@color/whiteDefault" />
+
+    <LinearLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightEditLayout"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/btn_cancel"
+            android:tint="@color/darkGray" />
+
+        <EditText
+            android:id="@+id/edit_search"
+            style="@style/Label.Normal.Black2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center_vertical"
+            android:hint="Поиск по деятелям"
+            android:paddingLeft="15dp"
+            android:textColorHint="@color/lightGray" />
+
+
+    </LinearLayout>
+</RelativeLayout>

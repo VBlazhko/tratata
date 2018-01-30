@@ -44,7 +44,7 @@
     </style>
 
     <style name="Label.Caption.Black">
-        <item name="android:textColor">@color/blackDefault</item>
+        <item name="android:textColor">@color/blackText</item>
     </style>
 
     <style name="Label.Caption.Gray">

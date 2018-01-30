@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background2"
     android:orientation="vertical"
     tools:context="com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity">
 
@@ -42,7 +43,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="85dp">
+        android:layout_height="80dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pagerTab"
@@ -60,14 +61,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="130dp"
+            android:foregroundGravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
             app:fillColor="#198cc8"
             app:pageColor="#b5d7ef"
-            app:radius="4dp"
+            app:radius="3dp"
             app:strokeColor="@android:color/transparent"
             app:strokeWidth="0dp" />
     </RelativeLayout>
@@ -75,8 +78,9 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="@dimen/deafault_size"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:paddingLeft="20dp">
 
     </android.support.v4.view.ViewPager>
@@ -117,33 +121,49 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/PiToday"
-        style="@style/Label.Normal.Gray"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="37dp"
-        android:text="PI на сегодня 68%" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/PiToday"
+            style="@style/Label.Normal.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:text="PI на сегодня" />
+
+        <TextView
+            android:id="@+id/pi_procent"
+            style="@style/Label.Normal.Gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="68%" />
+    </LinearLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:id="@+id/progress_line"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="37dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/progress_line_background" />
 
-    <EditText
+    <TextView
+        android:id="@+id/btn_search"
         style="@style/Label.Normal.GrayLight"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/rounded_edit_text"
+        android:gravity="center_vertical"
         android:hint="Поиск по деятелям"
         android:paddingLeft="15dp"
-        android:textColorHint="@color/lightGray"
-        android:layout_marginBottom="10dp"/>
+        android:textColorHint="@color/lightGray" />
 
 
 </LinearLayout>

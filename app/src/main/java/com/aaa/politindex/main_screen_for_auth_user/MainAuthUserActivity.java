@@ -1,12 +1,16 @@
 package com.aaa.politindex.main_screen_for_auth_user;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aaa.politindex.App;
@@ -18,15 +22,19 @@ import com.aaa.politindex.helper.Md5Helper;
 import com.aaa.politindex.main_screen.IShowFigureListener;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
 import com.aaa.politindex.main_screen.tabs.PagerAdapter;
+import com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure.IShowTitleListener;
 import com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure.TitleFigureFragment;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.TitleEvent;
+import com.aaa.politindex.model.Today;
+import com.aaa.politindex.search_by_figures.SearchByFiguresActivity;
 import com.google.gson.Gson;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +42,8 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class MainAuthUserActivity extends BaseActivity {
 
@@ -55,6 +65,15 @@ public class MainAuthUserActivity extends BaseActivity {
     @BindView(R.id.pager)
     ViewPager mViewPagerFigure;
 
+    @BindView(R.id.pi_procent)
+    TextView mPiProcent;
+
+    @BindView(R.id.progress_line)
+    ImageView mProgressLine;
+
+    @BindView(R.id.btn_search)
+    TextView mBtnSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +94,8 @@ public class MainAuthUserActivity extends BaseActivity {
                 JSONObject data = jsonObject.optJSONObject("data");
                 JSONArray items = data.optJSONArray("items");
 
+                getFigureRequest("");
+
                 for (int i = 0; i < items.length(); i++) {
                     TitleEvent titleEvent = gson.fromJson(items.optJSONObject(i).toString(), TitleEvent.class);
                     titleList.add(titleEvent);
@@ -83,10 +104,16 @@ public class MainAuthUserActivity extends BaseActivity {
                 for (int i = 0; i < titleList.size(); i++) {
                     TitleFigureFragment titleFigureFragment = new TitleFigureFragment();
                     titleFigureFragment.setTitleEvent(titleList.get(i));
+                    titleFigureFragment.setListener(new IShowTitleListener() {
+                        @Override
+                        public void onShowTitle(TitleEvent titleEvent) {
+                            getFigureRequest("/"+titleEvent.getIdEvent());
+                        }
+                    });
                     titleFragments.add(titleFigureFragment);
                 }
 
-                getFigure("2");
+
                 PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
                 pagerAdapter.setFragments(titleFragments);
                 mViewPagerTabTitle.setAdapter(pagerAdapter);
@@ -97,9 +124,12 @@ public class MainAuthUserActivity extends BaseActivity {
 
             }
         });
+
+
+
     }
 
-    private void getFigure(String idEvent){
+    private void getFigureRequest(String idEvent){
         Request.getInstance().getResult("v1/ru/"+idEvent+"/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -128,6 +158,8 @@ public class MainAuthUserActivity extends BaseActivity {
 
                             firstname.setText(figure.getFirstname());
                             lastname.setText(figure.getLastname());
+                            mPiProcent.setText(figure.getToday().getRating()+"%");
+
 
 
                         }
@@ -157,6 +189,20 @@ public class MainAuthUserActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    @OnClick(R.id.btn_search)
+    protected void clickSearch(){
+        Intent intent = new Intent(this,SearchByFiguresActivity.class);
+
+        ArrayList<Today> todayArrayList = new ArrayList<>();
+        for(int i=0;i<figureList.size();i++){
+            todayArrayList.add(figureList.get(i).getToday());
+        }
+        intent.putParcelableArrayListExtra("figure",figureList);
+        intent.putParcelableArrayListExtra("today",todayArrayList);
+        startActivity(intent);
     }
 
 

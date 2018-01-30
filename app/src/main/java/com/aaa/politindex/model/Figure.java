@@ -1,8 +1,12 @@
 package com.aaa.politindex.model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Figure {
+public class Figure implements Parcelable {
 
     @SerializedName("idFigure")
     @Expose
@@ -25,12 +29,69 @@ public class Figure {
     @SerializedName("isLiked")
     @Expose
     private Integer isLiked;
-//    @SerializedName("today")
-//    @Expose
-//    private Today today;
-//    @SerializedName("graph")
+    //    @SerializedName("today")
+    @Expose
+    private Today today;
+    //    @SerializedName("graph")
     @Expose
     private Graph graph;
+
+    protected Figure(Parcel in) {
+        if (in.readByte() == 0) {
+            idFigure = null;
+        } else {
+            idFigure = in.readInt();
+        }
+        firstname = in.readString();
+        middlename = in.readString();
+        lastname = in.readString();
+        avatar = in.readString();
+        avatarSmall = in.readString();
+        if (in.readByte() == 0) {
+            isLiked = null;
+        } else {
+            isLiked = in.readInt();
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (idFigure == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(idFigure);
+        }
+        dest.writeString(firstname);
+        dest.writeString(middlename);
+        dest.writeString(lastname);
+        dest.writeString(avatar);
+        dest.writeString(avatarSmall);
+        if (isLiked == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(isLiked);
+        }
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Figure> CREATOR = new Creator<Figure>() {
+        @Override
+        public Figure createFromParcel(Parcel in) {
+            return new Figure(in);
+        }
+
+        @Override
+        public Figure[] newArray(int size) {
+            return new Figure[size];
+        }
+    };
 
     public Integer getIdFigure() {
         return idFigure;
@@ -88,13 +149,13 @@ public class Figure {
         this.isLiked = isLiked;
     }
 
-//    public Today getToday() {
-//        return today;
-//    }
+    public Today getToday() {
+        return today;
+    }
 
-//    public void setToday(Today today) {
-//        this.today = today;
-//    }
+    public void setToday(Today today) {
+        this.today = today;
+    }
 
     public Graph getGraph() {
         return graph;
