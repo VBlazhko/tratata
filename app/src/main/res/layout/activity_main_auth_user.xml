@@ -147,11 +147,12 @@
 
     <ImageView
         android:id="@+id/progress_line"
-        android:layout_width="50dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="37dp"
         android:layout_marginTop="4dp"
-        android:src="@drawable/progress_line_background" />
+        android:src="@drawable/progress_line_background"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/btn_search"

@@ -3,7 +3,7 @@
     android:id="@+id/listview_background_shape">
 
     <size
-        android:width="100dp"
+        android:width="300dp"
         android:height="2dp" />
     <padding
         android:bottom="2dp"

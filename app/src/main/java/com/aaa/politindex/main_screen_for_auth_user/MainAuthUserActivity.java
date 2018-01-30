@@ -163,10 +163,16 @@ public class MainAuthUserActivity extends BaseActivity {
                         public void onShowFigure(Figure figure) {
                             firstname.setVisibility(View.VISIBLE);
                             lastname.setVisibility(View.VISIBLE);
+                            mProgressLine.setVisibility(View.VISIBLE);
+                            mPiProcent.setVisibility(View.VISIBLE);
+                            mPiToday.setVisibility(View.VISIBLE);
 
                             firstname.setText(figure.getFirstname());
                             lastname.setText(figure.getLastname());
                             mPiProcent.setText(figure.getToday().getRating()+"%");
+
+                            mProgressLine.getLayoutParams().width=200+(3*(figure.getToday().getRating()+1));
+                            mProgressLine.requestLayout();
 
 
 
@@ -182,8 +188,13 @@ public class MainAuthUserActivity extends BaseActivity {
                 figureFragment.setListener(new IShowFigureListener() {
                     @Override
                     public void onShowFigure(Figure figure) {
+                        Log.w(TAG, "onShowFigure: " );
                             firstname.setVisibility(View.INVISIBLE);
                             lastname.setVisibility(View.INVISIBLE);
+                            mProgressLine.setVisibility(View.INVISIBLE);
+                            mPiProcent.setVisibility(View.INVISIBLE);
+                            mPiToday.setVisibility(View.INVISIBLE);
+
 
                     }
                 });
