@@ -2,7 +2,9 @@ package com.aaa.politindex;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 
 import com.aaa.politindex.model.Item;
 
@@ -76,5 +78,12 @@ public class App extends Application {
     public String getSharedPreferences(String key){
         return mSharedPreferences.getString(key,"");
     }
+
+    public float getDestiny(){
+        float density  = getResources().getDisplayMetrics().density;
+        return density;
+    }
+
+
 
 }

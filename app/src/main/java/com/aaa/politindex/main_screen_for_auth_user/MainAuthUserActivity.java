@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.figure_main_screen.FigureMainActivity;
 import com.aaa.politindex.helper.Md5Helper;
 import com.aaa.politindex.main_screen.IShowFigureListener;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
@@ -70,6 +73,9 @@ public class MainAuthUserActivity extends BaseActivity {
 
     @BindView(R.id.progress_line)
     ImageView mProgressLine;
+
+    @BindView(R.id.btn_profile)
+    ImageView mBtnProfile;
 
     @BindView(R.id.btn_search)
     TextView mBtnSearch;
@@ -133,7 +139,11 @@ public class MainAuthUserActivity extends BaseActivity {
             }
         });
 
-
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+        int dpWidth  = outMetrics.widthPixels;
+        App.getApp().setSharedPreferences("width",dpWidth+"");
 
     }
 
@@ -173,10 +183,6 @@ public class MainAuthUserActivity extends BaseActivity {
 
                             mProgressLine.getLayoutParams().width=200+(3*(figure.getToday().getRating()+1));
                             mProgressLine.requestLayout();
-
-
-
-
                         }
                     });
 
@@ -224,6 +230,11 @@ public class MainAuthUserActivity extends BaseActivity {
         intent.putParcelableArrayListExtra("figure",figureList);
         intent.putParcelableArrayListExtra("today",todayArrayList);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_profile)
+    protected void clickProfile(){
+        startActivity(new Intent(this,FigureMainActivity.class));
     }
 
 

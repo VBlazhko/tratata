@@ -33,7 +33,9 @@
             android:windowSoftInputMode="adjustResize"
         </activity>
         <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity" />
-        <activity android:name=".search_by_figures.SearchByFiguresActivity"></activity>
+        <activity android:name=".search_by_figures.SearchByFiguresActivity" />
+        <activity android:name=".figure_main_screen.FigureMainActivity" />
+        <activity android:name=".user_profile.UserProfileActivity"></activity>
     </application>
 
 </manifest>
