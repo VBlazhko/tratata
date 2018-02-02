@@ -129,7 +129,7 @@ public class MainAuthUserActivity extends BaseActivity {
                 mViewPagerTabTitle.setAdapter(pagerAdapter);
 
                 mViewPagerTabTitle.setClipToPadding(false); //
-                mViewPagerTabTitle.setPageMargin(80);
+                mViewPagerTabTitle.setPageMargin((int)(20*App.getApp().getDestiny()));
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
                 mCirclePageIndicator.setCurrentItem(0);
 
@@ -207,7 +207,7 @@ public class MainAuthUserActivity extends BaseActivity {
                 fragments.add(figureFragment);
 
                 mViewPagerFigure.setClipToPadding(false); //
-                mViewPagerFigure.setPageMargin(30);
+                mViewPagerFigure.setPageMargin((int) (10*App.getApp().getDestiny()));
 
                 pagerAdapter.setFragments(fragments);
                 mViewPagerFigure.setAdapter(pagerAdapter);

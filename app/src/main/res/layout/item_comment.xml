@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/photo_figure"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/figure2"
+        app:riv_oval="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="@dimen/half_deafault_size"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/surname"
+            style="@style/Label.Normal.BlueComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Ольга Казанцева" />
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Label.Small.Black2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:text="Да, есть заслуги у нашего президента, это несомненно. Не сказать, что я являюсь ярым патриотом своей «многострадальной», просто реально смотрю на происходящие вещи. В свое время конечно многое радовало, наверняка таких большенство... НО в последнее время всё сходит похоже на нет. «Кризис» с которым он и его правительство бьётся как-то - похоже ВСЁ БЕСТОЛКОВО.
+
+Но это сугубо мое личное мнение!" />
+
+
+    </LinearLayout>
+</LinearLayout>

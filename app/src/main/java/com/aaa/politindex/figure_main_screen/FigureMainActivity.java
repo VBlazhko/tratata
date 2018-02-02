@@ -4,13 +4,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.R;
+import com.aaa.politindex.figure_main_screen.comment_list.Comment;
+import com.aaa.politindex.figure_main_screen.comment_list.CommentListAdapter;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PagerAdapterPhoto;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoFigureFragment;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoTransformer;
+import com.aaa.politindex.search_by_figures.SearchListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,8 @@ public class FigureMainActivity extends BaseActivity {
 
     @BindView(R.id.pager)
     ViewPager mViewPager;
+    @BindView(R.id.comment_list)
+    ListView mCommentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +51,14 @@ public class FigureMainActivity extends BaseActivity {
         mViewPager.setPageMargin((int)(0.8*destity));
         mViewPager.setClipToPadding(false); //
         mViewPager.setPageTransformer(false,new PhotoTransformer());
+
+        ArrayList<Comment>comments = new ArrayList<>();
+        comments.add(new Comment());
+        comments.add(new Comment());
+        comments.add(new Comment());
+        comments.add(new Comment());
+        CommentListAdapter adapter = new CommentListAdapter(this,comments);
+        mCommentList.setScrollContainer(true);
+        mCommentList.setAdapter(adapter);
     }
 }

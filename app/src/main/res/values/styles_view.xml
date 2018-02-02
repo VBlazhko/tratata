@@ -16,6 +16,10 @@
     <style name="Label.Normal.Gray">
         <item name="android:textColor">@color/grayDefault</item>
     </style>
+
+    <style name="Label.Normal.BlueComment">
+        <item name="android:textColor">@color/blueComment</item>
+    </style>
     <style name="Label.Normal.GrayLight">
         <item name="android:textColor">@color/lightGray</item>
     </style>
@@ -94,6 +98,18 @@
 
     <style name="Label.Smaller2.Gray">
         <item name="android:textColor">@color/grayDefault</item>
+    </style>
+
+    <style name="Label.Normal_plus">
+        <item name="android:textSize">@dimen/font_big</item>
+    </style>
+
+    <style name="Label.Normal_plus.Gray">
+        <item name="android:textColor">@color/blackText</item>
+    </style>
+
+    <style name="Label.NormalSmall">
+        <item name="android:textSize">@dimen/font_medium</item>
     </style>
 
 </resources>

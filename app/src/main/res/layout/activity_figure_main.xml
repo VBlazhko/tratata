@@ -1,29 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aaa.politindex.figure_main_screen.FigureMainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.aaa.politindex.figure_main_screen.FigureMainActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="@dimen/toolbar_size"
+        android:layout_marginTop="2dp"
+        android:background="@color/whiteDefault"
+        android:paddingLeft="@dimen/deafault_size"
+        android:paddingRight="@dimen/deafault_size">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/btn_back"
-        android:layout_gravity="center_horizontal"
-        android:rotation="90"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="center"
-        android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Никита Хрущёв" />
+
+        <ImageView
+            android:id="@+id/icon_back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:rotation="90"
+            android:src="@drawable/btn_up_down"
+            android:tint="@color/blackText" />
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_back"
+            android:paddingLeft="4dp"
+            android:text="Назад" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icons8_info_squared"
+            android:tint="@color/blackText" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@color/whiteDefault">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/lightEditLayout"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/btn_dislike"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/background_btn_like"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/btn_dislike"
+                            android:tint="@color/whiteDefault" />
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/Label.Normal_plus.Gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-3dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_toRightOf="@id/btn_dislike"
+                        android:text="1231" />
+
+                    <TextView
+                        style="@style/Label.Normal_plus.Gray"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="-3dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_toLeftOf="@id/btn_like"
+                        android:text="23453454" />
+
+
+                    <LinearLayout
+                        android:id="@+id/btn_like"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/background_btn_like"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:rotation="180"
+                            android:scaleX="-1"
+                            android:src="@drawable/btn_dislike"
+                            android:tint="@color/whiteDefault" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:layout_toLeftOf="@id/btn_like"
+                        android:layout_toRightOf="@id/btn_dislike"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0.5dp"
+                            android:layout_weight="1"
+                            android:background="@color/grayDefault" />
+
+                        <TextView
+                            style="@style/Label.Smaller2.Gray"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="Против или за " />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0.5dp"
+                            android:layout_weight="1"
+                            android:background="@color/grayDefault" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="20dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="54dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/btn_timeline" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="40dp"
+                        android:src="@drawable/btn_bio" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="40dp"
+                        android:src="@drawable/btn_share" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="74dp"
+                    android:layout_height="42dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/background_blue_for_pi">
+
+                    <TextView
+                        style="@style/Label.Caption"
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="100%"
+                        android:textColor="@color/whiteDefault" />
+
+                    <TextView
+                        style="@style/Label.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pi"
+                        android:textColor="@color/whiteDefault" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/whiteDefault"
+                android:divider="@color/whiteDefault" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lightEditLayout"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/edit_search"
+            style="@style/Label.Normal.Black2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edit_text"
+            android:gravity="center_vertical"
+            android:hint="Написать коментарий"
+            android:paddingLeft="15dp"
+            android:textColorHint="@color/lightGray" />
+
+        <LinearLayout
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/background_btn_send"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/btn_send"
+                android:tint="@color/whiteDefault" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
