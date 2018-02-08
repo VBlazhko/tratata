@@ -31,6 +31,7 @@ import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.TitleEvent;
 import com.aaa.politindex.model.Today;
 import com.aaa.politindex.search_by_figures.SearchByFiguresActivity;
+import com.aaa.politindex.user_profile.UserProfileActivity;
 import com.google.gson.Gson;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -116,10 +117,10 @@ public class MainAuthUserActivity extends BaseActivity {
                     titleFigureFragment.setListener(new IShowTitleListener() {
                         @Override
                         public void onShowTitle(TitleEvent titleEvent) {
-                            getFigureRequest("/"+titleEvent.getIdEvent());
+                            getFigureRequest("/" + titleEvent.getIdEvent());
                         }
                     });
-                    if(i==0)titleFigureFragment.setFirstImage(true);
+                    if (i == 0) titleFigureFragment.setFirstImage(true);
                     titleFragments.add(titleFigureFragment);
                 }
 
@@ -129,7 +130,7 @@ public class MainAuthUserActivity extends BaseActivity {
                 mViewPagerTabTitle.setAdapter(pagerAdapter);
 
                 mViewPagerTabTitle.setClipToPadding(false); //
-                mViewPagerTabTitle.setPageMargin((int)(20*App.getApp().getDestiny()));
+                mViewPagerTabTitle.setPageMargin((int) (20 * App.getApp().getDestiny()));
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
                 mCirclePageIndicator.setCurrentItem(0);
 
@@ -142,13 +143,13 @@ public class MainAuthUserActivity extends BaseActivity {
         Display display = getWindowManager().getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
         display.getMetrics(outMetrics);
-        int dpWidth  = outMetrics.widthPixels;
-        App.getApp().setSharedPreferences("width",dpWidth+"");
+        int dpWidth = outMetrics.widthPixels;
+        App.getApp().setSharedPreferences("width", dpWidth + "");
 
     }
 
-    private void getFigureRequest(String idEvent){
-        Request.getInstance().getResult("v1/ru/"+idEvent+"/event.api", headers, new Request.CallBack() {
+    private void getFigureRequest(String idEvent) {
+        Request.getInstance().getResult("v1/ru/" + idEvent + "/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 figureList = new ArrayList<>();
@@ -179,9 +180,9 @@ public class MainAuthUserActivity extends BaseActivity {
 
                             firstname.setText(figure.getFirstname());
                             lastname.setText(figure.getLastname());
-                            mPiProcent.setText(figure.getToday().getRating()+"%");
+                            mPiProcent.setText(figure.getToday().getRating() + "%");
 
-                            mProgressLine.getLayoutParams().width=200+(3*(figure.getToday().getRating()+1));
+                            mProgressLine.getLayoutParams().width = 200 + (3 * (figure.getToday().getRating() + 1));
                             mProgressLine.requestLayout();
                         }
                     });
@@ -194,12 +195,12 @@ public class MainAuthUserActivity extends BaseActivity {
                 figureFragment.setListener(new IShowFigureListener() {
                     @Override
                     public void onShowFigure(Figure figure) {
-                        Log.w(TAG, "onShowFigure: " );
-                            firstname.setVisibility(View.INVISIBLE);
-                            lastname.setVisibility(View.INVISIBLE);
-                            mProgressLine.setVisibility(View.INVISIBLE);
-                            mPiProcent.setVisibility(View.INVISIBLE);
-                            mPiToday.setVisibility(View.INVISIBLE);
+                        Log.w(TAG, "onShowFigure: ");
+                        firstname.setVisibility(View.INVISIBLE);
+                        lastname.setVisibility(View.INVISIBLE);
+                        mProgressLine.setVisibility(View.INVISIBLE);
+                        mPiProcent.setVisibility(View.INVISIBLE);
+                        mPiToday.setVisibility(View.INVISIBLE);
 
 
                     }
@@ -207,7 +208,7 @@ public class MainAuthUserActivity extends BaseActivity {
                 fragments.add(figureFragment);
 
                 mViewPagerFigure.setClipToPadding(false); //
-                mViewPagerFigure.setPageMargin((int) (10*App.getApp().getDestiny()));
+                mViewPagerFigure.setPageMargin((int) (10 * App.getApp().getDestiny()));
 
                 pagerAdapter.setFragments(fragments);
                 mViewPagerFigure.setAdapter(pagerAdapter);
@@ -220,23 +221,26 @@ public class MainAuthUserActivity extends BaseActivity {
 
 
     @OnClick(R.id.btn_search)
-    protected void clickSearch(){
-        Intent intent = new Intent(this,SearchByFiguresActivity.class);
+    protected void clickSearch() {
+        Intent intent = new Intent(this, SearchByFiguresActivity.class);
 
         ArrayList<Today> todayArrayList = new ArrayList<>();
-        for(int i=0;i<figureList.size();i++){
+        for (int i = 0; i < figureList.size(); i++) {
             todayArrayList.add(figureList.get(i).getToday());
         }
-        intent.putParcelableArrayListExtra("figure",figureList);
-        intent.putParcelableArrayListExtra("today",todayArrayList);
+        intent.putParcelableArrayListExtra("figure", figureList);
+        intent.putParcelableArrayListExtra("today", todayArrayList);
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_profile)
-    protected void clickProfile(){
-        startActivity(new Intent(this,FigureMainActivity.class));
-    }
-
-
+//    @OnClick(R.id.btn_profile)
+//    protected void clickProfile() {
+//        startActivity(new Intent(this, UserProfileActivity.class));
+//    }
+//
+//    @OnClick(R.id.btn_change_language)
+//    protected void clickChangeLanguage() {
+//        startActivity(new Intent(this, FigureMainActivity.class));
+//    }
 
 }

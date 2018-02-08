@@ -25,6 +25,16 @@
             android:layout_centerInParent="true"
             android:text="Антон Антон " />
 
+        <TextView
+            android:id="@+id/back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_back"
+            android:paddingLeft="4dp"
+            android:text="Назад" />
+
         <ImageView
             android:id="@+id/icon_back"
             style="@style/Label.Normal.Black"
@@ -36,15 +46,7 @@
             android:src="@drawable/btn_up_down"
             android:tint="@color/blackText" />
 
-        <TextView
-            android:id="@+id/back"
-            style="@style/Label.Normal.Black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/icon_back"
-            android:paddingLeft="4dp"
-            android:text="Назад" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -72,14 +74,16 @@
         android:layout_height="230dp">
 
         <ImageView
+            android:id="@+id/background_photo"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            android:background="@color/lightGray" />
+            android:focusable="false"
+            android:scaleType="centerCrop" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/photo_figure"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
@@ -87,13 +91,61 @@
             app:riv_oval="true" />
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/load_avatar"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/deafault_size"/>
+            android:layout_margin="@dimen/deafault_size"
+            android:src="@drawable/load_avatar" />
+
+
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/whiteDefault">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/deafault_size"
+            android:layout_toLeftOf="@id/btn_edit_name"
+            android:layout_centerVertical="true">
+
+            <EditText
+                android:id="@+id/edit_name"
+                style="@style/Label.Caption.Black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/whiteDefault"
+                android:text="Антон Антон" />
+
+            <TextView
+                style="@style/Label.Smaller2.Gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ваше имя" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grayDefault" />
+
+        <ImageView
+            android:id="@+id/btn_edit_name"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/deafault_size"
+            android:src="@drawable/btn_edit" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
