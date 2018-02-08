@@ -127,10 +127,11 @@ public class MainAuthUserActivity extends BaseActivity {
 
                 PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
                 pagerAdapter.setFragments(titleFragments);
-                mViewPagerTabTitle.setAdapter(pagerAdapter);
+
 
                 mViewPagerTabTitle.setClipToPadding(false); //
                 mViewPagerTabTitle.setPageMargin((int) (20 * App.getApp().getDestiny()));
+                mViewPagerTabTitle.setAdapter(pagerAdapter);
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
                 mCirclePageIndicator.setCurrentItem(0);
 
