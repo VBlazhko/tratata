@@ -103,10 +103,7 @@ public class Request {
     }
 
     public JSONObject getResultLove(final String function, final Map<String, String> headers, Map<String, String> params, final CallBack callBack) {
-        headers.put("Encoding", App.getApp().getLocale());
-
-        Log.w("log", "getResultLove: token" + headers.get("Token"));
-        Log.w("log", "getResultLove: auth" + headers.get("Authorization"));
+//        headers.put("Encoding", App.getApp().getLocale());
 
         mRetrofitApi.getRequestLovePost(function, headers, params).enqueue(new Callback<ResponseBody>() {
             @Override

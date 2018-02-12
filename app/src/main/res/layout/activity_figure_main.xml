@@ -228,15 +228,12 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <ListView
-                android:id="@+id/comment_list"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/whiteDefault"
-                android:divider="@color/whiteDefault" />
-
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/list_comment"
+           android:layout_width="match_parent"
+           android:layout_height="500dp"/>
         </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout

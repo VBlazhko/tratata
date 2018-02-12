@@ -113,7 +113,7 @@ public class MainAuthUserActivity extends BaseActivity {
                     titleFigureFragment.setListener(new IShowTitleListener() {
                         @Override
                         public void onShowTitle(TitleEvent titleEvent) {
-                            getFigureRequest("/" + titleEvent.getIdEvent());
+                            getFigureRequest(titleEvent.getIdEvent().toString());
                         }
                     });
                     if (i == 0) titleFigureFragment.setFirstImage(true);
@@ -144,7 +144,7 @@ public class MainAuthUserActivity extends BaseActivity {
     }
 
     private void getFigureRequest(final String idEvent) {
-        Request.getInstance().getResult("v1/ru" + idEvent + "/event.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/ru/" + idEvent + "/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 figureList = new ArrayList<>();

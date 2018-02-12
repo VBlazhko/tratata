@@ -163,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         slidingLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {

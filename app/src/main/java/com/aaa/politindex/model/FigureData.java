@@ -1,6 +1,7 @@
 package com.aaa.politindex.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +10,7 @@ public class FigureData {
 
     @SerializedName("items")
     @Expose
-    private List<ItemComment> commentItems = null;
+    private ArrayList<ItemComment> commentItems = null;
     @SerializedName("itemCount")
     @Expose
     private Integer itemCount;
@@ -17,11 +18,11 @@ public class FigureData {
     @Expose
     private FigureStatistics figure;
 
-    public List<ItemComment> getItems() {
+    public ArrayList<ItemComment> getItems() {
         return commentItems;
     }
 
-    public void setItems(List<ItemComment> comments) {
+    public void setItems(ArrayList<ItemComment> comments) {
         this.commentItems = comments;
     }
 
