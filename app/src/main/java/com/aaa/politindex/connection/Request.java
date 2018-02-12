@@ -4,6 +4,7 @@ package com.aaa.politindex.connection;
  * Created by 11 on 21.01.2018.
  */
 
+import android.support.v4.util.LogWriter;
 import android.util.Log;
 
 import com.aaa.politindex.App;
@@ -51,10 +52,7 @@ public class Request {
     }
 
 
-    public JSONObject getResult(final String function, final Map<String, String> params, final CallBack callBack) {
-
-
-        Map<String, String> headers = new HashMap<>();
+    public JSONObject getResult(final String function, final Map<String, String> headers, final CallBack callBack) {
 
 
         headers.put("Encoding", App.getApp().getLocale());
@@ -103,6 +101,35 @@ public class Request {
 
         return null;
     }
+
+    public JSONObject getResultLove(final String function, final Map<String, String> headers, Map<String, String> params, final CallBack callBack) {
+        headers.put("Encoding", App.getApp().getLocale());
+
+        Log.w("log", "getResultLove: token" + headers.get("Token"));
+        Log.w("log", "getResultLove: auth" + headers.get("Authorization"));
+
+        mRetrofitApi.getRequestLovePost(function, headers, params).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.w("log", "onResponse: " + response.raw());
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    callBack.onResponse(result);
+                    Log.w("log", "onResponse: " + result.toString());
+                } catch (Exception e) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+
+            }
+        });
+
+        return null;
+    }
+
 
     public interface CallBack {
         void onResponse(JSONObject jsonObject);

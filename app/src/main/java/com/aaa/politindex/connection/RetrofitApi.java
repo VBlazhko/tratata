@@ -24,8 +24,9 @@ import retrofit2.http.QueryMap;
 public interface RetrofitApi {
 
 
-    @GET("/{server}")
-    Call<ResponseBody> getRequestGet(@Path(value = "server", encoded = true) String server, @HeaderMap Map<String, String> headers, @QueryMap Map<String, String> queryParams);
+    @FormUrlEncoded
+    @POST("/{server}")
+    Call<ResponseBody> getRequestLovePost(@Path(value = "server", encoded = true) String server, @HeaderMap Map<String, String> headers, @FieldMap Map<String, String> queryParams);
 
 
     @POST("/{server}")

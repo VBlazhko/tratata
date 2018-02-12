@@ -1,4 +1,4 @@
-package com.aaa.politindex.main_screen;
+package com.aaa.politindex.main_screen.tabs;
 
 
 import com.aaa.politindex.model.Figure;

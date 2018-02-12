@@ -14,8 +14,15 @@ import android.widget.ProgressBar;
 import com.aaa.politindex.App;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
+import com.aaa.politindex.connection.RequestLog;
 import com.aaa.politindex.main_screen.MainActivity;
 import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -47,8 +54,6 @@ public class AuthActivity extends AppCompatActivity {
         if (selectSocialNetwork.equals(Const.FACEBOOK)) wb.loadUrl(Const.FBSERVER);
         if (selectSocialNetwork.equals(Const.VKONTAKTE)) wb.loadUrl(Const.VKSERVER);
 
-
-//        VKSdk.login(this, VKScope.DIRECT);
     }
 
 
@@ -78,6 +83,7 @@ public class AuthActivity extends AppCompatActivity {
                                         finish();
                                         return;
                                     }
+
                                     parseString(result);
                                     changeActivity();
                                 }

@@ -19,6 +19,7 @@ import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.lounchscreen.FirstDialogFragment;
 import com.aaa.politindex.main_screen.diagram.Diagram;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
+import com.aaa.politindex.main_screen.tabs.IShowFigureListener;
 import com.aaa.politindex.main_screen.tabs.PagerAdapter;
 import com.aaa.politindex.model.Figure;
 import com.google.gson.Gson;
@@ -28,12 +29,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Map<String, String> headers;
 
     SharedPreferences sPrefLounchScreeen = null;
     boolean show;
@@ -87,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
         sPrefLounchScreeen = getPreferences(MODE_PRIVATE);
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
-        Request.getInstance().getResult("v1/ru/event.api", null, new Request.CallBack() {
+        headers=new HashMap<>();
+
+        Request.getInstance().getResult("v1/ru/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 List<Figure> figureList = new ArrayList<>();
@@ -205,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AuthActivity.class).putExtra("authorization",Const.VKONTAKTE));
             }
         });
+
+
+
+
     }
 
 

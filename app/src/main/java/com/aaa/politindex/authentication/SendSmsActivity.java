@@ -162,6 +162,7 @@ public class SendSmsActivity extends BaseActivity {
                         public void onResponse(JSONObject jsonObject) {
                             if (jsonObject.optString("status").equals("OK")) {
                                 App.getApp().setSharedPreferences(Const.ID_TOKEN, jsonObject.optString("idToken"));
+                                Const.setLog("auth ok start main auth activity");
                                 startActivity(new Intent(SendSmsActivity.this, MainAuthUserActivity.class));
                                 finish();
                             } else if (jsonObject.optString("status").equals("wrongsmscode")) {

@@ -14,14 +14,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private Map<String, String> headers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Request.getInstance().getResult("v1/locale.api", null, new Request.CallBack() {
+        headers=new HashMap<>();
+        Request.getInstance().getResult("v1/locale.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 JSONObject data = jsonObject.optJSONObject("data");

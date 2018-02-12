@@ -1,18 +1,14 @@
 package com.aaa.politindex.main_screen_for_auth_user;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aaa.politindex.App;
@@ -22,8 +18,9 @@ import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.figure_main_screen.FigureMainActivity;
 import com.aaa.politindex.helper.Md5Helper;
-import com.aaa.politindex.main_screen.IShowFigureListener;
+import com.aaa.politindex.main_screen.tabs.IShowFigureListener;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
+import com.aaa.politindex.main_screen.tabs.OnClickFigureListener;
 import com.aaa.politindex.main_screen.tabs.PagerAdapter;
 import com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure.IShowTitleListener;
 import com.aaa.politindex.main_screen_for_auth_user.tabs_title_figure.TitleFigureFragment;
@@ -38,7 +35,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +43,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 public class MainAuthUserActivity extends BaseActivity {
 
@@ -96,6 +91,7 @@ public class MainAuthUserActivity extends BaseActivity {
         headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
                 Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
+
         Request.getInstance().getResultEvent("v1/ru/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -124,16 +120,13 @@ public class MainAuthUserActivity extends BaseActivity {
                     titleFragments.add(titleFigureFragment);
                 }
 
-
                 PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
                 pagerAdapter.setFragments(titleFragments);
-
 
                 mViewPagerTabTitle.setClipToPadding(false); //
                 mViewPagerTabTitle.setPageMargin((int) (20 * App.getApp().getDestiny()));
                 mViewPagerTabTitle.setAdapter(pagerAdapter);
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
-                mCirclePageIndicator.setCurrentItem(0);
 
                 mPiToday.setText(App.getApp().getValue("lbl_pi_today"));
                 mBtnSearch.setText(App.getApp().getValue("search_placeholder"));
@@ -147,17 +140,17 @@ public class MainAuthUserActivity extends BaseActivity {
         int dpWidth = outMetrics.widthPixels;
         App.getApp().setSharedPreferences("width", dpWidth + "");
 
+
     }
 
-    private void getFigureRequest(String idEvent) {
-        Request.getInstance().getResult("v1/ru/" + idEvent + "/event.api", headers, new Request.CallBack() {
+    private void getFigureRequest(final String idEvent) {
+        Request.getInstance().getResult("v1/ru" + idEvent + "/event.api", headers, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 figureList = new ArrayList<>();
                 Gson gson = new Gson();
                 JSONObject data = jsonObject.optJSONObject("data");
                 JSONArray figures = data.optJSONArray("figures");
-
 
                 for (int i = 0; i < figures.length(); i++) {
                     Figure figure = gson.fromJson(figures.optJSONObject(i).toString(), Figure.class);
@@ -168,7 +161,7 @@ public class MainAuthUserActivity extends BaseActivity {
                 final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
                 final List<Fragment> fragments = new ArrayList<>();
                 for (int i = 0; i < figureList.size(); i++) {
-                    FigureFragment fragment = new FigureFragment();
+                    final FigureFragment fragment = new FigureFragment();
                     fragment.setFigure(figureList.get(i));
                     fragment.setListener(new IShowFigureListener() {
                         @Override
@@ -187,6 +180,18 @@ public class MainAuthUserActivity extends BaseActivity {
                             mProgressLine.requestLayout();
                         }
                     });
+
+                    fragment.setOnClickFigureListener(new OnClickFigureListener() {
+                        @Override
+                        public void onClickFigure(Figure figure) {
+                            Intent intent = new Intent(MainAuthUserActivity.this, FigureMainActivity.class);
+                            intent.putParcelableArrayListExtra("figure_list", figureList);
+                            intent.putExtra("selected_figure", figure);
+                            intent.putExtra("idEvent", idEvent);
+                            startActivity(intent);
+                        }
+                    });
+
 
                     if (i == 0) fragment.setFirstImage(true);
                     fragments.add(fragment);
@@ -213,11 +218,8 @@ public class MainAuthUserActivity extends BaseActivity {
 
                 pagerAdapter.setFragments(fragments);
                 mViewPagerFigure.setAdapter(pagerAdapter);
-
-
             }
         });
-
     }
 
 
@@ -234,14 +236,14 @@ public class MainAuthUserActivity extends BaseActivity {
         startActivity(intent);
     }
 
-//    @OnClick(R.id.btn_profile)
-//    protected void clickProfile() {
-//        startActivity(new Intent(this, UserProfileActivity.class));
-//    }
-//
-//    @OnClick(R.id.btn_change_language)
-//    protected void clickChangeLanguage() {
-//        startActivity(new Intent(this, FigureMainActivity.class));
-//    }
+    @OnClick(R.id.btn_profile)
+    protected void clickProfile() {
+        startActivity(new Intent(this, UserProfileActivity.class));
+    }
+
+    @OnClick(R.id.btn_change_language)
+    protected void clickChangeLanguage() {
+        startActivity(new Intent(this, FigureMainActivity.class));
+    }
 
 }

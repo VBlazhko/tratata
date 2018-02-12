@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
+import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.Today;
@@ -65,6 +66,7 @@ public class SearchByFiguresActivity extends BaseActivity {
     }
     @OnClick(R.id.btn_cancel)
     protected void clickBack(){
+        Const.setLog("id_user "+App.getApp().getSharedPreferences(Const.ID_USER)+" # replace back to main auth");
         onBackPressed();
     }
 }
