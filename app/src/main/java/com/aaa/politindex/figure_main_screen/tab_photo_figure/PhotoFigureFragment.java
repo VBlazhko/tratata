@@ -44,6 +44,7 @@ public class PhotoFigureFragment extends BaseFragment {
         mUnbinder= ButterKnife.bind(this,view);
 
         if (mFigure != null) Glide.with(getContext()).load(Uri.parse(mFigure.getAvatar())).into(mImageFigure);
+        else mImageFigure.setImageResource(R.drawable.comingsoon);
         return view;
     }
 
@@ -51,6 +52,7 @@ public class PhotoFigureFragment extends BaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) mListener.onShowFigure(mFigure);
+        if(mFigure==null)mListener.onShowFigure(null);
     }
 
     public void setFigure(Figure figure) {

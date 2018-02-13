@@ -1,8 +1,11 @@
 package com.aaa.politindex.search_by_figures;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -11,6 +14,8 @@ import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
+import com.aaa.politindex.figure_main_screen.FigureMainActivity;
+import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.Today;
 
@@ -27,6 +32,9 @@ public class SearchByFiguresActivity extends BaseActivity {
     ArrayList<Figure> mFigureArrayList;
     ArrayList<Today> mTodayArrayList;
 
+    private String numbFigure;
+    private String mIdEvent;
+
     @BindView(R.id.figure_list)
     ListView mFigureList;
     @BindView(R.id.edit_search)
@@ -39,6 +47,7 @@ public class SearchByFiguresActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_figures);
         mUnbinder= ButterKnife.bind(this);
+        mIdEvent = this.getIntent().getStringExtra("idEvent");
         mFigureArrayList=this.getIntent().getParcelableArrayListExtra("figure");
         mTodayArrayList=this.getIntent().getParcelableArrayListExtra("today");
         for(int i=0;i<mFigureArrayList.size();i++){
@@ -48,6 +57,12 @@ public class SearchByFiguresActivity extends BaseActivity {
         Log.w(TAG, "onCreate: "+mFigureArrayList.get(0).getToday().getRating() );
         SearchListAdapter adapter = new SearchListAdapter(this,mFigureArrayList);
         mFigureList.setAdapter(adapter);
+        mFigureList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                changeActivity(mFigureArrayList.get(i).getIdFigure().toString());
+            }
+        });
 
         mEditFigure.setHint(App.getApp().getValue("search_placeholder"));
 
@@ -55,7 +70,7 @@ public class SearchByFiguresActivity extends BaseActivity {
 
     @OnTextChanged(R.id.edit_search)
     protected void changeList(){
-        ArrayList<Figure> newList = new ArrayList<>();
+        final ArrayList<Figure> newList = new ArrayList<>();
         for(int i=0;i<mFigureArrayList.size();i++){
             if(mFigureArrayList.get(i).getFirstname().toLowerCase().contains(mEditFigure.getText().toString().toLowerCase()) || mFigureArrayList.get(i).getLastname().toLowerCase().contains(mEditFigure.getText().toString().toLowerCase())){
                 newList.add(mFigureArrayList.get(i));
@@ -63,10 +78,28 @@ public class SearchByFiguresActivity extends BaseActivity {
         }
         SearchListAdapter adapter = new SearchListAdapter(this,newList);
         mFigureList.setAdapter(adapter);
+        mFigureList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                changeActivity(newList.get(i).getIdFigure().toString());
+            }
+        });
     }
     @OnClick(R.id.btn_cancel)
     protected void clickBack(){
         Const.setLog("id_user "+App.getApp().getSharedPreferences(Const.ID_USER)+" # replace back to main auth");
         onBackPressed();
+    }
+
+    private void changeActivity(String idFigure){
+        String curentNumb=null;
+        for(int i=0;i<mFigureArrayList.size();i++){
+            if(mFigureArrayList.get(i).getIdFigure().toString().equals(idFigure))curentNumb=i+"";
+        }
+        Intent intent = new Intent(SearchByFiguresActivity.this, FigureMainActivity.class);
+        intent.putParcelableArrayListExtra("figure_list", mFigureArrayList);
+        intent.putExtra("figure_numb_in_list", curentNumb);
+        intent.putExtra("idEvent", mIdEvent);
+        startActivity(intent);
     }
 }

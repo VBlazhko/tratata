@@ -48,6 +48,8 @@ public class MainAuthUserActivity extends BaseActivity {
 
     private Map<String, String> headers;
     private ArrayList<Figure> figureList;
+    private String idEvent;
+    private String idFigure;
 
     @BindView(R.id.pagerTab)
     ViewPager mViewPagerTabTitle;
@@ -100,11 +102,14 @@ public class MainAuthUserActivity extends BaseActivity {
                 JSONObject data = jsonObject.optJSONObject("data");
                 JSONArray items = data.optJSONArray("items");
 
-                getFigureRequest("");
 
                 for (int i = 0; i < items.length(); i++) {
                     TitleEvent titleEvent = gson.fromJson(items.optJSONObject(i).toString(), TitleEvent.class);
                     titleList.add(titleEvent);
+                    if (i == 0) {
+                        idEvent = titleEvent.getIdEvent().toString();
+                        getFigureRequest(idEvent);
+                    }
                 }
                 List<Fragment> titleFragments = new ArrayList<>();
                 for (int i = 0; i < titleList.size(); i++) {
@@ -113,7 +118,8 @@ public class MainAuthUserActivity extends BaseActivity {
                     titleFigureFragment.setListener(new IShowTitleListener() {
                         @Override
                         public void onShowTitle(TitleEvent titleEvent) {
-                            getFigureRequest(titleEvent.getIdEvent().toString());
+                            idEvent = titleEvent.getIdEvent().toString();
+                            getFigureRequest(idEvent);
                         }
                     });
                     if (i == 0) titleFigureFragment.setFirstImage(true);
@@ -139,7 +145,6 @@ public class MainAuthUserActivity extends BaseActivity {
         display.getMetrics(outMetrics);
         int dpWidth = outMetrics.widthPixels;
         App.getApp().setSharedPreferences("width", dpWidth + "");
-
 
     }
 
@@ -181,12 +186,14 @@ public class MainAuthUserActivity extends BaseActivity {
                         }
                     });
 
+                    final int numb = i;
                     fragment.setOnClickFigureListener(new OnClickFigureListener() {
                         @Override
                         public void onClickFigure(Figure figure) {
+
                             Intent intent = new Intent(MainAuthUserActivity.this, FigureMainActivity.class);
                             intent.putParcelableArrayListExtra("figure_list", figureList);
-                            intent.putExtra("selected_figure", figure);
+                            intent.putExtra("figure_numb_in_list", numb + "");
                             intent.putExtra("idEvent", idEvent);
                             startActivity(intent);
                         }
@@ -208,6 +215,12 @@ public class MainAuthUserActivity extends BaseActivity {
                         mPiProcent.setVisibility(View.INVISIBLE);
                         mPiToday.setVisibility(View.INVISIBLE);
 
+
+                    }
+                });
+                figureFragment.setOnClickFigureListener(new OnClickFigureListener() {
+                    @Override
+                    public void onClickFigure(Figure figure) {
 
                     }
                 });
@@ -233,6 +246,8 @@ public class MainAuthUserActivity extends BaseActivity {
         }
         intent.putParcelableArrayListExtra("figure", figureList);
         intent.putParcelableArrayListExtra("today", todayArrayList);
+        intent.putExtra("idEvent", idEvent);
+
         startActivity(intent);
     }
 

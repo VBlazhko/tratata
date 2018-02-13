@@ -3,11 +3,16 @@ package com.aaa.politindex.figure_main_screen;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aaa.politindex.App;
@@ -39,6 +44,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.OnFocusChange;
 
 public class FigureMainActivity extends BaseActivity {
 
@@ -46,6 +53,8 @@ public class FigureMainActivity extends BaseActivity {
     private ArrayList<Figure> mFigureArrayList;
     private String mIdEvent;
     private String mIdFigure;
+    private String mIdInList;
+    private LinearLayout myLayout;
 
 
     @BindView(R.id.pager)
@@ -66,15 +75,21 @@ public class FigureMainActivity extends BaseActivity {
     View mBtnLike;
     @BindView(R.id.btn_dislike)
     View mBtnDislike;
+    @BindView(R.id.edit_comment)
+    EditText mEditText;
+    @BindView(R.id.scroll)
+    NestedScrollView mNestedScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_figure_main);
         mUnbinder = ButterKnife.bind(this);
-
+        myLayout = (LinearLayout) findViewById(R.id.lay);
         mFigureArrayList = this.getIntent().getParcelableArrayListExtra("figure_list");
         mIdEvent = this.getIntent().getStringExtra("idEvent");
+        mIdInList = this.getIntent().getStringExtra("figure_numb_in_list");
+
         headers = new HashMap<>();
         headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
         headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
@@ -91,12 +106,22 @@ public class FigureMainActivity extends BaseActivity {
                 public void onShowFigure(Figure figure) {
                     mFigureName.setText(figure.getFirstname() + " " + figure.getLastname());
                     mIdFigure = figure.getIdFigure().toString();
+
+
                     getFigureInfo(mIdFigure, mIdEvent);
 
                 }
             });
             fragments.add(fragment);
         }
+
+
+
+
+
+
+
+
 
 
         int screenWidth = getWidth();
@@ -107,6 +132,7 @@ public class FigureMainActivity extends BaseActivity {
         mViewPager.setPageMargin((int) (0.8 * destiny));
         mViewPager.setClipToPadding(false); //
         mViewPager.setPageTransformer(false, new PhotoTransformer());
+        mViewPager.setCurrentItem(Integer.parseInt(mIdInList));
 
 
     }
@@ -127,18 +153,13 @@ public class FigureMainActivity extends BaseActivity {
 
                 ArrayList<ItemComment> comments = figureData.getItems();
 
-                CommentListAdapter adapter = new CommentListAdapter(getApplicationContext(),comments);
+                CommentListAdapter adapter = new CommentListAdapter(getApplicationContext(), comments);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                RecyclerView.OnItemTouchListener disabler = new RecyclerViewDisabler();
-
-                mCommentList.addOnItemTouchListener(disabler);
+                mLayoutManager.setAutoMeasureEnabled(true);
                 mCommentList.setAdapter(adapter);
+
                 mCommentList.setLayoutManager(mLayoutManager);
-                mCommentList.stopScroll();
-
-
-
-
+                mCommentList.setNestedScrollingEnabled(false);
 
 
             }
@@ -192,6 +213,9 @@ public class FigureMainActivity extends BaseActivity {
         return dpWidth;
     }
 
+
+
+
     @OnClick(R.id.btn_like)
     protected void onClickLike() {
         getFigureLove(mIdFigure, mIdEvent, true);
@@ -201,6 +225,48 @@ public class FigureMainActivity extends BaseActivity {
     protected void onClickDislike() {
         getFigureLove(mIdFigure, mIdEvent, false);
     }
+
+    @OnClick(R.id.btn_send_comment)
+    protected void onClickSendComment() {
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(getBaseContext().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(myLayout.getWindowToken(), 0);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("text", mEditText.getText().toString());
+        mEditText.getText().clear();
+
+        Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", headers, params, new Request.CallBack() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+            }
+        });
+
+        try {
+            Thread.sleep(1000);
+            getFigureInfo(mIdFigure, mIdEvent);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        mEditText.clearFocus();
+
+    }
+
+    @OnFocusChange(R.id.edit_comment)
+    protected void onClickEdit(){
+        float destiny = App.getApp().getDestiny();
+        mNestedScrollView.scrollTo(0,(int)(320*destiny));
+
+    }
+    @OnClick(R.id.edit_comment)
+    protected void onClickMEdit(){
+        float destiny = App.getApp().getDestiny();
+        mNestedScrollView.scrollTo(0,(int)(320*destiny));
+
+    }
+
+
+
 
 
 }
