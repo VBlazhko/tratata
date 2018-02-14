@@ -23,6 +23,7 @@ import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.figure_main_screen.comment_list.CommentListAdapter;
 
 import com.aaa.politindex.figure_main_screen.comment_list.RecyclerViewDisabler;
+import com.aaa.politindex.figure_main_screen.tab_photo_figure.DeactivatableViewPager;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PagerAdapterPhoto;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoFigureFragment;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoTransformer;
@@ -46,6 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
+import butterknife.OnTouch;
 
 public class FigureMainActivity extends BaseActivity {
 
@@ -58,19 +60,19 @@ public class FigureMainActivity extends BaseActivity {
 
 
     @BindView(R.id.pager)
-    ViewPager mViewPager;
+    DeactivatableViewPager mViewPager;
     @BindView(R.id.list_comment)
     RecyclerView mCommentList;
     @BindView(R.id.figure_name)
     TextView mFigureName;
     @BindView(R.id.pi_today)
     TextView mPiToday;
-
     @BindView(R.id.numb_dislike)
     TextView mNumbDislike;
     @BindView(R.id.numb_like)
     TextView mNumbLike;
-
+    @BindView(R.id.back)
+    TextView mBack;
     @BindView(R.id.btn_like)
     View mBtnLike;
     @BindView(R.id.btn_dislike)
@@ -87,6 +89,7 @@ public class FigureMainActivity extends BaseActivity {
         mUnbinder = ButterKnife.bind(this);
         myLayout = (LinearLayout) findViewById(R.id.lay);
         mFigureArrayList = this.getIntent().getParcelableArrayListExtra("figure_list");
+
         mIdEvent = this.getIntent().getStringExtra("idEvent");
         mIdInList = this.getIntent().getStringExtra("figure_numb_in_list");
 
@@ -107,7 +110,6 @@ public class FigureMainActivity extends BaseActivity {
                     mFigureName.setText(figure.getFirstname() + " " + figure.getLastname());
                     mIdFigure = figure.getIdFigure().toString();
 
-
                     getFigureInfo(mIdFigure, mIdEvent);
 
                 }
@@ -115,25 +117,26 @@ public class FigureMainActivity extends BaseActivity {
             fragments.add(fragment);
         }
 
+        PhotoFigureFragment fragmentEmpty = new PhotoFigureFragment();
+        fragmentEmpty.setListener(new IShowFigureListener() {
+            @Override
+            public void onShowFigure(Figure figure) {
 
+            }
+        });
+        fragments.add(fragmentEmpty);
 
-
-
-
-
-
-
-
-        int screenWidth = getWidth();
         float destiny = App.getApp().getDestiny();
         pagerAdapterPhoto.setFragments(fragments);
-        mViewPager.setPadding((int) ((screenWidth / 2) - ((112 + 13) * destiny)), 0, 0, 0);
+        mViewPager.setPadding((int) ((getWidth() / 2) - ((112 + 13) * destiny)), 0, 0, 0);
         mViewPager.setAdapter(pagerAdapterPhoto);
         mViewPager.setPageMargin((int) (0.8 * destiny));
         mViewPager.setClipToPadding(false); //
         mViewPager.setPageTransformer(false, new PhotoTransformer());
         mViewPager.setCurrentItem(Integer.parseInt(mIdInList));
+        mViewPager.setMaxCount(mFigureArrayList.size() - 1);
 
+        mBack.setText(App.getApp().getValue("back_button"));
 
     }
 
@@ -171,7 +174,6 @@ public class FigureMainActivity extends BaseActivity {
         params.put("idEvent", idEvent);
         params.put("idFigure", idFigure);
         params.put("isLike", isLiked ? "1" : "0");
-
 
         Request.getInstance().getResultLove("v1/love.api", headers, params, new Request.CallBack() {
             @Override
@@ -214,7 +216,44 @@ public class FigureMainActivity extends BaseActivity {
     }
 
 
+    @OnClick(R.id.btn_send_comment)
+    protected void onClickSendComment() {
 
+
+        Map<String, String> params = new HashMap<>();
+        if (mEditText.getText().toString() != "") {
+            params.put("text", mEditText.getText().toString());
+            mEditText.getText().clear();
+
+            Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", headers, params, new Request.CallBack() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                }
+            });
+
+            try {
+                Thread.sleep(1000);
+                getFigureInfo(mIdFigure, mIdEvent);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(getBaseContext().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(myLayout.getWindowToken(), 0);
+        mEditText.clearFocus();
+    }
+
+    @OnFocusChange(R.id.edit_comment)
+    protected void onClickEdit() {
+        float destiny = App.getApp().getDestiny();
+        mNestedScrollView.scrollTo(0, (int) (320 * destiny));
+    }
+
+    @OnClick({R.id.back, R.id.icon_back})
+    protected void clickBack() {
+        onBackPressed();
+    }
 
     @OnClick(R.id.btn_like)
     protected void onClickLike() {
@@ -226,46 +265,12 @@ public class FigureMainActivity extends BaseActivity {
         getFigureLove(mIdFigure, mIdEvent, false);
     }
 
-    @OnClick(R.id.btn_send_comment)
-    protected void onClickSendComment() {
-
-        InputMethodManager imm = (InputMethodManager) getSystemService(getBaseContext().INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(myLayout.getWindowToken(), 0);
-
-        Map<String, String> params = new HashMap<>();
-        params.put("text", mEditText.getText().toString());
-        mEditText.getText().clear();
-
-        Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", headers, params, new Request.CallBack() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-            }
-        });
-
-        try {
-            Thread.sleep(1000);
-            getFigureInfo(mIdFigure, mIdEvent);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
         mEditText.clearFocus();
-
+        Log.w(TAG, "onBackPressed: " );
     }
-
-    @OnFocusChange(R.id.edit_comment)
-    protected void onClickEdit(){
-        float destiny = App.getApp().getDestiny();
-        mNestedScrollView.scrollTo(0,(int)(320*destiny));
-
-    }
-    @OnClick(R.id.edit_comment)
-    protected void onClickMEdit(){
-        float destiny = App.getApp().getDestiny();
-        mNestedScrollView.scrollTo(0,(int)(320*destiny));
-
-    }
-
-
 
 
 

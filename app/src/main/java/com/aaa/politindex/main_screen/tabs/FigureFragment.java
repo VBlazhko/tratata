@@ -87,7 +87,8 @@ public class FigureFragment extends BaseFragment {
 
     @OnClick(R.id.image)
     protected void onClickImage() {
-        mOnClickFigureListener.onClickFigure(mFigure);
+       if(mFigure!=null&&mOnClickFigureListener!=null) mOnClickFigureListener.onClickFigure(mFigure);
     }
+
 
 }

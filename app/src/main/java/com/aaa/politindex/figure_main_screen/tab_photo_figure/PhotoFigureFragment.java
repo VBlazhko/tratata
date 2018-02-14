@@ -44,7 +44,7 @@ public class PhotoFigureFragment extends BaseFragment {
         mUnbinder= ButterKnife.bind(this,view);
 
         if (mFigure != null) Glide.with(getContext()).load(Uri.parse(mFigure.getAvatar())).into(mImageFigure);
-        else mImageFigure.setImageResource(R.drawable.comingsoon);
+        else mImageFigure.setImageResource(R.drawable.rocket);
         return view;
     }
 
@@ -62,13 +62,6 @@ public class PhotoFigureFragment extends BaseFragment {
     public void setListener(IShowFigureListener listener) {
         mListener = listener;
     }
-//
-//    public void setTitleEvent(TitleEvent titleEvent) {
-//        mTitleEvent = titleEvent;
-//    }
-//
-//    public void setFirstImage(boolean firstImage) {
-//        mIsFirstImage = firstImage;
-//    }
+
 }
 

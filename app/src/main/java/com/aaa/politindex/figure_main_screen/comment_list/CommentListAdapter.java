@@ -72,7 +72,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
 
             holder.name.setText(mComments.get(position).getName());
             holder.text.setText(mComments.get(position).getText());
-            holder.date.setText(checkTime(mComments.get(position).getFulldate()));
+            holder.date.setText(converDateTimezone(mComments.get(position).getFulldate().split("G")[0]));
 
             if (mComments.get(position).getAvatar() != null)
                 Glide.with(mContext).load(Uri.parse(mComments.get(position).getAvatar())).into(holder.image);
@@ -84,64 +84,31 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         return mComments.size();
     }
 
-    private String checkTime(String dateServer) {
+    public static String converDateTimezone(String date) {
+        Log.w(TAG, "converDateTimezone: "+date );
+        String result = "";
+        try {
+            DateFormat df = new SimpleDateFormat("MM dd HH:mm");
+            String dateCurent = df.format(Calendar.getInstance().getTime());
 
-        String dateReturn = null, servYear, servMonth, servDay, servHour, servMin, servSec;
-        String cYear, cMonth, cDay, cHour, cMin, cSec;
-        String GMTHour, GMTMin;
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        String cuerentDate = df.format(Calendar.getInstance().getTime());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date d = formatter.parse(date);
 
-        String[] array = dateServer.split("-");
-        servYear = array[0];
-        servMonth = array[1];
-        servDay = array[2].split("T")[0];
-        servHour = array[2].split("T")[1].split(":")[0];
-        servMin = array[2].split("T")[1].split(":")[1];
-        servSec = array[2].split("T")[1].split(":")[2].split("\\+")[0];
+            SimpleDateFormat showSDF = new SimpleDateFormat("MM dd HH:mm");
+            showSDF.setTimeZone(TimeZone.getDefault());
+            result = showSDF.format(d);
 
-        String[] array2 = cuerentDate.split("-");
-        cYear = array2[0];
-        cMonth = array2[1];
-        cDay = array2[2].split("T")[0];
-        cHour = array2[2].split("T")[1].split(":")[0];
-        cMin = array2[2].split("T")[1].split(":")[1];
-        cSec = array2[2].split("T")[1].split(":")[2];
-
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"),
-                Locale.getDefault());
-        Date currentLocalTime = calendar.getTime();
-        DateFormat date = new SimpleDateFormat("z", Locale.getDefault());
-        String localTime = date.format(currentLocalTime);
-
-        String[] array3 = localTime.split("\\+");
-        GMTHour = array3[1].split(":")[0];
-        GMTMin = array3[1].split(":")[1];
-        Log.w(TAG, "checkTime: GMTH" + GMTHour);
+            if(result.equals(dateCurent)){
+                return "just now";
+            }else{
+                return result;
+            }
 
 
-        int min = Integer.parseInt(servMin) + Integer.parseInt(GMTMin);
-        int hour = Integer.parseInt(servHour) + Integer.parseInt(GMTHour);
-        if (min > 60) {
-            hour++;
-            min = min - 60;
-            if (min < 10) servMin = "0"+min;
-            else servMin = min + "";
-            servHour = hour + "";
-        } else {
-            if (min < 10) servMin = "0"+min;
-            else servMin = min + "";
-            servHour = hour + "";
+        } catch (Exception e) {
+            return result;
         }
-
-        if (cMin.equals(servMin)&&cHour.equals(servHour)&&cDay.equals(servDay)){
-            return "just now";
-
-        }
-
-
-            return servMonth + " " + servDay + " " + servHour + ":" + servMin;
-
     }
 
 

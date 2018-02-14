@@ -88,6 +88,7 @@ public class MainAuthUserActivity extends BaseActivity {
         setContentView(R.layout.activity_main_auth_user);
 
         mUnbinder = ButterKnife.bind(this);
+
         headers = new HashMap<>();
         headers.put("token", App.getApp().getSharedPreferences(Const.TOKEN));
         headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
@@ -133,6 +134,8 @@ public class MainAuthUserActivity extends BaseActivity {
                 mViewPagerTabTitle.setPageMargin((int) (20 * App.getApp().getDestiny()));
                 mViewPagerTabTitle.setAdapter(pagerAdapter);
                 mCirclePageIndicator.setViewPager(mViewPagerTabTitle);
+
+
 
                 mPiToday.setText(App.getApp().getValue("lbl_pi_today"));
                 mBtnSearch.setText(App.getApp().getValue("search_placeholder"));
@@ -190,7 +193,6 @@ public class MainAuthUserActivity extends BaseActivity {
                     fragment.setOnClickFigureListener(new OnClickFigureListener() {
                         @Override
                         public void onClickFigure(Figure figure) {
-
                             Intent intent = new Intent(MainAuthUserActivity.this, FigureMainActivity.class);
                             intent.putParcelableArrayListExtra("figure_list", figureList);
                             intent.putExtra("figure_numb_in_list", numb + "");
