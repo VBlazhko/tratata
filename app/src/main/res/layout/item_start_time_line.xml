@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        style="@style/Label.Small.Gray"
+        android:id="@+id/text_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Хроника собитий:" />
+    <TextView
+        style="@style/Label.Small.Gray"
+        android:id="@+id/date"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21.12.12"/>
+
+</LinearLayout>

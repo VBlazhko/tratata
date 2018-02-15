@@ -35,7 +35,9 @@
         <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity" />
         <activity android:name=".search_by_figures.SearchByFiguresActivity" />
         <activity android:name=".figure_main_screen.FigureMainActivity" />
-        <activity android:name=".user_profile.UserProfileActivity"></activity>
+        <activity android:name=".user_profile.UserProfileActivity" />
+        <activity android:name=".date_information_activity.DateInfoActivity" />
+        <activity android:name=".time_line_info_activity.TimeLineActivity"></activity>
     </application>
 
 </manifest>

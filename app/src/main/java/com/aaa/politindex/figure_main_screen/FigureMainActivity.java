@@ -1,5 +1,6 @@
 package com.aaa.politindex.figure_main_screen;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ import com.aaa.politindex.App;
 import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
+import com.aaa.politindex.authentication.AuthActivity;
 import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.date_information_activity.DateInfoActivity;
 import com.aaa.politindex.figure_main_screen.comment_list.CommentListAdapter;
 
 import com.aaa.politindex.figure_main_screen.comment_list.RecyclerViewDisabler;
@@ -28,11 +31,14 @@ import com.aaa.politindex.figure_main_screen.tab_photo_figure.PagerAdapterPhoto;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoFigureFragment;
 import com.aaa.politindex.figure_main_screen.tab_photo_figure.PhotoTransformer;
 import com.aaa.politindex.helper.Md5Helper;
+import com.aaa.politindex.main_screen.MainActivity;
 import com.aaa.politindex.main_screen.tabs.IShowFigureListener;
+import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.FigureData;
 import com.aaa.politindex.model.FigureStatistics;
 import com.aaa.politindex.model.ItemComment;
+import com.aaa.politindex.time_line_info_activity.TimeLineActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -264,6 +270,17 @@ public class FigureMainActivity extends BaseActivity {
     protected void onClickDislike() {
         getFigureLove(mIdFigure, mIdEvent, false);
     }
+
+    @OnClick(R.id.time_line)
+    protected void onTimeLineClick(){
+        Intent intent = new Intent(FigureMainActivity.this, DateInfoActivity.class);
+        intent.putExtra("idFigure", mIdFigure);
+        intent.putExtra("idEvent", mIdEvent);
+        intent.putExtra("figureName", mFigureName.getText());
+        startActivity(intent);
+    }
+
+
 
     @Override
     public void onBackPressed() {

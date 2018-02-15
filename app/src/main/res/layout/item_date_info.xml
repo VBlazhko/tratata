@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    android:background="@color/whiteDefault">
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/Label.Normal.Black2"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="15 апреля" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="10dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/arrow"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_margin="5dp"
+                android:rotation="180"
+                android:scaleX="-1"
+                android:src="@drawable/btn_dislike"
+                android:tint="@color/darkGray"/>
+
+            <TextView
+                android:id="@+id/text_like"
+                style="@style/Label.Smaller.Gray"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="12343" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/btn_dislike"
+                android:tint="@color/darkGray"/>
+
+            <TextView
+                android:id="@+id/text_dislike"
+                style="@style/Label.Smaller.Gray"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="123" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/icon_comment"
+                android:tint="@color/darkGray"/>
+
+            <TextView
+                android:id="@+id/text_comment"
+                style="@style/Label.Smaller.Gray"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="12233" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/arrow"
+            android:background="@drawable/background_progress_gray" />
+
+        <LinearLayout
+            android:id="@+id/progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/arrow"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/active_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background_progress_blue" />
+
+            <View
+                android:id="@+id/no_active_line"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_layout"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/arrow">
+
+            <View
+                android:id="@+id/space_pi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/text_pi_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:minWidth="40dp">
+
+                <TextView
+                    android:id="@+id/text_pi"
+                    style="@style/Label.Normal.Black2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50%" />
+
+                <TextView
+                    style="@style/Label.Normal.Black2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="PI" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:rotation="-90"
+            android:src="@drawable/btn_up_down"
+            android:tint="@color/darkGray"/>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
