@@ -21,6 +21,7 @@ import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.authentication.AuthActivity;
+import com.aaa.politindex.biography_activity.BiographyActivity;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.date_information_activity.DateInfoActivity;
 import com.aaa.politindex.figure_main_screen.comment_list.CommentListAdapter;
@@ -62,6 +63,7 @@ public class FigureMainActivity extends BaseActivity {
     private String mIdEvent;
     private String mIdFigure;
     private String mIdInList;
+    private String mPhotoFigure;
     private LinearLayout myLayout;
 
 
@@ -115,7 +117,7 @@ public class FigureMainActivity extends BaseActivity {
                 public void onShowFigure(Figure figure) {
                     mFigureName.setText(figure.getFirstname() + " " + figure.getLastname());
                     mIdFigure = figure.getIdFigure().toString();
-
+                    mPhotoFigure=figure.getAvatar();
                     getFigureInfo(mIdFigure, mIdEvent);
 
                 }
@@ -269,6 +271,15 @@ public class FigureMainActivity extends BaseActivity {
     @OnClick(R.id.btn_dislike)
     protected void onClickDislike() {
         getFigureLove(mIdFigure, mIdEvent, false);
+    }
+
+    @OnClick(R.id.biography)
+    protected void onClikBiography() {
+        Intent intent = new Intent(FigureMainActivity.this, BiographyActivity.class);
+        intent.putExtra("idFigure", mIdFigure);
+        intent.putExtra("figureName", mFigureName.getText());
+        intent.putExtra("figurePhoto", mPhotoFigure);
+        startActivity(intent);
     }
 
     @OnClick(R.id.time_line)

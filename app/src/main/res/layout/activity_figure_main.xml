@@ -190,7 +190,7 @@
                         android:src="@drawable/btn_timeline" />
 
                     <ImageView
-                        android:id="@+id/biographi"
+                        android:id="@+id/biography"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_marginTop="40dp"
