@@ -38,7 +38,7 @@ import butterknife.OnClick;
 
 public class DateInfoActivity extends BaseActivity {
 
-    private Map<String, String> headers;
+
     private ArrayList<ItemDiagram> mDiagramArrayList;
     private String mIdEvent;
     private String mIdFigure;
@@ -64,14 +64,11 @@ public class DateInfoActivity extends BaseActivity {
 
         mFigureName.setText(mNameFigure);
 
-        headers = new HashMap<>();
-        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
+
 
         mDiagramArrayList = new ArrayList<>();
 
-        Request.getInstance().getResult("v1/" + mIdEvent + "/" + mIdFigure + "/graph.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/" + mIdEvent + "/" + mIdFigure + "/graph.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Log.w(TAG, "onResponse: " + jsonObject.toString());

@@ -26,13 +26,10 @@ public class Const {
     public static final String ID_USER = "id_user";
     public static final String ID_TOKEN = "id_token";
 
-    public static void setLog(String textLog){
-        DateFormat df = new SimpleDateFormat("HH:mm:ss, yyyy-MM-dd");
-        String date = df.format(Calendar.getInstance().getTime());
-        Map<String,String> logParam = new HashMap<>();
-        logParam.put("date", date+"" );
-        logParam.put("log", textLog );
-        RequestLog.getInstance().setLog("log/savelog", logParam, null);
-    }
+    public static final String LOCALE = "locale";
+    public static final String COUNTRY = "country";
+
+    public static final String FIRST = "first";
+
 
 }

@@ -14,13 +14,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.aaa.politindex.App;
+import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class FirstDialogFragment extends DialogFragment {
+
+
 
     @BindView(R.id.pager)
     ViewPager mPager;
@@ -42,6 +48,10 @@ public class FirstDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_first_dialog, null);
         ButterKnife.bind(this,view);
+
+
+
+
         return view;
     }
 

@@ -18,13 +18,12 @@ import java.util.Locale;
 public class App extends Application {
 
     private static App mApp;
-    private String mLocale="EN";
+    private String mLocale="";
 
     private SharedPreferences mSharedPreferences;
 
 
-    public static String mUserId;
-    public static String mToken;
+
 
     private List<Item> mItemList;
 
@@ -36,10 +35,13 @@ public class App extends Application {
 
        mSharedPreferences =  getSharedPreferences("info", MODE_PRIVATE);
 
+       if(!mSharedPreferences.getString(Const.FIRST, "null").equals("firstOK")) {
+           Locale locale = getResources().getConfiguration().locale;
+           mLocale = locale.toString().split("_")[0];
+           setSharedPreferences(Const.LOCALE,mLocale);
+       }
 
-        Locale locale=getResources().getConfiguration().locale;
-        mLocale=locale.toString().split("_")[0];
-        Log.w("log", "onCreate: "+ mLocale.toString() );
+        setSharedPreferences(Const.FIRST,"firstOK");
 
     }
 
@@ -63,9 +65,8 @@ public class App extends Application {
         return "null";
     }
 
-    public String getLocale() {
-        return mLocale;
-    }
+
+
 
 
     public void setSharedPreferences(String key, String value){

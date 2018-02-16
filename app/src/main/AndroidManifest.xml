@@ -38,7 +38,8 @@
         <activity android:name=".user_profile.UserProfileActivity" />
         <activity android:name=".date_information_activity.DateInfoActivity" />
         <activity android:name=".time_line_info_activity.TimeLineActivity" />
-        <activity android:name=".biography_activity.BiographyActivity"></activity>
+        <activity android:name=".biography_activity.BiographyActivity" />
+        <activity android:name=".locale.LocaleActivity"></activity>
     </application>
 
 </manifest>

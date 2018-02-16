@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.figure_main_screen.FigureMainActivity;
+import com.aaa.politindex.helper.Md5Helper;
 import com.aaa.politindex.main_screen.MainActivity;
+import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.aaa.politindex.model.Item;
 import com.google.gson.Gson;
 
@@ -16,23 +19,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private Map<String, String> headers;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        headers=new HashMap<>();
-        Request.getInstance().getResult("v1/locale.api", headers, new Request.CallBack() {
+
+
+        Request.getInstance().getResult("v1/locale.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 JSONObject data = jsonObject.optJSONObject("data");
                 JSONArray items = data.optJSONArray("items");
                 Gson gson = new Gson();
                 List<Item> list = new ArrayList<>();
-                for(int i = 0; i < items.length(); i++){
+                for (int i = 0; i < items.length(); i++) {
                     Item item = gson.fromJson(items.optJSONObject(i).toString(), Item.class);
                     list.add(item);
 
@@ -40,12 +46,23 @@ public class SplashActivity extends AppCompatActivity {
 
                 App.getApp().setItemList(list);
 
-              startActivity(new Intent(SplashActivity.this,MainActivity.class));
-              finish();
 
-
+                Request.getInstance().getResult("v1/love.api", new Request.CallBack() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.w("log", "onResponse: " + jsonObject);
+                        if (jsonObject.toString().contains("authorization")) {
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            finish();
+                        } else {
+                            startActivity(new Intent(SplashActivity.this, MainAuthUserActivity.class));
+                            finish();
+                        }
+                    }
+                });
             }
         });
+
 
     }
 }

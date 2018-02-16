@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/lightEditLayout">
+
+    <TextView
+        android:layout_centerInParent="true"
+        style="@style/Label.Small.Gray"
+        android:gravity="center"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="Если вы хотите помочь локализовать
+проект в какой-то стране, пишите нам
+на почту help@politindex.ru"/>
+
+</RelativeLayout>

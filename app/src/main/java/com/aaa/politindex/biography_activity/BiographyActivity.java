@@ -76,7 +76,7 @@ public class BiographyActivity extends BaseActivity {
         headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
                 Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
-        Request.getInstance().getResult("v1/" + mIdFigure + "/bio.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/" + mIdFigure + "/bio.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Log.w(TAG, "onResponse: " + jsonObject.toString());

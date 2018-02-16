@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.aaa.politindex.locale.LocaleActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_size"
+        android:layout_marginTop="2dp"
+        android:background="@color/whiteDefault"
+        android:paddingLeft="@dimen/deafault_size"
+        android:paddingRight="@dimen/deafault_size">
+
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Label.Caption.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Страна и язик" />
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_back"
+            android:paddingLeft="4dp"
+            android:text="Назад" />
+
+        <ImageView
+            android:id="@+id/icon_back"
+            style="@style/Label.Normal.Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:rotation="90"
+            android:src="@drawable/btn_up_down"
+            android:tint="@color/blackText" />
+
+        <TextView
+            android:id="@+id/apply"
+            style="@style/Label.Normal.GrayLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="3dp"
+            android:text="Применить"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/apply_active"
+            style="@style/Label.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/background_apply"
+            android:padding="3dp"
+            android:text="Применить"
+            android:textColor="@color/whiteDefault"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/lightEditLayout"
+        android:elevation="0dp"
+        android:minHeight="?attr/actionBarSize"
+        app:tabBackground="@color/lightEditLayout"
+        app:tabIndicatorColor="#b327C6C9"
+        app:tabMaxWidth="170dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/blackDefault"
+        app:tabTextAppearance="@style/Label.Normal"
+        app:tabTextColor="@color/grayDefault" />
+
+    <com.aaa.politindex.locale.locale_tabs.CustomViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/tab_layout" />
+</LinearLayout>

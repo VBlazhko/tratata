@@ -87,7 +87,6 @@ public class SearchByFiguresActivity extends BaseActivity {
     }
     @OnClick(R.id.btn_cancel)
     protected void clickBack(){
-        Const.setLog("id_user "+App.getApp().getSharedPreferences(Const.ID_USER)+" # replace back to main auth");
         onBackPressed();
     }
 

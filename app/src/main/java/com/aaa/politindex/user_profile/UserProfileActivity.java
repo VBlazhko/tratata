@@ -128,12 +128,9 @@ public class UserProfileActivity extends BaseActivity {
                 .blurFromResource(R.drawable.figure2)
                 .into(imageView);
 
-        headers = new HashMap<>();
-        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
-        Request.getInstance().getResult("v1/user.api", headers, new Request.CallBack() {
+
+        Request.getInstance().getResult("v1/user.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Gson gson = new Gson();
@@ -207,7 +204,7 @@ public class UserProfileActivity extends BaseActivity {
     }
 
     private void setField(final Map<String, String> params, final TextView field) {
-        Request.getInstance().getResultLove("v1/user.api", headers, params, new Request.CallBack() {
+        Request.getInstance().getResultLove("v1/user.api", params, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 try {
@@ -239,7 +236,7 @@ public class UserProfileActivity extends BaseActivity {
             Map<String, String> params = new HashMap<>();
             params.put("birth", selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay);
 
-            Request.getInstance().getResultLove("v1/user.api", headers, params, new Request.CallBack() {
+            Request.getInstance().getResultLove("v1/user.api", params, new Request.CallBack() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
                     try {

@@ -11,6 +11,7 @@ import com.aaa.politindex.App;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.helper.HttpHelper;
 
+import com.aaa.politindex.helper.Md5Helper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -52,10 +53,16 @@ public class Request {
     }
 
 
-    public JSONObject getResult(final String function, final Map<String, String> headers, final CallBack callBack) {
+    public JSONObject getResult(final String function, final CallBack callBack) {
+
+        Map<String, String> headers=new HashMap<>();
+        headers.put("Encoding", App.getApp().getSharedPreferences(Const.LOCALE));
+        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
+        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
+                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
 
-        headers.put("Encoding", App.getApp().getLocale());
+
         mRetrofitApi.getRequestPost(function, headers).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -78,32 +85,15 @@ public class Request {
         return null;
     }
 
-    public JSONObject getResultEvent(final String function, final Map<String, String> headers, final CallBack callBack) {
 
-        mRetrofitApi.getRequestPostEvent(function, headers).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.w("log", "onResponse: " + response.raw());
-                try {
-                    JSONObject result = new JSONObject(response.body().string());
-                    callBack.onResponse(result);
-                    Log.w("log", "onResponse: " + result.toString());
-                } catch (Exception e) {
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+    public JSONObject getResultLove(final String function, Map<String, String> params, final CallBack callBack) {
 
 
-            }
-        });
-
-        return null;
-    }
-
-    public JSONObject getResultLove(final String function, final Map<String, String> headers, Map<String, String> params, final CallBack callBack) {
-//        headers.put("Encoding", App.getApp().getLocale());
+        Map<String, String> headers=new HashMap<>();
+        headers.put("Encoding", App.getApp().getSharedPreferences(Const.LOCALE));
+        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
+        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
+                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
         mRetrofitApi.getRequestLovePost(function, headers, params).enqueue(new Callback<ResponseBody>() {
             @Override

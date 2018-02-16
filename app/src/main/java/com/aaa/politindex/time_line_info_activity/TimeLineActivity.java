@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 public class TimeLineActivity extends BaseActivity {
 
-    private Map<String, String> headers;
+
     private ArrayList<ItemTimeLine> mTimeLines;
     private ArrayList<String> mHourList;
     private String mIdEvent;
@@ -61,14 +61,10 @@ public class TimeLineActivity extends BaseActivity {
 
         mFigureName.setText(mNameFigure);
 
-        headers = new HashMap<>();
-        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
         mTimeLines = new ArrayList<>();
 
-        Request.getInstance().getResult("v1/" + mIdEvent + "/" + mIdFigure + "/"+date+"/timeline.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/" + mIdEvent + "/" + mIdFigure + "/"+date+"/timeline.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Log.w(TAG, "onResponse: " + jsonObject.toString());

@@ -101,10 +101,6 @@ public class FigureMainActivity extends BaseActivity {
         mIdEvent = this.getIntent().getStringExtra("idEvent");
         mIdInList = this.getIntent().getStringExtra("figure_numb_in_list");
 
-        headers = new HashMap<>();
-        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
         PagerAdapterPhoto pagerAdapterPhoto = new PagerAdapterPhoto(getSupportFragmentManager());
         List<Fragment> fragments = new ArrayList<>();
@@ -149,7 +145,7 @@ public class FigureMainActivity extends BaseActivity {
     }
 
     private void getFigureInfo(String idFigure, String idEvent) {
-        Request.getInstance().getResult("v1/" + idEvent + "/" + idFigure + "/figure.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/" + idEvent + "/" + idFigure + "/figure.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Gson gson = new Gson();
@@ -183,7 +179,7 @@ public class FigureMainActivity extends BaseActivity {
         params.put("idFigure", idFigure);
         params.put("isLike", isLiked ? "1" : "0");
 
-        Request.getInstance().getResultLove("v1/love.api", headers, params, new Request.CallBack() {
+        Request.getInstance().getResultLove("v1/love.api", params, new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 Gson gson = new Gson();
@@ -233,7 +229,7 @@ public class FigureMainActivity extends BaseActivity {
             params.put("text", mEditText.getText().toString());
             mEditText.getText().clear();
 
-            Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", headers, params, new Request.CallBack() {
+            Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", params, new Request.CallBack() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
                 }

@@ -16,6 +16,7 @@ import com.aaa.politindex.authentication.AuthActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
+import com.aaa.politindex.locale.LocaleActivity;
 import com.aaa.politindex.lounchscreen.FirstDialogFragment;
 import com.aaa.politindex.main_screen.diagram.Diagram;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
@@ -35,10 +36,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Map<String, String> headers;
 
     SharedPreferences sPrefLounchScreeen = null;
     boolean show;
@@ -81,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView vk_auth_button;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         sPrefLounchScreeen = getPreferences(MODE_PRIVATE);
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
-        headers=new HashMap<>();
 
-        Request.getInstance().getResult("v1/ru/event.api", headers, new Request.CallBack() {
+
+        Request.getInstance().getResult("v1/ru/event.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 List<Figure> figureList = new ArrayList<>();
@@ -195,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
 
         loginform_law_text.setText(App.getApp().getValue("loginform_law_text"));
 
-        flag.setBackgroundResource(App.getApp().getLocale().equals("en") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
 
+        flag.setBackgroundResource(App.getApp().getSharedPreferences(Const.LOCALE).toUpperCase().equals("EN") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
 
 
         fb_auth_button.setOnClickListener(new View.OnClickListener() {
@@ -208,19 +208,18 @@ public class MainActivity extends AppCompatActivity {
         vk_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AuthActivity.class).putExtra("authorization",Const.VKONTAKTE));
+                startActivity(new Intent(MainActivity.this, AuthActivity.class).putExtra("authorization", Const.VKONTAKTE));
             }
         });
+    }
 
-
-
-
+    @OnClick(R.id.falg)
+    protected void onLocaleClick() {
+        startActivity(new Intent(MainActivity.this, LocaleActivity.class).putExtra("from","main"));
     }
 
 
-
-
-    }
+}
 
 
 

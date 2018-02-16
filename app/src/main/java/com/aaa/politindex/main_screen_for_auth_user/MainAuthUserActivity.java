@@ -18,6 +18,7 @@ import com.aaa.politindex.R;
 import com.aaa.politindex.connection.Request;
 import com.aaa.politindex.figure_main_screen.FigureMainActivity;
 import com.aaa.politindex.helper.Md5Helper;
+import com.aaa.politindex.locale.LocaleActivity;
 import com.aaa.politindex.main_screen.tabs.IShowFigureListener;
 import com.aaa.politindex.main_screen.tabs.FigureFragment;
 import com.aaa.politindex.main_screen.tabs.OnClickFigureListener;
@@ -80,6 +81,8 @@ public class MainAuthUserActivity extends BaseActivity {
 
     @BindView(R.id.PiToday)
     TextView mPiToday;
+    @BindView(R.id.btn_change_language)
+    ImageView mChangeLocale;
 
 
     @Override
@@ -89,13 +92,9 @@ public class MainAuthUserActivity extends BaseActivity {
 
         mUnbinder = ButterKnife.bind(this);
 
-        headers = new HashMap<>();
-        headers.put("token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
 
 
-        Request.getInstance().getResultEvent("v1/ru/event.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/ru/event.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 List<TitleEvent> titleList = new ArrayList<>();
@@ -149,10 +148,13 @@ public class MainAuthUserActivity extends BaseActivity {
         int dpWidth = outMetrics.widthPixels;
         App.getApp().setSharedPreferences("width", dpWidth + "");
 
+
+        mChangeLocale.setBackgroundResource(App.getApp().getSharedPreferences(Const.LOCALE).toUpperCase().equals("EN") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
+
     }
 
     private void getFigureRequest(final String idEvent) {
-        Request.getInstance().getResult("v1/ru/" + idEvent + "/event.api", headers, new Request.CallBack() {
+        Request.getInstance().getResult("v1/ru/" + idEvent + "/event.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 figureList = new ArrayList<>();
@@ -260,7 +262,9 @@ public class MainAuthUserActivity extends BaseActivity {
 
     @OnClick(R.id.btn_change_language)
     protected void clickChangeLanguage() {
-        startActivity(new Intent(this, FigureMainActivity.class));
+        startActivity(new Intent(this, LocaleActivity.class).putExtra("from","auth"));
     }
+
+
 
 }
