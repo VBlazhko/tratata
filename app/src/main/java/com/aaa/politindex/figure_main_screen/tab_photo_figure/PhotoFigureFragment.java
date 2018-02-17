@@ -29,8 +29,12 @@ public class PhotoFigureFragment extends BaseFragment {
     private Figure mFigure;
     private IShowFigureListener mListener;
 
+
     @BindView(R.id.photo_figure)
     ImageView mImageFigure;
+
+    @BindView(R.id.arrow)
+    ImageView mArrow;
 
     public PhotoFigureFragment() {
         // Required empty public constructor
@@ -44,7 +48,13 @@ public class PhotoFigureFragment extends BaseFragment {
         mUnbinder= ButterKnife.bind(this,view);
 
         if (mFigure != null) Glide.with(getContext()).load(Uri.parse(mFigure.getAvatar())).into(mImageFigure);
-        else mImageFigure.setImageResource(R.drawable.rocket);
+        else {
+            mImageFigure.setImageResource(R.drawable.rocket);
+            mArrow.setVisibility(View.INVISIBLE);
+        }
+
+
+
         return view;
     }
 

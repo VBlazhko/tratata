@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/icon_back"
-            android:paddingLeft="4dp"
+            android:padding="4dp"
             android:text="Назад" />
 
         <ImageView
@@ -51,10 +51,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="0dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="20dp">
+        android:paddingLeft="20dp"
+        android:layout_weight="0.2"
+        android:background="@color/lightEditLayout">
 
         <TextView
             style="@style/Label.Normal.Black2"
@@ -74,17 +76,22 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+
+
+
         <ImageView
             android:id="@+id/background_photo"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:focusable="false"
-            android:scaleType="centerCrop" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+
+
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/photo_figure"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:id="@+id/photo_user"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
@@ -92,10 +99,9 @@
             app:riv_oval="true" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/addAvatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/deafault_size"
             android:src="@drawable/load_avatar" />
 
@@ -150,20 +156,24 @@
             android:text="Anton Anton"
             android:visibility="invisible" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/grayDefault" />
-
         <ImageView
             android:id="@+id/btn_edit_name"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:tint="@color/blackText"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/deafault_size"
             android:src="@drawable/btn_edit" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/grayDefault"
+            android:layout_marginLeft="@dimen/deafault_size"/>
 
     </RelativeLayout>
 
@@ -215,20 +225,25 @@
             android:text=""
             android:visibility="invisible" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/grayDefault" />
 
         <ImageView
             android:id="@+id/btn_edit_mail"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:tint="@color/blackText"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/deafault_size"
             android:src="@drawable/btn_edit" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/grayDefault"
+            android:layout_marginLeft="@dimen/deafault_size"/>
 
     </RelativeLayout>
 
@@ -287,8 +302,10 @@
 
         <ImageView
             android:id="@+id/btn_edit_teleg"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:tint="@color/blackText"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/deafault_size"
@@ -347,12 +364,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/grayDefault" />
+            android:background="@color/grayDefault"
+            android:layout_marginLeft="@dimen/deafault_size"/>
 
         <ImageView
             android:id="@+id/btn_edit_prof"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:tint="@color/blackText"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/deafault_size"
@@ -397,12 +417,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/grayDefault" />
+            android:background="@color/grayDefault"
+            android:layout_marginLeft="@dimen/deafault_size"/>
 
         <ImageView
             android:id="@+id/btn_edit_date"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:tint="@color/blackText"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/deafault_size"

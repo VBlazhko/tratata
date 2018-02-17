@@ -32,7 +32,6 @@ public class App extends Application {
         super.onCreate();
 
         mApp = this;
-
        mSharedPreferences =  getSharedPreferences("info", MODE_PRIVATE);
 
        if(!mSharedPreferences.getString(Const.FIRST, "null").equals("firstOK")) {

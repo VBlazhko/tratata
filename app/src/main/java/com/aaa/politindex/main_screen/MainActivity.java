@@ -215,7 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.falg)
     protected void onLocaleClick() {
-        startActivity(new Intent(MainActivity.this, LocaleActivity.class).putExtra("from","main"));
+        Intent intent=new Intent(this,LocaleActivity.class);
+        intent.putExtra("from","main");
+        startActivity(intent);
     }
 
 

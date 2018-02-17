@@ -68,6 +68,7 @@ public class LocaleFragment extends BaseFragment {
                     @Override public void onItemClick(View view, int position) {
                         Log.w("log", "onItemClick: "+position  );
 
+                        if(position>=localeArrayList.size())return;
                         localeFromFragment=localeArrayList.get(position).getLocaleKey();
 
                         LocaleRecyclerViewAdapter adapter = new LocaleRecyclerViewAdapter(getContext(), localeArrayList, localeFromFragment);

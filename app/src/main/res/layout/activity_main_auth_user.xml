@@ -26,10 +26,13 @@
 
         <ImageView
             android:id="@+id/btn_profile"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="33dp"
+            android:layout_height="41dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:paddingTop="@dimen/half_deafault_size"
+            android:paddingBottom="@dimen/half_deafault_size"
+            android:paddingRight="@dimen/half_deafault_size"
             android:src="@drawable/btn_profile" />
 
         <ImageView
@@ -38,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="@dimen/half_deafault_size"
             />
 
     </RelativeLayout>

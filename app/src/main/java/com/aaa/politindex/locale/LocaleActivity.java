@@ -22,6 +22,7 @@ import com.aaa.politindex.locale.locale_tabs.LocalePagerAdapter;
 import com.aaa.politindex.main_screen.MainActivity;
 import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.aaa.politindex.model.Item;
+import com.aaa.politindex.search_by_figures.SearchByFiguresActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

@@ -1,10 +1,22 @@
 package com.aaa.politindex.user_profile;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,38 +44,55 @@ import com.aaa.politindex.model.FigureData;
 import com.aaa.politindex.model.FigureStatistics;
 import com.aaa.politindex.model.ItemComment;
 import com.aaa.politindex.model.UserProfile;
-import com.chootdev.blurimg.BlurImage;
+import com.bumptech.glide.Glide;
+
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.blurry.Blurry;
 
 public class UserProfileActivity extends BaseActivity {
 
-    private Map<String, String> headers;
+
     static final int DATE_PICKER_ID = 1111;
     private int year;
     private int month;
     private int day;
+    private String imageURL;
+
+
+    @BindView(R.id.photo_user)
+    ImageView mphotous;
+    @BindView(R.id.background_photo)
+    ImageView mBackgroundPhoto;
 
 
     @BindView(R.id.title)
     TextView mTitle;
 
-    @BindView(R.id.background_photo)
-    ImageView imageView;
     @BindView(R.id.name)
     TextView mName;
     @BindView(R.id.btn_edit_name)
@@ -123,12 +152,6 @@ public class UserProfileActivity extends BaseActivity {
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
 
-        BlurImage.withContext(this)
-                .setBitmapScale(0.1f)
-                .blurFromResource(R.drawable.figure2)
-                .into(imageView);
-
-
 
         Request.getInstance().getResult("v1/user.api", new Request.CallBack() {
             @Override
@@ -142,8 +165,23 @@ public class UserProfileActivity extends BaseActivity {
                 mTeleg.setText(userProfile.getTelegram() != null ? userProfile.getTelegram() : "");
                 mProf.setText(userProfile.getProfession() != null ? userProfile.getProfession() : "");
                 mDate.setText(!userProfile.getBirth().equals("0000-00-00") ? converDate(userProfile.getBirth()) : "");
+                if (userProfile.getAvatar() != null) {
+                    Glide.with(App.getApp()).load(userProfile.getAvatar()).into(mphotous);
+                    Glide.with(App.getApp())
+                            .load(userProfile.getAvatar())
+                            .asBitmap()
+                            .into(new SimpleTarget<Bitmap>(400, 400) {
+                                @Override
+                                public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                                    Blurry.with(App.getApp()).sampling(3).from(bitmap).into(mBackgroundPhoto);
+                                }
+                            });
+                }
+
+
             }
         });
+
 
         mBack.setText(App.getApp().getValue("back_button"));
     }
@@ -257,7 +295,7 @@ public class UserProfileActivity extends BaseActivity {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date d = formatter.parse(date);
-            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM yyyy");
+            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM yyyy",new Locale(App.getApp().getSharedPreferences(Const.LOCALE)));
             result = showSDF.format(d);
             return result;
         } catch (Exception e) {
@@ -294,6 +332,169 @@ public class UserProfileActivity extends BaseActivity {
             mBtnEditMail.setVisibility(View.INVISIBLE);
         }
     }
+
+    private void openGalery() {
+        if (PackageManager.PERMISSION_GRANTED
+                != ContextCompat.checkSelfPermission(getApplication(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        } else {
+            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, 0);
+
+
+//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("image/*");
+//            startActivityForResult(Intent.createChooser(intent,"select image"),0);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, 0);
+
+//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("image/*");
+//            startActivityForResult(Intent.createChooser(intent,"select image"),0);
+        }
+
+    }
+
+    @OnClick(R.id.addAvatar)
+    protected void onAddAvatarClick() {
+        openGalery();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.w(TAG, "onActivityResult: " + resultCode);
+        if (data != null && data.getData() != null) {
+
+            File file = new File(getRealPathFromURI(App.getApp(), data.getData()));
+            Log.w(TAG, "onActivityResult: " + file.getName());
+
+
+            Bitmap srcBmp = BitmapFactory.decodeFile(getRealPathFromURI(App.getApp(), data.getData()));
+            Bitmap dstBmp;
+            Bitmap finalBmp;
+            if (srcBmp.getWidth() >= srcBmp.getHeight()) {
+
+                dstBmp = Bitmap.createBitmap(
+                        srcBmp,
+                        srcBmp.getWidth() / 2 - srcBmp.getHeight() / 2,
+                        0,
+                        srcBmp.getHeight(),
+                        srcBmp.getHeight()
+                );
+
+            } else {
+
+                dstBmp = Bitmap.createBitmap(
+                        srcBmp,
+                        0,
+                        srcBmp.getHeight() / 2 - srcBmp.getWidth() / 2,
+                        srcBmp.getWidth(),
+                        srcBmp.getWidth()
+                );
+            }
+
+            finalBmp = getResizedBitmap(dstBmp, 400);
+
+            Log.w(TAG, "onActivityResult: " + dstBmp.getHeight());
+            Log.w(TAG, "onActivityResult: " + dstBmp.getWidth());
+
+            Log.w(TAG, "onActivityResult: " + finalBmp.getHeight());
+            Log.w(TAG, "onActivityResult: " + finalBmp.getWidth());
+
+
+            File f = new File(App.getApp().getCacheDir(), "image");
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//Convert bitmap to byte array
+            Bitmap bitmap = finalBmp;
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(f);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            Request.getInstance().uploadImage("v1/user.api", f, new Request.CallBack() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    String json = null;
+                    try {
+                        json = jsonObject.getString("value");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    if (json != null) {
+                        Glide.with(App.getApp()).load(json).into(mphotous);
+                        Glide.with(App.getApp())
+                                .load(json)
+                                .asBitmap()
+                                .into(new SimpleTarget<Bitmap>(400, 400) {
+                                    @Override
+                                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                                        Blurry.with(App.getApp()).sampling(3).from(bitmap).into(mBackgroundPhoto);
+                                    }
+                                });
+                    }
+                }
+            });
+        }
+
+    }
+
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
 }
 
 

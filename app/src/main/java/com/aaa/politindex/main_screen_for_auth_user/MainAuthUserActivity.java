@@ -262,7 +262,10 @@ public class MainAuthUserActivity extends BaseActivity {
 
     @OnClick(R.id.btn_change_language)
     protected void clickChangeLanguage() {
-        startActivity(new Intent(this, LocaleActivity.class).putExtra("from","auth"));
+        Log.w(TAG, "clickChangeLanguage: " );
+        Intent intent = new Intent(this, LocaleActivity.class);
+        intent.putExtra("from","auth");
+        startActivity(intent);
     }
 
 

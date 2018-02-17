@@ -3,6 +3,7 @@
     package="com.aaa.politindex">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -25,21 +26,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".authentication.AuthActivity" />
-        <activity android:name=".authentication.AuthPhoneActivity">
+        <activity
+            android:name=".authentication.AuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".authentication.AuthPhoneActivity"
+            android:screenOrientation="portrait">
             android:windowSoftInputMode="adjustResize"
         </activity>
-        <activity android:name=".authentication.SendSmsActivity">
+        <activity
+            android:name=".authentication.SendSmsActivity"
+            android:screenOrientation="portrait">
             android:windowSoftInputMode="adjustResize"
         </activity>
-        <activity android:name=".main_screen_for_auth_user.MainAuthUserActivity" />
-        <activity android:name=".search_by_figures.SearchByFiguresActivity" />
-        <activity android:name=".figure_main_screen.FigureMainActivity" />
-        <activity android:name=".user_profile.UserProfileActivity" />
-        <activity android:name=".date_information_activity.DateInfoActivity" />
-        <activity android:name=".time_line_info_activity.TimeLineActivity" />
-        <activity android:name=".biography_activity.BiographyActivity" />
-        <activity android:name=".locale.LocaleActivity"></activity>
+        <activity
+            android:name=".main_screen_for_auth_user.MainAuthUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".search_by_figures.SearchByFiguresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".figure_main_screen.FigureMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user_profile.UserProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".date_information_activity.DateInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".time_line_info_activity.TimeLineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".biography_activity.BiographyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".locale.LocaleActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

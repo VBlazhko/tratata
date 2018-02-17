@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.aaa.politindex.App;
@@ -15,9 +16,11 @@ import com.aaa.politindex.BaseActivity;
 import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.figure_main_screen.FigureMainActivity;
+import com.aaa.politindex.locale.LocaleActivity;
 import com.aaa.politindex.main_screen_for_auth_user.MainAuthUserActivity;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.Today;
+import com.aaa.politindex.user_profile.UserProfileActivity;
 
 import java.util.ArrayList;
 
@@ -35,6 +38,8 @@ public class SearchByFiguresActivity extends BaseActivity {
     private String numbFigure;
     private String mIdEvent;
 
+    @BindView(R.id.btn_change_language)
+    ImageView mChangeLocale;
     @BindView(R.id.figure_list)
     ListView mFigureList;
     @BindView(R.id.edit_search)
@@ -65,6 +70,8 @@ public class SearchByFiguresActivity extends BaseActivity {
         });
 
         mEditFigure.setHint(App.getApp().getValue("search_placeholder"));
+
+        mChangeLocale.setBackgroundResource(App.getApp().getSharedPreferences(Const.LOCALE).toUpperCase().equals("EN") ? R.drawable.english_language_icon : R.drawable.icon_russia_3x);
 
     }
 
@@ -101,4 +108,12 @@ public class SearchByFiguresActivity extends BaseActivity {
         intent.putExtra("idEvent", mIdEvent);
         startActivity(intent);
     }
+
+    @OnClick(R.id.btn_profile)
+    protected void clickProfile() {
+        startActivity(new Intent(this, UserProfileActivity.class));
+    }
+
+
+
 }

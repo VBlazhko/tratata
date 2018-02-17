@@ -24,6 +24,7 @@
             android:text="POLITINDEX" />
 
         <ImageView
+            android:id="@+id/btn_profile"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentLeft="true"
@@ -35,8 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/flag_russia" />
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 
@@ -44,12 +44,14 @@
 
         android:id="@+id/figure_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@id/edit_layout"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="20dp"
-        android:background="@color/whiteDefault"
-        android:divider="@color/whiteDefault" />
+        android:background="@color/lightEditLayout"
+        android:clipToPadding="false"
+        android:divider="@color/lightEditLayout"
+        android:dividerHeight="2dp"
+        android:paddingTop="20dp" />
 
     <LinearLayout
         android:id="@+id/edit_layout"

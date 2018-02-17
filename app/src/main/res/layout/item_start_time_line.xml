@@ -10,7 +10,7 @@
         android:id="@+id/text_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Хроника собитий:" />
+        android:text="Хроника событий:" />
     <TextView
         style="@style/Label.Small.Gray"
         android:id="@+id/date"

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aaa.politindex.App;
+import com.aaa.politindex.Const;
 import com.aaa.politindex.R;
 import com.aaa.politindex.model.Figure;
 import com.aaa.politindex.model.ItemDiagram;
@@ -21,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import static com.aaa.politindex.BaseActivity.TAG;
@@ -132,7 +135,7 @@ public class DateInfoListAdapter extends BaseAdapter {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date d = formatter.parse(date);
-            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM");
+            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM",new Locale(App.getApp().getSharedPreferences(Const.LOCALE)));
             showSDF.setTimeZone(TimeZone.getDefault());
             result = showSDF.format(d);
             return result;

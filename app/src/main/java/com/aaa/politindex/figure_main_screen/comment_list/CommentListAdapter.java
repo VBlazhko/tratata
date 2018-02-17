@@ -85,7 +85,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     }
 
     public static String converDateTimezone(String date) {
-        Log.w(TAG, "converDateTimezone: "+date );
+        Log.w(TAG, "converDateTimezone: " + date);
         String result = "";
         try {
             DateFormat df = new SimpleDateFormat("MM dd HH:mm");
@@ -99,13 +99,11 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             showSDF.setTimeZone(TimeZone.getDefault());
             result = showSDF.format(d);
 
-            if(result.equals(dateCurent)){
+            if (result.equals(dateCurent)) {
                 return "just now";
             }else{
                 return result;
             }
-
-
         } catch (Exception e) {
             return result;
         }

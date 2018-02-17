@@ -13,7 +13,8 @@
         android:layout_height="@dimen/toolbar_size"
         android:layout_marginTop="2dp"
         android:paddingLeft="@dimen/deafault_size"
-        android:paddingRight="@dimen/deafault_size">
+        android:paddingRight="@dimen/deafault_size"
+        android:background="@color/lightEditLayout">
 
 
         <TextView
@@ -50,7 +51,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/lightEditLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,8 +67,8 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/photo_figure"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="15dp"
                     android:layout_marginBottom="10dp"

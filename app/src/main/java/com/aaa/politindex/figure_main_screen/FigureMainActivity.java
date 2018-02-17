@@ -69,6 +69,9 @@ public class FigureMainActivity extends BaseActivity {
 
     @BindView(R.id.pager)
     DeactivatableViewPager mViewPager;
+    @BindView(R.id.pi_today_text)
+    TextView mTextPi;
+
     @BindView(R.id.list_comment)
     RecyclerView mCommentList;
     @BindView(R.id.figure_name)
@@ -141,6 +144,7 @@ public class FigureMainActivity extends BaseActivity {
         mViewPager.setMaxCount(mFigureArrayList.size() - 1);
 
         mBack.setText(App.getApp().getValue("back_button"));
+        mTextPi.setText(App.getApp().getValue("lbl_pi_today"));
 
     }
 
@@ -232,6 +236,7 @@ public class FigureMainActivity extends BaseActivity {
             Request.getInstance().getResultLove("v1/" + mIdEvent + "/" + mIdFigure + "/figure.api", params, new Request.CallBack() {
                 @Override
                 public void onResponse(JSONObject jsonObject) {
+
                 }
             });
 

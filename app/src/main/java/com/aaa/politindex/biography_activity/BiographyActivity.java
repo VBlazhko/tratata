@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -36,7 +37,7 @@ import butterknife.OnClick;
 
 public class BiographyActivity extends BaseActivity {
 
-    private Map<String, String> headers;
+
     private String mIdFigure;
     private String mNameFigure;
     private String mPhoto;
@@ -70,12 +71,6 @@ public class BiographyActivity extends BaseActivity {
         mNameFigure = this.getIntent().getStringExtra("figureName");
         mPhoto = this.getIntent().getStringExtra("figurePhoto");
 
-
-        headers = new HashMap<>();
-        headers.put("Token", App.getApp().getSharedPreferences(Const.TOKEN));
-        headers.put("Authorization", App.getApp().getSharedPreferences(Const.ID_TOKEN) + "_" +
-                Md5Helper.md5(App.getApp().getSharedPreferences(Const.ID_TOKEN) + ":" + App.getApp().getSharedPreferences(Const.ID_USER) + ":" + App.getApp().getSharedPreferences(Const.TOKEN)));
-
         Request.getInstance().getResult("v1/" + mIdFigure + "/bio.api", new Request.CallBack() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -104,7 +99,7 @@ public class BiographyActivity extends BaseActivity {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date d = formatter.parse(date);
-            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM yyyy");
+            SimpleDateFormat showSDF = new SimpleDateFormat("dd MMM yyyy", new Locale(App.getApp().getSharedPreferences(Const.LOCALE)));
             result = showSDF.format(d);
             return result;
         } catch (Exception e) {

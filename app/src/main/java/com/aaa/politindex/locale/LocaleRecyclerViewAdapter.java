@@ -66,20 +66,16 @@ public class LocaleRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (position) {
-            case 100:
-                ((ItemStandingsStartViewHolder) holder).bindView();
-                break;
-            default:
-                ((ItemStandingsViewHolder) holder).bindView(mLocaleList.get(position));
-                break;
+        if(position==mLocaleList.size()){
+            ((ItemStandingsStartViewHolder) holder).bindView();
+        }else {
+            ((ItemStandingsViewHolder) holder).bindView(mLocaleList.get(position));
         }
-
     }
 
     @Override
     public int getItemViewType(int position) {
-        // if (position == mLocaleList.size()) return 0;
+        if (position == mLocaleList.size()) return 0;
         return 1;
     }
 
@@ -127,7 +123,7 @@ public class LocaleRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return mLocaleList.size();
+        return mLocaleList.size()+1;
     }
 
 }

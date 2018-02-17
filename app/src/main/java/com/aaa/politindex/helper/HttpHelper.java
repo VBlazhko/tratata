@@ -50,7 +50,6 @@ public class HttpHelper {
             okHttpClient = new OkHttpClient.Builder()
                     .readTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(60, TimeUnit.SECONDS)
-                    .addInterceptor(new BasicAuthInterceptor("mobile_api", "qFvfRl7w"))
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .sslSocketFactory(tlsSocketFactory, trustManager)
                     .build();
@@ -123,21 +122,4 @@ public class HttpHelper {
         }
     }
 
-    public static class BasicAuthInterceptor implements Interceptor {
-
-        private String credentials;
-
-        public BasicAuthInterceptor(String user, String password) {
-            this.credentials = Credentials.basic(user, password);
-        }
-
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            Request authenticatedRequest = request.newBuilder()
-                    .build();
-            return chain.proceed(authenticatedRequest);
-        }
-
-    }
 }
